@@ -1,3 +1,15 @@
+# custom
+rt
+old/
+*.png
+
+# vim
+.*.swo
+.*.swp
+
+# build folder
+build/
+
 # Prerequisites
 *.d
 
