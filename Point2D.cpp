@@ -26,3 +26,6 @@ Point2D & Point2D::operator=(const Point2D & rhs) {
     return *this;
 }
 
+Point2D Point2D::operator*(const float a) {
+    return Point2D(x * a, y * a);
+}

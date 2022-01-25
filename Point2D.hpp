@@ -10,6 +10,7 @@ public:
     virtual ~Point2D(void);
 
     Point2D & operator=(const Point2D & rhs);
+    Point2D operator*(const float a);
 
 public:
     float x, y;
