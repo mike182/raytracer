@@ -37,5 +37,5 @@ bool Plane::hit(const Ray & ray, double & tmin, ShadeRec & sr) const {
         return true;
     }
     else
-        return true;
+        return false;
 }

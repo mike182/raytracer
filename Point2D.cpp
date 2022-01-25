@@ -1,7 +1,7 @@
 #include "Point2D.hpp"
 
 Point2D::Point2D(void)
-    : x(0), y(0) { }
+    : x(0.0), y(0.0) { }
 
 Point2D::Point2D(const float a)
     : x(a), y(a) { }

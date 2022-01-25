@@ -1,9 +1,17 @@
 #ifndef __WORLD_HPP__
 #define __WORLD_HPP__
 
-#include <vector>
+#include "ViewPlane.hpp"
 #include "RGBColor.hpp"
-// #include "Point2D.hpp"
+#include "Sphere.hpp"
+#include "Plane.hpp"
+#include "Tracer.hpp"
+#include "GeometricObject.hpp"
+#include "ShadeRec.hpp"
+
+#include <vector>
+
+#include "SingleSphere.hpp"
 
 class World {
 public:
@@ -13,14 +21,17 @@ public:
 
 public:
     void build();
-    void render();
-
+    void render_scene(void) const;
+    // void display_pixel(const int row, const int column, const RGBColor & pixel_color) const;
 private:
+    // void delete_objects();
+
 public:
-    int hres;
-    int vres;
-    // Point2D vp;
-    // RGBColor bg;
+    ViewPlane vp;
+    RGBColor background_color;
+    Sphere sphere;
+    Tracer * tracer_ptr;
+    std::vector<GeometricObject*> obj;
 };
 
 #endif // __WORLD_HPP__

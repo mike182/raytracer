@@ -1,33 +1,70 @@
+#include "World.hpp"
+
 #include <chrono>
 #include <png++/png.hpp>
 
-#include "World.hpp"
+#include "Constants.h"
+#include "Ray.hpp"
+#include "Point2D.hpp"
+#include "Point3D.hpp"
+#include "Vector3D.hpp"
+#include "Normal.hpp"
+#include "Sphere.hpp"
+#include "Plane.hpp"
+#include "SingleSphere.hpp"
 
-World::World () {
-}
+
+World::World ()
+    : background_color(black),
+    tracer_ptr(nullptr) { }
 
 World::~World() {
+    if (tracer_ptr)
+        delete tracer_ptr;
+    // delete_objects();
 }
 
-void World::build() {
-    this->hres = 800;
-    this->vres = 600;
+// void World::delete_objects() {
+
+// 3.18
+void World::build(void) {
+    vp.set_hres(200);
+    vp.set_vres(200);
+    vp.set_pixel_size(1.0);
+
+    background_color = black;
+    tracer_ptr = new SingleSphere(this);
+
+    sphere.set_center(0.0);
+    sphere.set_radius(85.0);
 }
 
-void World::render() {
-    std::vector<RGBColor> vp(this->hres * this->vres, RGBColor(0, 0, 0));
+void World::render_scene() const {
+    png::image<png::rgb_pixel> image(vp.hres, vp.vres);
+    RGBColor pixel_color;
+    Ray ray;
+    double zw = 100.0;
+    double x, y;
 
-    for (int row = 0; row < vres; row++)
-        for (int col = 0; col < hres; col++)
-            vp[row * col + col] = RGBColor((col*row*255)/(hres*vres), 0, (row*col*255)/(hres*vres));
+    ray.d = Vector3D(0, 0, -1);
+    for (int r = 0; r < vp.vres; r++)
+        for (int c = 0; c < vp.hres; c++) {
+            x = vp.s * (c - 0.5 * (vp.hres - 1.0));
+            y = vp.s * (r - 0.5 * (vp.vres - 1.0));
+            ray.o = Point3D(x, y, zw);
+            pixel_color = tracer_ptr->trace_ray(ray);
+            image[r][c] = png::rgb_pixel(pixel_color.r * 255,
+                                         pixel_color.g * 255,
+                                         pixel_color.b * 255);
+        }
 
-    // save to image
-    png::image<png::rgb_pixel> image(hres, vres);
-    for (png::uint_32 y = 0; y < image.get_height(); ++y)
-        for (png::uint_32 x = 0; x < image.get_width(); ++x)
-            image[y][x] = png::rgb_pixel(vp[y*x+x].r, vp[y*x+x].g, vp[y*x+x].b);
-    auto now = std::chrono::system_clock::now();
-    auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+    using namespace std::chrono;
+    auto now = system_clock::now();
+    auto UTC = duration_cast<seconds>(now.time_since_epoch()).count();
+    // write image to file
     image.write("/mnt/d/w/rt_image/" + std::to_string(UTC) + ".png");
 }
+
+// void World::display_pixel(const int row, const int column, const RGBColor & pixel_color) const {
+// }
 

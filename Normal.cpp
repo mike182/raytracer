@@ -49,47 +49,49 @@ Normal & Normal::operator=(const Point3D & rhs) {
 }
 
 Normal Normal::operator-() const {
-  return Normal(-x, -y, -z);
+    return Normal(-x, -y, -z);
 }
 
 Normal Normal::operator+(const Normal & n) const {
-  return Normal(x + n.x, y + n.y, z + n.z);
+    return Normal(x + n.x, y + n.y, z + n.z);
 }
 
 Normal & Normal::operator+=(const Normal & n) {
-  x += n.x; y += n.y; z += n.z;
-  return *this;
+    x += n.x;
+    y += n.y;
+    z += n.z;
+
+    return *this;
 }
 
 double Normal::operator*(const Vector3D & v) const {
-  return x * v.x + y * v.y + z * v.z;
+    return x * v.x + y * v.y + z * v.z;
 }
 
 Normal Normal::operator*(const double a) const {
-  return Normal(x * a, y * a, z * a);
+    return Normal(x * a, y * a, z * a);
 }
 
 Normal operator*(const double a, const Normal & n) {
-  return Normal(a * n.x, a * n.y, a * n.z);
+    return Normal(a * n.x, a * n.y, a * n.z);
 }
 
 Vector3D operator+(const Vector3D & v, const Normal & n) {
-  return Vector3D(v.x + n.x, v.y + n.y, v.z + n.z);
+    return Vector3D(v.x + n.x, v.y + n.y, v.z + n.z);
 }
 
 Vector3D operator-(const Vector3D & v, const Normal & n) {
-  return Vector3D(v.x - n.x, v.y - n.y, v.z - n.z);
+    return Vector3D(v.x - n.x, v.y - n.y, v.z - n.z);
 }
 
 double operator*(const Vector3D & v, const Normal & n) {
-  return v.x * n.x + v.y * n.y + v.z * n.z;
+    return v.x * n.x + v.y * n.y + v.z * n.z;
 }
 
 void Normal::normalize() {
-  double length = sqrt(x * x + y * y + z * z);
-  x /= length;
-  y /= length;
-  z /= length;
+    double length = sqrt(x * x + y * y + z * z);
+    x /= length;
+    y /= length;
+    z /= length;
 }
-
 

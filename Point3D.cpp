@@ -3,7 +3,7 @@
 #include <cmath>
 
 Point3D::Point3D(void)
-    : x(0), y(0), z(0) { }
+    : x(0.0), y(0.0), z(0.0) { }
 
 Point3D::Point3D(const double a)
     : x(a), y(a), z(a) { }

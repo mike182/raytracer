@@ -27,15 +27,15 @@ public:
     double operator*(const Vector3D & v) const;
     Vector3D operator^(const Vector3D & v) const;
 
-    double length();
-    double len_squared();
     void normalize();
     Vector3D & hat();
+    double length();
+    double len_squared();
 
 public:
     double x, y, z;
 };
 
-Vector3D operator*(const double a, const Vector3D & v); // prototype
+Vector3D operator*(const double a, const Vector3D & v);
 
 #endif // __VECTOR3D_HPP__

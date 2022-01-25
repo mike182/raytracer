@@ -5,10 +5,9 @@
 #include "Normal.hpp"
 #include "RGBColor.hpp"
 
-#include "World.hpp"
+class World;
 
-class ShadeRec
-{
+class ShadeRec {
 public:
     ShadeRec(void) = delete;
     ShadeRec(World & w);

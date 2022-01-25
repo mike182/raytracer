@@ -4,7 +4,7 @@ project(raytracer)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
 set(CMAKE_CXX_COMPILER clang++)
-list(APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -W -Wall -Werror -Wextra -pedantic -g")
+list(APPEND CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -W -Wall -Werror -Wextra -pedantic -g3")
 
 find_package(PNG REQUIRED)
 
@@ -13,8 +13,10 @@ set (SOURCES
   World.cpp
   ViewPlane.cpp
   Ray.cpp
+  Tracer.cpp
   ShadeRec.cpp
   GeometricObject.cpp
+  SingleSphere.cpp
   Plane.cpp
   Sphere.cpp
   Point2D.cpp

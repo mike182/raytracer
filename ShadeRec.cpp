@@ -1,4 +1,5 @@
 #include "ShadeRec.hpp"
+#include "World.hpp"
 #include "Constants.h"
 
 // deleted

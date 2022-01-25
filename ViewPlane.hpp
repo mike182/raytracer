@@ -15,8 +15,8 @@ public:
     void set_pixel_size(const float size);
     void set_samples(const int n);
 
-    // void set_gamma(const float g);
-    // void set_gamut_display(const bool show);
+    void set_gamma(const float g);
+    void set_gamut_display(const bool show);
 
 public:
     int hres;
@@ -24,9 +24,9 @@ public:
     float s;
     int num_samples;
 
-    // float gamma;
-    // float inv_gamma;
-    // bool show_out_of_gamut;
+    float gamma;
+    float inv_gamma;
+    bool show_out_of_gamut;
 };
 
 #endif // __VIEWPLANE_HPP__

@@ -6,7 +6,7 @@
 #include <cmath>
 
 Vector3D::Vector3D(void)
-    :  x(0), y(0), z(0) { }
+    :  x(0.0), y(0.0), z(0.0) { }
 
 Vector3D::Vector3D(double a)
     :  x(a), y(a), z(a) { }
