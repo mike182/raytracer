@@ -15,6 +15,8 @@ set (SOURCES
   Ray.cpp
   ShadeRec.cpp
   GeometricObject.cpp
+  Plane.cpp
+  Sphere.cpp
   Point2D.cpp
   Point3D.cpp
   Vector3D.cpp
