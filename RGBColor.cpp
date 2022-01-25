@@ -1,32 +1,33 @@
 #include "RGBColor.hpp"
 
-RGBColor::RGBColor() {
-    this->r = 0;
-    this->g = 0;
-    this->b = 0;
-    // this->a = 0;
-}
-RGBColor::RGBColor(int i) {
-    this->r = i;
-    this->g = i;
-    this->b = i;
-    // this->a = 0;
+RGBColor::RGBColor(void)
+    : r(0), g(0), b(0), a(0) { }
+
+RGBColor::RGBColor(float a)
+    : r(a), g(a), b(a), a(0) { }
+
+RGBColor::RGBColor(float r, float g, float b)
+    : r(r), g(g), b(b), a(0) { }
+
+RGBColor::RGBColor(float r, float g, float b, float a)
+    : r(r), g(g), b(b), a(a) { }
+
+RGBColor::RGBColor(const RGBColor & c)
+    : r(c.r), g(c.g), b(c.b), a(c.a) { }
+
+RGBColor::~RGBColor(void)
+{
 }
 
-RGBColor::RGBColor(int r, int g, int b) {
-    this->r = r;
-    this->g = g;
-    this->b = b;
-    // this->a = a;
-}
+RGBColor & RGBColor::operator=(const RGBColor & rhs) {
+    if (this == &rhs)
+        return *this;
 
-RGBColor::RGBColor(int r, int g, int b, int a) {
-    this->r = r;
-    this->g = g;
-    this->b = b;
-    this->a = a;
-}
+    r = rhs.r;
+    g = rhs.g;
+    b = rhs.b;
+    a = rhs.a;
 
-RGBColor::~RGBColor() {
+    return *this;
 }
 

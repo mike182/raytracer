@@ -1,6 +1,7 @@
 #ifndef __WORLD_HPP__
 #define __WORLD_HPP__
 
+#include <vector>
 #include "RGBColor.hpp"
 // #include "Point2D.hpp"
 

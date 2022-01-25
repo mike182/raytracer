@@ -1,21 +1,19 @@
 #ifndef __RGBCOLOR_HPP__
 #define __RGBCOLOR_HPP__
 
-class RGBColor
-{
+class RGBColor {
 public:
-    RGBColor();
-    RGBColor(int i);
-    RGBColor(int r, int g, int b);
-    RGBColor(int r, int g, int b, int a);
-    virtual ~RGBColor();
+    RGBColor(void);
+    RGBColor(float a);
+    RGBColor(float r, float g, float b);
+    RGBColor(float r, float g, float b, float a);
+    RGBColor(const RGBColor & c);
+    virtual ~RGBColor(void);
 
-private:
+    RGBColor & operator=(const RGBColor & rhs);
+
 public:
-    int r;
-    int g;
-    int b;
-    int a;
+    float r, g, b, a;
 };
 
 #endif // __RGBCOLOR_HPP__
