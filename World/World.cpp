@@ -49,6 +49,7 @@ void World::render_scene() const {
     ray.d = Vector3D(0, 0, -1);
     for (int r = 0; r < vp.vres; r++)
         for (int c = 0; c < vp.hres; c++) {
+            progress_bar(r, vp.vres);
             x = vp.s * (c - 0.5 * (vp.hres - 1.0));
             y = vp.s * (r - 0.5 * (vp.vres - 1.0));
             ray.o = Point3D(x, y, zw);
@@ -63,6 +64,22 @@ void World::render_scene() const {
     auto UTC = duration_cast<seconds>(now.time_since_epoch()).count();
     // write image to file
     image.write("/mnt/d/w/rt_image/" + std::to_string(UTC) + ".png");
+}
+
+inline void World::progress_bar(int r, int vres) const {
+    int barWidth = 50;
+    int progress = r * barWidth / vres;
+    int pos = progress;
+    std::cout << "[";
+    for (int i = 0; i < barWidth; i++) {
+        if (i < pos) std::cout << "=";
+        else if (i == pos) std::cout << ">";
+        else std::cout << " ";
+    }
+    std::cout << "] " << r * 100 / vres << " %\r";
+    std::cout.flush();
+    //
+
 }
 
 // void World::display_pixel(const int row, const int column, const RGBColor & pixel_color) const {
