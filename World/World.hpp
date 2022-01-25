@@ -24,6 +24,7 @@ public:
     void render_scene(void) const;
     // void display_pixel(const int row, const int column, const RGBColor & pixel_color) const;
 private:
+    // void progress_bar(int row, int vres) const;
     // void delete_objects();
 
 public:
