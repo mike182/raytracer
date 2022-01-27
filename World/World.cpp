@@ -161,15 +161,16 @@ RGBColor World::clamp_to_color(const RGBColor & raw_color) const {
     return (c);
 }
 
-// Progress: [ 57%] [#####################...........]
+// Progress: [ 42%] [#####################...........]
 void World::pbar_update(int progress, int vres) const {
     int bar_width = winsize / 4;
     int percent = (progress + 1) * 100 / vres;
     int pos = progress * bar_width / vres;
 
-    std::cout << "Progress: ";
-    std::cout << "[" << std::setw(3) << percent << "%] [";
-
+    std::cout << "\033[0;30m" << "\033[42m"; // black txt & green bg
+    std::cout << "Progress: [" << std::setw(3) << percent << "%]";
+    std::cout << "\033[0m"; // reset color
+    std::cout << " [";
     for (int i = 0; i < bar_width; i++) {
         if (i < pos) std::cout << "#";
         else if (i == pos) std::cout << "";
@@ -178,7 +179,6 @@ void World::pbar_update(int progress, int vres) const {
     std::cout << "] " << "\r";
     std::cout.flush();
 }
-
 
 void World::pbar_clear() const {
     for (int i = 0; i < 25 + 19; i++)
