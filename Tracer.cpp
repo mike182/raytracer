@@ -3,13 +3,13 @@
 #include "World.hpp"
 #include "Constants.h"
 
-Tracer::Tracer()
+Tracer::Tracer(void)
     : world_ptr(NULL) { }
 
-Tracer::Tracer(World * w_ptr)
-    : world_ptr(w_ptr) { }
+Tracer::Tracer(World * wp)
+    : world_ptr(wp) { }
 
-Tracer::~Tracer()
+Tracer::~Tracer(void)
 {
     if (world_ptr)
         world_ptr = nullptr;

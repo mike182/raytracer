@@ -1,5 +1,7 @@
 #include "World.hpp"
 
+#include <iostream>
+
 int main(void) {
     World w;
 

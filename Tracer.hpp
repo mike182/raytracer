@@ -8,9 +8,9 @@ class World;
 
 class Tracer {
 public:
-    Tracer();
+    Tracer(void);
     Tracer(World * w_ptr);
-    virtual ~Tracer();
+    virtual ~Tracer(void);
 
     virtual RGBColor trace_ray(const Ray & ray) const;
     // virtual RGBColor trace_ray(const Ray & ray, const int depth) const;
