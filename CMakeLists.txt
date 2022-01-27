@@ -22,9 +22,10 @@ set (SOURCES
   Tracer.cpp
   # Objects
   GeometricObjects/GeometricObject.cpp
-  GeometricObjects/SingleSphere.cpp
+  GeometricObjects/MultipleObjects.cpp
   GeometricObjects/Plane.cpp
   GeometricObjects/Sphere.cpp
+  # GeometricObjects/SingleSphere.cpp
   # Utilities
   Utilities/ShadeRec.cpp
   Utilities/RGBColor.cpp

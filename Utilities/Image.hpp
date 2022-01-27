@@ -5,8 +5,7 @@
 #include <vector>
 #include "RGBColor.hpp"
 
-class Image
-{
+class Image {
 public:
     Image(void);
     Image(const Image & img) = delete;

@@ -15,9 +15,7 @@ Tracer::~Tracer(void)
         world_ptr = nullptr;
 }
 
-
-RGBColor Tracer::trace_ray(const Ray & ray) const {
-    Ray unused = ray; // unused
+RGBColor Tracer::trace_ray(__attribute__((unused))const Ray & ray) const {
     return red;
 }
 

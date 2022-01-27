@@ -27,9 +27,8 @@ void Image::set_pixel(RGBColor c) {
     raw_image.push_back(c);
 }
 
-void Image::set_pixel(RGBColor c, int x, int y) {
+void Image::set_pixel(RGBColor c, __attribute__((unused))int x, __attribute__((unused))int y) {
     c.to_255(); // from 0-1 to 0-255 for png::image
-    x++, y++; // tmp
     raw_image.push_back(c);
 }
 
@@ -39,7 +38,9 @@ void Image::save_image_png() {
 
     for (int r = 0; r < vres; r++)
         for (int c = 0; c < hres; c++, i++) {
-            image[r][c] = png::rgb_pixel(raw_image[i].r,
+            int x = c;
+            int y = vres - r - 1;
+            image[y][x] = png::rgb_pixel(raw_image[i].r,
                                          raw_image[i].g,
                                          raw_image[i].b);
         }
@@ -52,7 +53,6 @@ void Image::save_image_png() {
 }
 
 // void World::saveJPEG(const char * filename2, uint8_t * raw) const;
-
 void Image::save_image_jpeg() {
 //     uint8_t *raw = (uint8_t*) malloc(sizeof(uint8_t) * hres * vres * 3);
 //     uint8_t *save = raw;
