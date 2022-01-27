@@ -31,3 +31,4 @@ RGBColor MultipleObjects::trace_ray(__attribute__((unused))const Ray & ray) cons
     else
         return world_ptr->background_color;
 }
+
