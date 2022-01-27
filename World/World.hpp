@@ -1,8 +1,11 @@
 #ifndef __WORLD_HPP__
 #define __WORLD_HPP__
 
+#include <sys/ioctl.h> // winsize
+#include <stdio.h> // winsize
 #include <stdint.h>
 #include <vector>
+
 #include "Constants.h"
 #include "Maths.h"
 #include "ViewPlane.hpp"
@@ -31,17 +34,19 @@ public:
 
 private:
     void delete_objects();
-    void progress_bar(int row, int vres) const;
-    void clear_progress_bar() const;
+    void pbar_update(int row, int vres) const;
+    void pbar_clear() const;
 
 public:
-    ViewPlane                       vp;
-    RGBColor                        background_color;
-    Tracer                          *tracer_ptr;
-    // Camera                          *camera_ptr;
-    std::vector<GeometricObject*>   objects;
-    // std::vector<Light*>             objects;
-    Image                           *image;
+    ViewPlane vp;
+    RGBColor background_color;
+    Tracer * tracer_ptr;
+    // Camera * camera_ptr;
+    std::vector<GeometricObject*> objects;
+    // std::vector<Light*> objects;
+private:
+    Image * image;
+    int winsize;
 };
 
 #endif // __WORLD_HPP__

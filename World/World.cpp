@@ -1,6 +1,8 @@
 #include "World.hpp"
 
 #include <iostream>
+#include <iomanip>
+#include <cmath>
 
 #include "Point2D.hpp"
 #include "Point3D.hpp"
@@ -14,6 +16,15 @@ World::World (void)
     tracer_ptr(nullptr)
 {
     image = new Image();
+#ifdef TIOCGSIZE
+    struct ttysize ts;
+    ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
+    winsize = ts.ts_cols;
+#elif defined(TIOCGWINSZ)
+    struct winsize ws;
+    ioctl(0, TIOCGWINSZ, &ws);
+    winsize = ws.ws_col;
+#endif // TIOCGSIZE
 }
 
 World::~World(void) {
@@ -37,6 +48,7 @@ World::~World(void) {
 // }
 
 
+// 3.20
 void World::build(void) {
     vp.set_hres(200);
     vp.set_vres(200);
@@ -152,22 +164,27 @@ RGBColor World::clamp_to_color(const RGBColor & raw_color) const {
     return (c);
 }
 
-void World::progress_bar(int r, int vres) const {
-    int barWidth = 50;
-    int progress = r * barWidth / vres;
-    int pos = progress; //
-    std::cout << "[";
-    for (int i = 0; i < barWidth; i++) {
-        if (i < pos) std::cout << "=";
-        else if (i == pos) std::cout << ">";
-        else std::cout << " ";
+// Progress: [ 57%] [#####################...........]
+void World::pbar_update(int progress, int vres) const {
+    int bar_width = winsize / 4;
+    int percent = (progress + 1) * 100 / vres;
+    int pos = progress * bar_width / vres;
+
+    std::cout << "Progress: ";
+    std::cout << "[" << std::setw(3) << percent << "%] [";
+
+    for (int i = 0; i < bar_width; i++) {
+        if (i < pos) std::cout << "#";
+        else if (i == pos) std::cout << "";
+        else std::cout << ".";
     }
-    std::cout << "] " << r * 100 / vres << " %\r";
+    std::cout << "] " << "\r";
     std::cout.flush();
 }
 
-void World::clear_progress_bar() const {
-    for (int i = 0; i < 100 + 20; i++)
+
+void World::pbar_clear() const {
+    for (int i = 0; i < 25 + 19; i++)
         std::cout << " ";
     std::cout << "\r";
     std::cout.flush();

@@ -49,6 +49,7 @@ void Image::save_image_png() {
     auto UTC = duration_cast<seconds>((system_clock::now()).time_since_epoch()).count();
     std::string filename = "/mnt/d/w/rt_image/" + std::to_string(UTC);
     image.write(filename + ".png");
+    std::cout << std::endl; // jump after progress bar
     std::cout << "Image: " << filename << ".png" << std::endl;
 }
 
