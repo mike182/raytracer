@@ -77,12 +77,20 @@ void World::render_scene(void) const {
             //     ray.o = Point3D(pp.x, pp.y, zw);
             //     pixel_color += tracer_ptr->trace_ray(ray);
             // }
+            // Jittered Sampling
+            // for (int p = 0; p < n; p++)
+            //     for (int q = 0; q < n; q++) {
+            //         pp.x = vp.s * (c - 0.5 * vp.hres + (q + rand_float()) / n);
+            //         pp.y = vp.s * (r - 0.5 * vp.vres + (p + rand_float()) / n);
+            //         ray.o = Point3D(pp.x, pp.y, zw);
+            //         pixel_color += tracer_ptr->trace_ray(ray);
+            //     }
             pixel_color /= vp.num_samples;
             display_pixel(r, c, pixel_color);
             pbar_update(r, vp.vres);
         }
     }
-    pbar_clear();
+    // pbar_clear();
     image->save_image_png(); // png
 }
 
