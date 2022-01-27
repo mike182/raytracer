@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <cmath>
 
+#include "Random.h"
 #include "Point2D.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
@@ -33,68 +34,55 @@ World::~World(void) {
     delete_objects();
 }
 
-// 3.18
-// void World::build(void) {
-//     vp.set_hres(200);
-//     vp.set_vres(200);
-//     vp.set_pixel_size(1.0);
-
-//     background_color = black;
-//     tracer_ptr = new SingleSphere(this);
-
-//     sphere.set_center(0.0);
-//     sphere.set_radius(85.0);
-
-// }
-
-
-// 3.20
 void World::build(void) {
     vp.set_hres(200);
     vp.set_vres(200);
+    vp.set_pixel_size(1.0);
+    vp.num_samples = 4;
 
     background_color = black;
     tracer_ptr = new MultipleObjects(this);
 
-    // use access functions to set center and radius for this sphere
-
     Sphere* sphere_ptr = new Sphere;
-    sphere_ptr->set_center(0, -25, 0);
-    sphere_ptr->set_radius(80.0);
+    sphere_ptr->set_center(0);
+    sphere_ptr->set_radius(85.0);
     sphere_ptr->set_color(1, 0, 0);  // red
     add_object(sphere_ptr);
-
-    // use a constructor to set center and radius for this sphere
-
-    sphere_ptr = new Sphere(Point3D(0, 30, 0), 60);
-    sphere_ptr->set_color(1, 1, 0);	// yellow
-    add_object(sphere_ptr);
-
-
-    Plane* plane_ptr = new Plane(Point3D(0.0), Normal(0, 1, 1));
-    plane_ptr->set_color(0.0, 0.25, 0.0);	// dark green
-    add_object(plane_ptr);
 }
 
 void World::render_scene(void) const {
-    image->set_resolution(vp.hres, vp.vres); // png
     RGBColor pixel_color;
     Ray ray;
     double zw = 100.0;
-    double x, y;
+    int n = (int) sqrt((float)vp.num_samples);
+    Point2D pp;
 
+    image->set_resolution(vp.hres, vp.vres); // png
     ray.d = Vector3D(0, 0, -1);
-    for (int r = 0; r < vp.vres; r++) {
-        for (int c = 0; c < vp.hres; c++) {
-            progress_bar(r, vp.vres);
-            x = vp.s * (c - 0.5 * (vp.hres - 1.0));
-            y = vp.s * (r - 0.5 * (vp.vres - 1.0));
-            ray.o = Point3D(x, y, zw);
-            pixel_color = tracer_ptr->trace_ray(ray);
+    for (int r = 0; r < vp.vres; r++) { // up
+        for (int c = 0; c < vp.hres; c++) { // accros
+            pixel_color = black;
+            // Regular Sampling
+            for (int p = 0; p < n; p++)
+                for (int q = 0; q < n; q++) {
+                    pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n);
+                    pp.y = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
+                    ray.o = Point3D(pp.x, pp.y, zw);
+                    pixel_color += tracer_ptr->trace_ray(ray);
+                }
+            // Random Sampling
+            // for (int p = 0; p < vp.num_samples; p++) {
+            //     pp.x = vp.s * (c - 0.5 * vp.hres + rand_float());
+            //     pp.y = vp.s * (r - 0.5 * vp.vres + rand_float());
+            //     ray.o = Point3D(pp.x, pp.y, zw);
+            //     pixel_color += tracer_ptr->trace_ray(ray);
+            // }
+            pixel_color /= vp.num_samples;
             display_pixel(r, c, pixel_color);
+            pbar_update(r, vp.vres);
         }
     }
-    clear_progress_bar();
+    pbar_clear();
     image->save_image_png(); // png
 }
 
@@ -109,7 +97,8 @@ void World::display_pixel(const int row, const int column, const RGBColor & pixe
     if (vp.gamma != 1.0)
         mapped_color = mapped_color.powc(vp.inv_gamma);
 
-    //have to start from max y coordinate to convert to screen coordinates
+    // done in Image Class
+    // have to start from max y coordinate to convert to screen coordinates
     int x = column;
     int y = vp.vres - row - 1;
 
@@ -138,7 +127,7 @@ ShadeRec World::hit_bare_bones_objects(const Ray & ray) {
             sr.hit_an_object = true;
             tmin = t;
             sr.color = objects[i]->get_color();
-            }
+        }
 
     return sr;
 }

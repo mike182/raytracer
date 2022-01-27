@@ -27,8 +27,8 @@ set (SOURCES
   GeometricObjects/Sphere.cpp
   # GeometricObjects/SingleSphere.cpp
   # Utilities
-  Utilities/ShadeRec.cpp
   Utilities/RGBColor.cpp
+  Utilities/ShadeRec.cpp
   Utilities/Point2D.cpp
   Utilities/Point3D.cpp
   Utilities/Vector3D.cpp
