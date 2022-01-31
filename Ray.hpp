@@ -7,11 +7,11 @@
 class Ray {
 public:
     Ray(void);
-    Ray(const Point3D & o, const Vector3D & d);
-    Ray(const Ray & ray);
+    Ray(const Point3D& o, const Vector3D& d);
+    Ray(const Ray& ray);
     virtual ~Ray(void);
 
-    Ray & operator=(const Ray & rhs);
+    Ray& operator=(const Ray& rhs);
 
 public:
     Point3D o;
