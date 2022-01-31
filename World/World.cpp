@@ -4,7 +4,6 @@
 #include <iomanip>
 #include <cmath>
 
-#include "Random.h"
 #include "Point2D.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"

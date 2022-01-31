@@ -4,9 +4,9 @@ project(raytracer)
 
 # set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
 set(CMAKE_CXX_COMPILER clang++)
-list(APPEND CMAKE_CXX_FLAGS "-std=c++17 ${CMAKE_CXX_FLAGS} -W -Wall -Werror -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "-std=c++11 -W -Wall -Werror -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
+set(CMAKE_CXX_FLAGS_DEBUG "-g3")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -15,12 +15,14 @@ find_package(PNG REQUIRED)
 
 set (SOURCES
   main.cpp
+  # Constants.h
   # World
   World/World.cpp
   World/ViewPlane.cpp
-  # Camera.cpp
-  Ray.cpp
-  # RayCast.cpp
+  # Cameras
+  Cameras/Camera.cpp
+  Cameras/Pinhole.cpp
+  RayCast.cpp
   Tracer.cpp
   # Objects
   GeometricObjects/GeometricObject.cpp
@@ -31,15 +33,18 @@ set (SOURCES
   # Utilities
   Utilities/RGBColor.cpp
   Utilities/ShadeRec.cpp
+  Utilities/Ray.cpp
   Utilities/Point2D.cpp
   Utilities/Point3D.cpp
   Utilities/Vector3D.cpp
   Utilities/Normal.cpp
+  Utilities/Maths.cpp
   Utilities/Image.cpp
   )
 
 set (SOURCES_SCENES
-    Scenes/BuildCh03PageOneImage.cpp
+    Scenes/BuildTmp.cpp
+    # Scenes/BuildCh03PageOneImage.cpp
     # Scenes/BuildFigure03.18.cpp
     # Scenes/BuildFigure03.20a.cpp
     )
@@ -47,7 +52,7 @@ set (SOURCES_SCENES
 include_directories (
   .
   # BRDFs/
-  # Camera/
+  Cameras/
   GeometricObjects/
   # Lights/
   # Materials/
