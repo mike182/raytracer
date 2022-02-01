@@ -19,7 +19,7 @@ public:
     Light & operator=(const Light & rhs);
 
     virtual Vector3D get_direction(ShadeRec& sr) = 0;
-    virtual RGBColor L(ShadeRec& sr);
+    virtual RGBColor L(ShadeRec& sr) const;
 };
 
 #endif // __LIGHT_HPP__

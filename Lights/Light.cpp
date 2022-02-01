@@ -15,6 +15,6 @@ Light & Light::operator=(const Light & rhs) {
     return *this;
 }
 
-RGBColor Light::L([[maybe_unused]] ShadeRec& sr) {
+RGBColor Light::L([[maybe_unused]] ShadeRec& sr) const {
     return black;
 }

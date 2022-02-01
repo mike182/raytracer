@@ -17,7 +17,7 @@ public:
     void set_color(const RGBColor& c);
     void set_color(const float r, const float g, const float b);
     virtual Vector3D get_direction(ShadeRec& s);
-    virtual RGBColor L(ShadeRec& s);
+    virtual RGBColor L(ShadeRec& s) const;
 
 public:
     float ls;

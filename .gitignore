@@ -3,7 +3,7 @@ rt
 old/
 *.png
 TODO.md
-Scenes/
+Scenes/Chapters
 compile_commands.json
 .cache/
 
