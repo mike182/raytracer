@@ -1,6 +1,8 @@
 #ifndef __VIEWPLANE_HPP__
 #define __VIEWPLANE_HPP__
 
+#include "Sampler.hpp"
+
 class ViewPlane {
 public:
     ViewPlane(void);
@@ -14,6 +16,7 @@ public:
     void set_resolution(int hres, int vres);
     void set_pixel_size(const float size);
     void set_samples(const int n);
+    void set_sampler(Sampler* sp);
 
     void set_gamma(const float g);
     void set_gamut_display(const bool show);
@@ -23,6 +26,7 @@ public:
     int vres;
     float s;
     int num_samples;
+    Sampler* sampler_ptr;
 
     float gamma;
     float inv_gamma;

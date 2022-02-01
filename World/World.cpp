@@ -1,7 +1,4 @@
 #include "World.hpp"
-// Geometric Objects
-#include "Plane.hpp"
-#include "Sphere.hpp"
 // Tracers
 // #include "SingleSphere.hpp"
 #include "MultipleObjects.hpp"
@@ -61,7 +58,8 @@ void World::render_scene(void) const {
     RGBColor pixel_color;
     Ray ray;
     double zw = 100.0;
-    int n = (int) sqrt((float)vp.num_samples);
+    // int n = (int) sqrt((float)vp.num_samples);
+    Point2D sp;
     Point2D pp;
 
     image->set_resolution(vp.hres, vp.vres); // png
@@ -69,11 +67,14 @@ void World::render_scene(void) const {
     for (int r = 0; r < vp.vres; r++) { // up
         for (int c = 0; c < vp.hres; c++) { // accros
             pixel_color = black;
-            // Regular Sampling
-            for (int p = 0; p < n; p++)
-                for (int q = 0; q < n; q++) {
-                    pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n);
-                    pp.y = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
+            for (int i = 0; i < vp.num_samples; i++) {
+                    sp = vp.sampler_ptr->sample_unit_square();
+                    // std::cout << "x " << sp.x << " y " << sp.y <<std::endl;
+                    pp.x = vp.s * (c - 0.5 * vp.hres + sp.x);
+                    pp.y = vp.s * (r - 0.5 * vp.vres + sp.y);
+                    // Regular Sampling
+                    // pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n);
+                    // pp.y = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
                     ray.o = Point3D(pp.x, pp.y, zw);
                     pixel_color += tracer_ptr->trace_ray(ray);
                 }

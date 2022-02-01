@@ -20,24 +20,24 @@ PointLight::~PointLight(void) {
 }
 
 Light* PointLight::clone(void) const {
-    return (new PointLight(*this));
+    return new PointLight(*this);
 }
 
 PointLight& PointLight::operator= (const PointLight& rhs) {
     if (this == &rhs)
-        return (*this);
+        return *this;
 
     Light::operator= (rhs);
     ls		= rhs.ls;
     color 	= rhs.color;
     location 	= rhs.location;
-    return (*this);
+    return *this;
 }
 
 Vector3D PointLight::get_direction([[maybe_unused]] ShadeRec& sr) {
-    return ((location - sr.hit_point).hat());
+    return (location - sr.hit_point).hat();
 }
 
 RGBColor PointLight::L([[maybe_unused]] ShadeRec& s) const {
-    return (ls * color);
+    return ls * color;
 }

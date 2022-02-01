@@ -1,5 +1,5 @@
 #include "ViewPlane.hpp"
-
+#include "Jittered.hpp"
 #include <iostream>
 
 ViewPlane::ViewPlane(void)
@@ -55,26 +55,48 @@ void ViewPlane::set_vres(int y) {
 void ViewPlane::set_resolution(int x, int y) {
     hres = x;
     vres = y;
-    std::cout << "ViewPlane: resolution set to " << x << ", " << y << std::endl;
+    std::cout << "ViewPlane: h_res set to " << x << std::endl;
+    std::cout << "ViewPlane: v_res set to " << y << std::endl;
+    std::cout << "ViewPlane: resolution set to " << x << "*" << y << std::endl;
 }
 
 void ViewPlane::set_pixel_size(const float size) {
-    this->s = size;
+    s = size;
     std::cout << "ViewPlane: pixe_size set to " << s << std::endl;
 }
 
 void ViewPlane::set_samples(const int n) {
-    this->num_samples = n;
+    num_samples = n;
+    // if (sampler_ptr) {
+    //     delete sampler_ptr;
+    //     sampler_ptr = nullptr;
+    // }
+    if (num_samples > 1)
+        // sampler_ptr = new MultiJittered(num_samples);
+        sampler_ptr = new Jittered(num_samples);
+    // else
+        // sampler_ptr = new Regular(1);
     std::cout << "ViewPlane: num_samples set to " << num_samples << std::endl;
 }
 
+void ViewPlane::set_sampler(Sampler* sp) {
+    // if (sampler_ptr) {
+    //     delete sampler_ptr;
+    //     sampler_ptr = nullptr;
+    // }
+    num_samples = sp->get_num_samples();
+    sampler_ptr = sp;
+    std::cout << "ViewPlane: num_samples set to " << num_samples << std::endl;
+    std::cout << "ViewPlane: sampler_ptr set to " << typeid(*sampler_ptr).name() << std::endl;
+}
+
 void ViewPlane::set_gamma(const float g) {
-    this->gamma = g;
+    gamma = g;
     std::cout << "ViewPlane: gamma set to " << gamma << std::endl;
     std::cout << "ViewPlane: inv_gamma set to " << inv_gamma << std::endl;
 }
 
 void ViewPlane::set_gamut_display(const bool show) {
-    this->show_out_of_gamut = show;
+    show_out_of_gamut = show;
     std::cout << "ViewPlane: show_out_of_gamut set to " << std::boolalpha << show_out_of_gamut << std::endl;
 }

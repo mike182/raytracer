@@ -31,6 +31,9 @@ set (SOURCES
   # Materials
   Materials/Material.cpp
   Materials/Matte.cpp
+  # Samplers
+  Samplers/Sampler.cpp
+  Samplers/Jittered.cpp
   # Tracers
   Tracers/Tracer.cpp #
   Tracers/MultipleObjects.cpp #
@@ -54,11 +57,13 @@ set (SOURCES
   )
 
 set (SOURCES_SCENES
-    # Scenes/BuildTmp.cpp
+    Scenes/BuildTmp.cpp
     # Scenes/BuildCh03PageOneImage.cpp
     # Scenes/BuildFigure03.18.cpp
     # Scenes/BuildFigure03.20a.cpp
-    Scenes/BuildFigure14.21.cpp
+    # Scenes/BuildFigure04.04.cpp
+    # Scenes/BuildFigure04.08.cpp
+    # Scenes/BuildFigure14.21.cpp
     )
 
 include_directories (
@@ -68,7 +73,7 @@ include_directories (
   GeometricObjects/
   Lights/
   Materials/
-  # Samplers/
+  Samplers/
   Tracers/
   Utilities/
   World/

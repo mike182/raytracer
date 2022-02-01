@@ -11,6 +11,7 @@
 #include "Image.hpp"
 #include "Camera.hpp"
 // Lights
+#include "Ambient.hpp"
 #include "Light.hpp"
 #include "Ambient.hpp"
 #include "Directional.hpp"

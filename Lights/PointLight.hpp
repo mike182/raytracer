@@ -49,12 +49,10 @@ inline void PointLight::set_color(const float r, const float g, const float b) {
 
 inline void PointLight::set_location(Vector3D d) {
     location = d;
-    location.normalize();
 }
 
 inline void PointLight::set_location(float dx, float dy, float dz) {
     location.x = dx; location.y = dy; location.z = dz;
-    location.normalize();
 }
 
 #endif // __POINTLIGHT_HPP__
