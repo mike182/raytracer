@@ -12,6 +12,7 @@
 #include "Camera.hpp"
 #include "Light.hpp"
 #include "Ambient.hpp"
+#include "Directional.hpp"
 #include <sys/ioctl.h>
 #include <cstdio>
 #include <cstdint>
