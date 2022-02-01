@@ -6,6 +6,7 @@
 #include "Ray.hpp"
 #include "RGBColor.hpp"
 
+class Material;
 class World;
 
 class ShadeRec {
@@ -19,7 +20,7 @@ public:
 
 public:
     bool hit_an_object;
-    // Material ?
+    Material* material_ptr;
     Point3D hit_point;
     Point3D local_hit_point;
     Normal normal;

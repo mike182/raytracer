@@ -7,5 +7,10 @@ int main(void) {
 
     w.build();
     w.render_scene();
-    return 0;
+    // if (w.tracer_ptr == nullptr) {
+    //     std::cout << "main: " << "tacer_ptr is null" << std::endl;
+    //     return EXIT_FAILURE;
+    // }
+    // w.camera_ptr->render_scene(w);
+    return EXIT_SUCCESS;
 }

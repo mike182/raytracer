@@ -3,17 +3,13 @@
 
 #include "Tracer.hpp"
 
-class World;
-
 class SingleSphere: public Tracer {
  public:
-  SingleSphere();
-  SingleSphere(World * worldPtr);
+  SingleSphere(void);
+  SingleSphere(World* w_ptr);
   virtual ~SingleSphere();
 
-  virtual RGBColor trace_ray(const Ray & ray) const;
+  virtual RGBColor trace_ray(const Ray& ray) const;
 };
-
-
 
 #endif // __SINGLESPHERE_HPP__

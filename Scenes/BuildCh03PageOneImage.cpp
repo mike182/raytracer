@@ -168,4 +168,3 @@ void World::build(void) {
     sphere_ptr35->set_color(light_purple);
     add_object(sphere_ptr35);
 }
-

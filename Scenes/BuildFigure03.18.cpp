@@ -21,4 +21,3 @@ void World::build(void) {
     add_object(sphere_ptr);
 
 }
-

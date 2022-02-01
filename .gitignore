@@ -2,10 +2,16 @@
 rt
 old/
 *.png
+TODO.md
+Scenes/
+compile_commands.json
+.cache/
 
 # vim
 .*.swo
 .*.swp
+*.vim
+*.vimrc
 
 # build folder
 build/

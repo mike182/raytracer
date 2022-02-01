@@ -10,10 +10,11 @@
 Image::Image(void)
     : hres(0),
     vres(0),
-    raw_image() { }
-
-Image::~Image(void)
+    raw_image()
 {
+}
+
+Image::~Image(void) {
 }
 
 void Image::set_resolution(const int h, const int v) {
@@ -27,9 +28,28 @@ void Image::set_pixel(RGBColor c) {
     raw_image.push_back(c);
 }
 
-void Image::set_pixel(RGBColor c, __attribute__((unused))int x, __attribute__((unused))int y) {
+void Image::set_pixel(RGBColor c, [[maybe_unused]] int x, [[maybe_unused]] int y) {
     c.to_255(); // from 0-1 to 0-255 for png::image
     raw_image.push_back(c);
+}
+
+void Image::save_image(int type) {
+    switch (type) {
+    case FILE_BMP:
+        // save_image_bmp();
+        break;
+    case FILE_PNG:
+        save_image_png();
+        break;
+    case FILE_JPEG:
+        save_image_jpeg();
+        break;
+    default:
+        save_image_bmp();
+    }
+}
+
+void Image::save_image_bmp() {
 }
 
 void Image::save_image_png() {
@@ -47,9 +67,14 @@ void Image::save_image_png() {
 
     using namespace std::chrono;
     auto UTC = duration_cast<seconds>((system_clock::now()).time_since_epoch()).count();
-    std::string filename = "/mnt/d/w/rt_image/" + std::to_string(UTC);
+    // std::string filename = "/mnt/d/w/rt_image/" + std::to_string(UTC);
+    std::string filename = "../Images/" + std::to_string(UTC);
     image.write(filename + ".png");
     std::cout << std::endl; // jump after progress bar
+    std::cout << "Image: " << filename << ".png" << std::endl;
+    // copy in current folder
+    filename = "./result";
+    image.write(filename + ".png");
     std::cout << "Image: " << filename << ".png" << std::endl;
 }
 

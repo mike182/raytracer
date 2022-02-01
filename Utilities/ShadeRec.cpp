@@ -2,10 +2,12 @@
 #include "Constants.h"
 
 // deleted
-// ShadeRec::ShadeRec(void) { }
+// ShadeRec::ShadeRec(void) {
+// }
 
 ShadeRec::ShadeRec(World& w)
     : hit_an_object(false),
+    material_ptr(nullptr),
     hit_point(),
     local_hit_point(),
     normal(),
@@ -15,10 +17,13 @@ ShadeRec::ShadeRec(World& w)
     t(0.0),
     u(0.0),
     v(0.0),
-    w(w) { }
+    w(w)
+{
+}
 
 ShadeRec::ShadeRec(const ShadeRec& sr)
     : hit_an_object(sr.hit_an_object),
+    material_ptr(sr.material_ptr),
     hit_point(sr.hit_point),
     local_hit_point(sr.local_hit_point),
     normal(sr.normal),
@@ -28,10 +33,11 @@ ShadeRec::ShadeRec(const ShadeRec& sr)
     t(sr.t),
     u(sr.u),
     v(sr.v),
-    w(sr.w) { }
-
-ShadeRec::~ShadeRec(void)
+    w(sr.w)
 {
+}
+
+ShadeRec::~ShadeRec(void) {
 }
 
 // deleted

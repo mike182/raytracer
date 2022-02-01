@@ -31,4 +31,3 @@ void World::build(void) {
     plane_ptr->set_color(0.0, 0.25, 0.0); // dark green
     add_object(plane_ptr);
 }
-

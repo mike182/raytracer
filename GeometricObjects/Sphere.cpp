@@ -1,53 +1,48 @@
 #include "Sphere.hpp"
 
-#include <cmath>
-
-const double Sphere::kEpsilon = 0.00001;
+// const double Sphere::kEpsilon = 0.00001;
+const double Sphere::kEpsilon = 0.001;
 
 Sphere::Sphere(void)
     : GeometricObject(),
     center(0.0),
-    radius(1.0)  { }
+    radius(1.0)
+{
+}
 
 Sphere::Sphere(Point3D c, double r)
     : GeometricObject(),
     center(c),
-    radius(r) { }
-
-Sphere::Sphere(const Sphere & sphere)
-    : GeometricObject(sphere),
-    center(sphere.center),
-    radius(sphere.radius)  { }
-
-Sphere::~Sphere(void)
+    radius(r)
 {
 }
 
-Sphere & Sphere::operator=(const Sphere & rhs) {
+Sphere::Sphere(const Sphere& sphere)
+    : GeometricObject(sphere),
+    center(sphere.center),
+    radius(sphere.radius)
+{
+}
+
+Sphere::~Sphere(void) {
+}
+
+Sphere* Sphere::clone(void) const {
+    return new Sphere(*this);
+}
+
+Sphere& Sphere::operator=(const Sphere& rhs) {
     if (this == &rhs)
         return *this;
 
+    GeometricObject::operator=(rhs);
     center = rhs.center;
     radius = rhs.radius;
 
     return *this;
 }
 
-void Sphere::set_center(const Point3D & c) {
-    center = c;
-}
-
-void Sphere::set_center(const double x, const double y, const double z) {
-    center.x = x;
-    center.y = y;
-    center.z = z;
-}
-
-void Sphere::set_radius(const double r) {
-    radius = r;
-}
-
-bool Sphere::hit(const Ray & ray, double & tmin, ShadeRec & sr) const {
+bool Sphere::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
     double t;
     Vector3D temp = ray.o - center;
     double a = ray.d * ray.d;
@@ -80,4 +75,3 @@ bool Sphere::hit(const Ray & ray, double & tmin, ShadeRec & sr) const {
     }
     return false;
 }
-

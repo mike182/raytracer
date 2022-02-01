@@ -23,12 +23,12 @@ badd +1 Vector3D.cpp
 badd +1 RGBColor.hpp
 badd +1 RGBColor.cpp
 badd +1 ShadeRec.hpp
-badd +1 ~/w/c++/raytracer/TODO.md
+badd +11 ~/w/c++/raytracer/TODO.md
 badd +1 ~/w/c++/raytracer/Ray.hpp
 badd +1 ~/w/c++/raytracer/Ray.cpp
 badd +1 ShadeRec.cpp
 badd +1 Ray.hpp
-badd +0 Ray.cpp
+badd +1 Ray.cpp
 argglobal
 %argdel
 $argadd Constants.h
@@ -46,26 +46,14 @@ tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
-tabnew +setlocal\ bufhidden=wipe
 tabrewind
 edit Constants.h
 argglobal
-let s:l = 2 - ((1 * winheight(0) + 24) / 48)
+let s:l = 1 - ((0 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
-normal! 0
-tabnext
-edit ~/w/c++/raytracer/TODO.md
-argglobal
-if bufexists("~/w/c++/raytracer/TODO.md") | buffer ~/w/c++/raytracer/TODO.md | else | edit ~/w/c++/raytracer/TODO.md | endif
-balt Constants.h
-let s:l = 11 - ((10 * winheight(0) + 24) / 48)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 11
+keepjumps 1
 normal! 0
 tabnext
 edit Maths.h
@@ -101,11 +89,11 @@ argglobal
 2argu
 if bufexists("Maths.cpp") | buffer Maths.cpp | else | edit Maths.cpp | endif
 balt Maths.h
-let s:l = 2 - ((1 * winheight(0) + 24) / 48)
+let s:l = 1 - ((0 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
+keepjumps 1
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 104 + 104) / 209)
@@ -133,22 +121,22 @@ exe 'vert 2resize ' . ((&columns * 104 + 104) / 209)
 argglobal
 3argu
 balt Normal.cpp
-let s:l = 1 - ((0 * winheight(0) + 24) / 48)
+let s:l = 2 - ((1 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 2
 normal! 0
 wincmd w
 argglobal
 3argu
 if bufexists("Normal.cpp") | buffer Normal.cpp | else | edit Normal.cpp | endif
 balt Normal.hpp
-let s:l = 2 - ((1 * winheight(0) + 24) / 48)
+let s:l = 1 - ((0 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
+keepjumps 1
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 104 + 104) / 209)
@@ -219,11 +207,11 @@ exe 'vert 2resize ' . ((&columns * 104 + 104) / 209)
 argglobal
 5argu
 balt Point3D.cpp
-let s:l = 1 - ((0 * winheight(0) + 24) / 48)
+let s:l = 2 - ((1 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 2
 normal! 0
 wincmd w
 argglobal
@@ -273,11 +261,11 @@ argglobal
 6argu
 if bufexists("Vector3D.cpp") | buffer Vector3D.cpp | else | edit Vector3D.cpp | endif
 balt Vector3D.hpp
-let s:l = 2 - ((1 * winheight(0) + 24) / 48)
+let s:l = 1 - ((0 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
+keepjumps 1
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 104 + 104) / 209)
@@ -306,22 +294,22 @@ argglobal
 1argu
 if bufexists("RGBColor.hpp") | buffer RGBColor.hpp | else | edit RGBColor.hpp | endif
 balt RGBColor.cpp
-let s:l = 1 - ((0 * winheight(0) + 24) / 48)
+let s:l = 2 - ((1 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 2
 normal! 0
 wincmd w
 argglobal
 1argu
 if bufexists("RGBColor.cpp") | buffer RGBColor.cpp | else | edit RGBColor.cpp | endif
 balt RGBColor.hpp
-let s:l = 7 - ((6 * winheight(0) + 24) / 48)
+let s:l = 1 - ((0 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 7
+keepjumps 1
 normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 104 + 104) / 209)
@@ -391,11 +379,11 @@ exe 'vert 2resize ' . ((&columns * 104 + 104) / 209)
 argglobal
 if bufexists("Ray.hpp") | buffer Ray.hpp | else | edit Ray.hpp | endif
 balt ShadeRec.cpp
-let s:l = 1 - ((0 * winheight(0) + 24) / 48)
+let s:l = 2 - ((1 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 2
 normal! 0
 wincmd w
 argglobal

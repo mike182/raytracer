@@ -2,25 +2,23 @@
 #define __PLANE_HPP__
 
 #include "GeometricObject.hpp"
-#include "Point3D.hpp"
-#include "Normal.hpp"
-#include "Constants.h"
 
 class Plane : public GeometricObject {
 public:
     Plane(void);
-    Plane(Point3D p, Normal n);
-    Plane(const Plane & obj);
+    Plane(const Point3D& p, const Normal& n);
+    Plane(const Plane& plane);
+    virtual Plane* clone(void) const;
     virtual ~Plane(void);
 
-    Plane & operator=(const Plane & rhs);
+    Plane& operator=(const Plane& rhs);
 
-    virtual bool hit(const Ray & ray, double & t, ShadeRec & s) const;
+    virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 
 private:
     Point3D a;
     Normal n;
-    static const double kEpsilon;
+    static const double kEpsilon; // shadow & secondary ray
 };
 
 #endif // __PLANE_HPP__

@@ -2,9 +2,8 @@ cmake_minimum_required(VERSION 3.1)
 
 project(raytracer)
 
-# set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
 set(CMAKE_CXX_COMPILER clang++)
-set(CMAKE_CXX_FLAGS "-std=c++11 -W -Wall -Werror -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "-std=c++17 -W -Wall -Werror -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3")
 
@@ -15,49 +14,61 @@ find_package(PNG REQUIRED)
 
 set (SOURCES
   main.cpp
-  # Constants.h
   # World
   World/World.cpp
   World/ViewPlane.cpp
+  #BRDFs
+  BRDFs/BRDF.cpp
+  BRDFs/Lambertian.cpp
   # Cameras
   Cameras/Camera.cpp
   Cameras/Pinhole.cpp
-  RayCast.cpp
-  Tracer.cpp
+  # Lights
+  Lights/Light.cpp
+  Lights/Ambient.cpp
+  Lights/Directional.cpp
+  # Materials
+  Materials/Material.cpp
+  Materials/Matte.cpp
+  # Tracers
+  Tracers/Tracer.cpp #
+  Tracers/MultipleObjects.cpp #
+  Tracers/RayCast.cpp #
+  # Tracers/SingleSphere.cpp # old
   # Objects
   GeometricObjects/GeometricObject.cpp
-  GeometricObjects/MultipleObjects.cpp
   GeometricObjects/Plane.cpp
   GeometricObjects/Sphere.cpp
-  # GeometricObjects/SingleSphere.cpp
   # Utilities
-  Utilities/RGBColor.cpp
-  Utilities/ShadeRec.cpp
-  Utilities/Ray.cpp
-  Utilities/Point2D.cpp
-  Utilities/Point3D.cpp
-  Utilities/Vector3D.cpp
-  Utilities/Normal.cpp
-  Utilities/Maths.cpp
+  # Utilities/Constants.h #
+  Utilities/RGBColor.cpp #
+  Utilities/ShadeRec.cpp #
+  Utilities/Ray.cpp #
+  Utilities/Point2D.cpp #
+  Utilities/Point3D.cpp #
+  Utilities/Vector3D.cpp #
+  Utilities/Normal.cpp #
+  Utilities/Maths.cpp #
   Utilities/Image.cpp
   )
 
 set (SOURCES_SCENES
-    Scenes/BuildTmp.cpp
+    # Scenes/BuildTmp.cpp
     # Scenes/BuildCh03PageOneImage.cpp
     # Scenes/BuildFigure03.18.cpp
     # Scenes/BuildFigure03.20a.cpp
+    Scenes/BuildFigure14.21.cpp
     )
 
 include_directories (
   .
-  # BRDFs/
+  BRDFs/
   Cameras/
   GeometricObjects/
-  # Lights/
-  # Materials/
+  Lights/
+  Materials/
   # Samplers/
-  # Tracer/
+  Tracers/
   Utilities/
   World/
   )

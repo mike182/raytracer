@@ -5,6 +5,18 @@
 #include <vector>
 #include "RGBColor.hpp"
 
+#ifndef FILE_BMP
+#define FILE_BMP 0
+#endif
+
+#ifndef FILE_PNG
+#define FILE_PNG 1
+#endif
+
+#ifndef FILE_JPEG
+#define FILE_JPEG 2
+#endif
+
 class Image {
 public:
     Image(void);
@@ -16,6 +28,8 @@ public:
     void set_resolution(const int hres, const int vres);
     void set_pixel(RGBColor c);
     void set_pixel(RGBColor c, int x, int y); // keep ?
+    void save_image(int type);
+    void save_image_bmp();
     void save_image_png();
     void save_image_jpeg();
 

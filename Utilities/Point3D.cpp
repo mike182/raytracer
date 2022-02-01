@@ -2,19 +2,26 @@
 #include <cmath>
 
 Point3D::Point3D(void)
-    : x(0.0), y(0.0), z(0.0) { }
+    : x(0.0), y(0.0), z(0.0)
+{
+}
 
 Point3D::Point3D(const double a)
-    : x(a), y(a), z(a) { }
+    : x(a), y(a), z(a)
+{
+}
 
 Point3D::Point3D(const double x, const double y, const double z)
-    : x(x), y(y), z(z) { }
+    : x(x), y(y), z(z)
+{
+}
 
 Point3D::Point3D(const Point3D& p)
-    : x(p.x), y(p.y), z(p.z) { }
-
-Point3D::~Point3D(void)
+    : x(p.x), y(p.y), z(p.z)
 {
+}
+
+Point3D::~Point3D(void) {
 }
 
 Point3D& Point3D::operator=(const Point3D& rhs) {

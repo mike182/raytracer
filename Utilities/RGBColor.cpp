@@ -2,19 +2,26 @@
 #include <cmath>
 
 RGBColor::RGBColor(void)
-    : r(0.0), g(0.0), b(0.0) { }
+    : r(0.0), g(0.0), b(0.0)
+{
+}
 
 RGBColor::RGBColor(float a)
-    : r(a), g(a), b(a) { }
+    : r(a), g(a), b(a)
+{
+}
 
 RGBColor::RGBColor(float r, float g, float b)
-    : r(r), g(g), b(b) { }
+    : r(r), g(g), b(b)
+{
+}
 
 RGBColor::RGBColor(const RGBColor& c)
-    : r(c.r), g(c.g), b(c.b) { }
-
-RGBColor::~RGBColor(void)
+    : r(c.r), g(c.g), b(c.b)
 {
+}
+
+RGBColor::~RGBColor(void) {
 }
 
 RGBColor& RGBColor::operator=(const RGBColor& rhs) {

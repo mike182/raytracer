@@ -2,18 +2,23 @@
 
 Ray::Ray(void)
     : o(0.0),
-    d(0.0, 0.0, 1.0) { }
+    d(0.0, 0.0, 1.0)
+{
+}
 
 Ray::Ray(const Point3D& origin, const Vector3D& dir)
     : o(origin),
-    d(dir) { }
+    d(dir)
+{
+}
 
 Ray::Ray(const Ray& ray)
     : o(ray.o),
-    d(ray.d) { }
-
-Ray::~Ray(void)
+    d(ray.d)
 {
+}
+
+Ray::~Ray(void) {
 }
 
 Ray& Ray::operator=(const Ray& rhs) {
@@ -25,4 +30,3 @@ Ray& Ray::operator=(const Ray& rhs) {
 
     return *this;
 }
-

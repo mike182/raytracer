@@ -4,10 +4,10 @@
 class ViewPlane {
 public:
     ViewPlane(void);
-    ViewPlane(const ViewPlane & vp);
+    ViewPlane(const ViewPlane& vp);
     virtual ~ViewPlane(void);
 
-    ViewPlane & operator=(const ViewPlane & rhs);
+    ViewPlane& operator=(const ViewPlane& rhs);
 
     void set_hres(int hres);
     void set_vres(int vres);
