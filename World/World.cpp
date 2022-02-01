@@ -10,7 +10,7 @@
 // #include "Camera.hpp"
 #include "Pinhole.hpp"
 // Lights
-#include "Ambient.hpp"
+#include "Light.hpp"
 // Materials
 #include "Matte.hpp"
 // Utilities

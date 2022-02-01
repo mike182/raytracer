@@ -27,6 +27,7 @@ set (SOURCES
   Lights/Light.cpp
   Lights/Ambient.cpp
   Lights/Directional.cpp
+  Lights/PointLight.cpp
   # Materials
   Materials/Material.cpp
   Materials/Matte.cpp

@@ -31,10 +31,10 @@ void World::build(void) {
     pinhole_ptr->compute_uvw();
     set_camera(pinhole_ptr);
 
-    // PointLight* light_ptr2 = new PointLight;
-    // light_ptr2->set_location(100, 50, 150);
-    // light_ptr2->scale_radiance(3.0);
-    // add_light(light_ptr2);
+    PointLight* light_ptr2 = new PointLight;
+    light_ptr2->set_location(100, 50, 150);
+    light_ptr2->scale_radiance(3.0);
+    add_light(light_ptr2);
 
     Matte* matte_ptr1 = new Matte;
     matte_ptr1->set_ka(0.25);

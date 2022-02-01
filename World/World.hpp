@@ -10,9 +10,11 @@
 // #include "SingleSphere.hpp"
 #include "Image.hpp"
 #include "Camera.hpp"
+// Lights
 #include "Light.hpp"
 #include "Ambient.hpp"
 #include "Directional.hpp"
+#include "PointLight.hpp"
 #include <sys/ioctl.h>
 #include <cstdio>
 #include <cstdint>
