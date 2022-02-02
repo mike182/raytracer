@@ -33,6 +33,7 @@ set (SOURCES
   Materials/Matte.cpp
   # Samplers
   Samplers/Sampler.cpp
+  Samplers/Regular.cpp
   Samplers/Jittered.cpp
   # Tracers
   Tracers/Tracer.cpp #

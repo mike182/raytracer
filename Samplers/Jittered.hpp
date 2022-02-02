@@ -8,13 +8,13 @@ public:
     Jittered(void);
     Jittered(const int num_samples);
     Jittered(const int num_samples, const int m);
-    Jittered(const Jittered & js);
+    Jittered(const Jittered& sp);
     virtual Jittered* clone(void) const;
     virtual ~Jittered(void);
 
-    Jittered & operator=(const Jittered & rhs);
+    Jittered& operator=(const Jittered& rhs);
 
-private:
+// private:
     virtual void generate_samples(void);
 };
 

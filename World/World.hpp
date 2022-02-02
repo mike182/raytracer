@@ -34,11 +34,11 @@ public:
     void add_light(Light* light_ptr);
     void set_ambient_light(Light* light_ptr);
 
-    void render_scene(void) const;
+    // void render_scene(void) const; // done in Camera
     void display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
 
     ShadeRec hit_objects(const Ray& ray);
-    ShadeRec hit_bare_bones_objects(const Ray& ray);
+    // ShadeRec hit_bare_bones_objects(const Ray& ray); // old
 
     RGBColor max_to_one(const RGBColor& c) const;
     RGBColor clamp_to_color(const RGBColor& c) const;
@@ -56,7 +56,6 @@ public:
     Tracer* tracer_ptr;
     Light* ambient_ptr;
     Camera* camera_ptr;
-    // Shpere sphere; // chap 3 only
     std::vector<GeometricObject*> objects;
     std::vector<Light*> lights;
 

@@ -35,7 +35,7 @@ Pinhole& Pinhole::operator=(const Pinhole& rhs) {
     return *this;
 }
 
-Vector3D Pinhole::get_direction(const Point2D& p) const {
+Vector3D Pinhole::ray_direction(const Point2D& p) const {
     Vector3D dir = p.x * u + p.y * v - d * w;
     dir.normalize();
     return dir;
@@ -46,8 +46,8 @@ void Pinhole::render_scene(const World& w) {
     ViewPlane vp(w.vp);
     Ray ray;
     int depth = 0;
+    Point2D sp;
     Point2D pp;
-    int n = (int)sqrt((float)vp.num_samples);
 
     vp.s /= zoom;
     ray.o = eye;
@@ -55,13 +55,13 @@ void Pinhole::render_scene(const World& w) {
     for (int r = 0; r < vp.vres; r++) // up
         for (int c = 0; c < vp.hres; c++) { // across
             L = black;
-            for (int p = 0; p < n; p++)	// up pixel
-                for (int q = 0; q < n; q++) { // across pixel
-                    pp.x = vp.s * (c - 0.5 * vp.hres + (q + 0.5) / n);
-                    pp.y = vp.s * (r - 0.5 * vp.vres + (p + 0.5) / n);
-                    ray.d = get_direction(pp);
-                    L += w.tracer_ptr->trace_ray(ray, depth);
-                }
+            for (int i = 0; i < vp.num_samples; i++) {
+                sp = vp.sampler_ptr->sample_unit_square();
+                pp.x = vp.s * (c - 0.5 * vp.hres + sp.x);
+                pp.y = vp.s * (r - 0.5 * vp.vres + sp.y);
+                ray.d = ray_direction(pp);
+                L += w.tracer_ptr->trace_ray(ray, depth);
+            }
             L /= vp.num_samples;
             L *= exposure_time;
             w.display_pixel(r, c, L);

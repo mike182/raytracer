@@ -1,30 +1,33 @@
 #include "ViewPlane.hpp"
+#include "Regular.hpp"
 #include "Jittered.hpp"
 #include <iostream>
 
 ViewPlane::ViewPlane(void)
-    :  hres(400), vres(400),
-    s(1.0), num_samples(1),
-    gamma(1.0), inv_gamma(1.0),
+    : hres(400),
+    vres(400),
+    s(1.0),
+    num_samples(1),
+    sampler_ptr(nullptr),
+    gamma(1.0),
+    inv_gamma(1.0),
     show_out_of_gamut(false)
-       // :  hres(vp.hres), vres(vp.vres), s(vp.s), num_samples(vp.num_samples) { }
 {
 }
 
 ViewPlane::ViewPlane(const ViewPlane& vp)
-    :  hres(vp.hres),
+    : hres(vp.hres),
     vres(vp.vres),
     s(vp.s),
     num_samples(vp.num_samples),
+    sampler_ptr(vp.sampler_ptr),
     gamma(vp.gamma),
     inv_gamma(vp.inv_gamma),
     show_out_of_gamut(vp.show_out_of_gamut)
-       // :  hres(vp.hres), vres(vp.vres), s(vp.s), num_samples(vp.num_samples)
 {
 }
 
-ViewPlane::~ViewPlane(void)
-{
+ViewPlane::~ViewPlane(void) {
 }
 
 ViewPlane& ViewPlane::operator=(const ViewPlane& rhs) {
@@ -38,7 +41,6 @@ ViewPlane& ViewPlane::operator=(const ViewPlane& rhs) {
     gamma = rhs.gamma;
     inv_gamma = rhs.inv_gamma;
     show_out_of_gamut = rhs.show_out_of_gamut;
-
     return *this;
 }
 
@@ -68,21 +70,21 @@ void ViewPlane::set_pixel_size(const float size) {
 void ViewPlane::set_samples(const int n) {
     num_samples = n;
     // if (sampler_ptr) {
-    //     delete sampler_ptr;
-    //     sampler_ptr = nullptr;
+        // delete sampler_ptr;
+        // sampler_ptr = nullptr;
     // }
     if (num_samples > 1)
         // sampler_ptr = new MultiJittered(num_samples);
-        sampler_ptr = new Jittered(num_samples);
-    // else
-        // sampler_ptr = new Regular(1);
+        sampler_ptr = new Jittered(n);
+    else
+        sampler_ptr = new Regular(1);
     std::cout << "ViewPlane: num_samples set to " << num_samples << std::endl;
 }
 
 void ViewPlane::set_sampler(Sampler* sp) {
     // if (sampler_ptr) {
-    //     delete sampler_ptr;
-    //     sampler_ptr = nullptr;
+        // delete sampler_ptr;
+        // sampler_ptr = nullptr;
     // }
     num_samples = sp->get_num_samples();
     sampler_ptr = sp;

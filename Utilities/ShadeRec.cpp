@@ -37,7 +37,14 @@ ShadeRec::ShadeRec(const ShadeRec& sr)
 {
 }
 
+#include "World.hpp"
+#include "Material.hpp"
+
 ShadeRec::~ShadeRec(void) {
+    // if (material_ptr) {
+        // delete material_ptr;
+        // material_ptr = nullptr;
+    // }
 }
 
 // deleted

@@ -11,12 +11,12 @@ class World;
 
 class ShadeRec {
 public:
-    ShadeRec(void) = delete;
+    // ShadeRec(void) = delete;
     ShadeRec(World& w);
     ShadeRec(const ShadeRec& sr);
-    virtual ~ShadeRec(void);
+    ~ShadeRec(void);
 
-    ShadeRec& operator=(const ShadeRec& rhs) = delete;
+    // ShadeRec& operator=(const ShadeRec& rhs) = delete;
 
 public:
     bool hit_an_object;

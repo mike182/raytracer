@@ -18,7 +18,7 @@ public:
 
     void set_view_distance(const float vd);
     void set_zoom(const float zoom_factor);
-    Vector3D get_direction(const Point2D& p) const;
+    Vector3D ray_direction(const Point2D& p) const;
 
 public:
     float d; // vp distance

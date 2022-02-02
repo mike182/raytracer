@@ -14,7 +14,7 @@ public:
     virtual ~Tracer(void);
 
     virtual RGBColor trace_ray(const Ray& ray) const; // SingleSphere & MultipleObjects
-    virtual RGBColor trace_ray(const Ray ray, const int depth) const;
+    virtual RGBColor trace_ray(const Ray& ray, const int depth) const;
 
 protected:
     World* world_ptr;

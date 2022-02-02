@@ -12,9 +12,10 @@ public:
     virtual Material* clone(void) const = 0;
     virtual ~Material(void);
 
-    Material& operator=(const Material& rhs);
-
     virtual RGBColor shade(ShadeRec& sr);
+
+protected:
+    Material& operator=(const Material& rhs);
 };
 
 #endif // __MATERIAL_HPP__

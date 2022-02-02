@@ -17,8 +17,8 @@ Jittered::Jittered(const int num_samples, const int m)
     generate_samples();
 }
 
-Jittered::Jittered(const Jittered & js)
-    : Sampler(js)
+Jittered::Jittered(const Jittered& sp)
+    : Sampler(sp)
 {
     generate_samples();
 }
@@ -30,10 +30,9 @@ Jittered* Jittered::clone(void) const {
     return new Jittered(*this);
 }
 
-Jittered & Jittered::operator=(const Jittered & rhs) {
+Jittered& Jittered::operator=(const Jittered& rhs) {
     if (this == &rhs)
         return *this;
-
     Sampler::operator=(rhs);
     return *this;
 }

@@ -7,13 +7,13 @@ class RayCast : public Tracer {
 public:
     RayCast(void);
     RayCast(World* w_ptr);
-    RayCast(const RayCast& rc) = delete;
+    // RayCast(const RayCast& rc) = delete;
     virtual ~RayCast(void);
 
-    RayCast& operator=(const RayCast& rhs) = delete;
+    // RayCast& operator=(const RayCast& rhs) = delete;
 
-    virtual RGBColor trace_ray(const Ray& ray) const;
-    virtual RGBColor trace_ray(const Ray ray, const int depth) const;
+    virtual RGBColor trace_ray(const Ray& ray) const override;
+    virtual RGBColor trace_ray(const Ray& ray, const int depth) const override;
 };
 
 #endif // __RAYCAST_HPP__

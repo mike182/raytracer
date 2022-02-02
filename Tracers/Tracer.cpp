@@ -20,6 +20,6 @@ RGBColor Tracer::trace_ray([[maybe_unused]] const Ray& ray) const {
     return black;
 }
 
-RGBColor Tracer::trace_ray([[maybe_unused]] const Ray ray, [[maybe_unused]] const int depth) const {
+RGBColor Tracer::trace_ray([[maybe_unused]] const Ray& ray, [[maybe_unused]] const int depth) const {
     return black;
 }

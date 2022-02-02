@@ -45,7 +45,7 @@ Camera& Camera::operator=(const Camera& rhs) {
 void Camera::compute_uvw(void) {
     w = eye - lookat;
     w.normalize();
-    w = up ^ w;
+    u = up ^ w;
     u.normalize();
     v = w ^ u;
 
