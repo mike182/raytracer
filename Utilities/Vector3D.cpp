@@ -1,8 +1,7 @@
 #include "Vector3D.hpp"
-#include <cmath>
-#include "Vector3D.hpp"
 #include "Normal.hpp"
 #include "Point3D.hpp"
+#include <cmath>
 
 Vector3D::Vector3D(void)
     :  x(0.0), y(0.0), z(0.0)

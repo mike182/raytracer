@@ -1,6 +1,7 @@
 #ifndef __WORLD_HPP__
 #define __WORLD_HPP__
 
+#include "Constants.h"
 #include "ViewPlane.hpp"
 #include "RGBColor.hpp"
 #include "Tracer.hpp"

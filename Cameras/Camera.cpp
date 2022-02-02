@@ -30,7 +30,6 @@ Camera::~Camera(void) {
 Camera& Camera::operator=(const Camera& rhs) {
     if (this == &rhs)
         return *this;
-
     eye = rhs.eye;
     lookat = rhs.lookat;
     ra = rhs.ra;

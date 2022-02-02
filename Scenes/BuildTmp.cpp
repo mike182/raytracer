@@ -1,16 +1,39 @@
 // this builds the page one image for Chapter 3: Bare Bones Ray Tracing
 
 #include "World.hpp"
-#include "RayCast.hpp"
-#include "Camera.hpp"
+// BRDFs
+#include "Lambertian.hpp"
+// Cameras
+#include "Orthographic.hpp"
 #include "Pinhole.hpp"
+// Lights
+#include "Ambient.hpp"
+#include "Directional.hpp"
+#include "PointLight.hpp"
+// Materials
+#include "Matte.hpp"
+// Samplers
+#include "Regular.hpp"
+#include "PureRandom.hpp"
+#include "Jittered.hpp"
+// Tracers
+// #include "SingleSphere.hpp"
 #include "MultipleObjects.hpp"
+#include "RayCast.hpp"
+// GeometricObjects
 #include "Plane.hpp"
 #include "Sphere.hpp"
-#include "Material.hpp"
-#include "Matte.hpp"
-
-#include "Jittered.hpp"
+// Utilities
+#include "Constants.h"
+#include "RGBColor.hpp"
+#include "ShadeRec.hpp"
+#include "Ray.hpp"
+#include "Maths.h"
+#include "Point2D.hpp"
+#include "Point3D.hpp"
+#include "Vector3D.hpp"
+#include "Normal.hpp"
+#include "Image.hpp"
 
 void World::build(void) {
     int num_samples = 16;

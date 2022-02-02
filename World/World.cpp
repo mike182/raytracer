@@ -4,14 +4,13 @@
 #include "MultipleObjects.hpp"
 #include "Ray.hpp"
 // Cameras
-// #include "Camera.hpp"
+#include "Orthographic.hpp"
 #include "Pinhole.hpp"
 // Lights
 #include "Light.hpp"
 // Materials
 #include "Matte.hpp"
 // Utilities
-#include "Constants.h"
 #include "Maths.h"
 #include "Point2D.hpp"
 #include "Point3D.hpp"
@@ -27,7 +26,7 @@ World::World (void)
     : background_color(black),
     tracer_ptr(nullptr),
     ambient_ptr(new Ambient),
-    camera_ptr(new Pinhole())
+    camera_ptr(new Orthographic)
 {
 #ifdef TIOCGSIZE
     struct ttysize ts;

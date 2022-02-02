@@ -1,8 +1,7 @@
 #include "Pinhole.hpp"
-#include "Constants.h"
+#include "Point2D.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
-#include <cmath>
 
 Pinhole::Pinhole(void)
     : Camera(),

@@ -2,8 +2,8 @@
 #define __PINHOLE_HPP__
 
 #include "Camera.hpp"
-#include "Point2D.hpp"
 #include "World.hpp"
+#include "Point2D.hpp"
 
 class Pinhole : public Camera {
 public:
