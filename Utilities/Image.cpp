@@ -19,8 +19,8 @@ Image::~Image(void) {
 }
 
 void Image::set_resolution(const int h, const int v) {
-    this->hres = h;
-    this->vres = v;
+    hres = h;
+    vres = v;
     raw_image.reserve(hres * vres);
 }
 

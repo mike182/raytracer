@@ -78,7 +78,7 @@ inline float RGBColor::average() const {
 
 // lhs
 inline RGBColor operator* (const float a, const RGBColor& c) {
-    return (RGBColor (a * c.r, a * c.g, a * c.b));
+    return RGBColor (a * c.r, a * c.g, a * c.b);
 }
 
 #endif // __RGBCOLOR_HPP__

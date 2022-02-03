@@ -58,17 +58,17 @@ void GeometricObject::add_object([[maybe_unused]] GeometricObject* object_ptr) {
 }
 
 Point3D GeometricObject::sample(void) {
-    return (Point3D(0.0));
+    return Point3D(0.0);
 }
 
 float GeometricObject::pdf([[maybe_unused]] ShadeRec& sr) {
-    return (0.0);
+    return 0.0;
 }
 
 Normal GeometricObject::get_normal(void) const {
-    return (Normal());
+    return Normal();
 }
 
 Normal GeometricObject::get_normal([[maybe_unused]] const Point3D& p) {
-    return (Normal());
+    return Normal();
 }

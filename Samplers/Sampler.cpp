@@ -48,14 +48,14 @@ Sampler::~Sampler(void) {
 
 Sampler& Sampler::operator= (const Sampler& rhs) {
     if (this == &rhs)
-        return (*this);
+        return *this;
     num_samples = rhs.num_samples;
     num_sets = rhs.num_sets;
     samples = rhs.samples;
     shuffled_indices = rhs.shuffled_indices;
     count = rhs.count;
     jump = rhs.jump;
-    return (*this);
+    return *this;
 }
 
 void Sampler::set_num_sets(const int np) {

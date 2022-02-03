@@ -20,24 +20,24 @@ Directional::~Directional(void) {
 }
 
 Light* Directional::clone(void) const {
-    return (new Directional(*this));
+    return new Directional(*this);
 }
 
 Directional& Directional::operator= (const Directional& rhs) {
     if (this == &rhs)
-        return (*this);
+        return *this;
 
     Light::operator= (rhs);
     ls		= rhs.ls;
     color 	= rhs.color;
     dir 	= rhs.dir;
-    return (*this);
+    return *this;
 }
 
 Vector3D Directional::get_direction([[maybe_unused]] ShadeRec& sr) {
-    return (dir);
+    return dir;
 }
 
 RGBColor Directional::L([[maybe_unused]] ShadeRec& s) const {
-    return (ls * color);
+    return ls * color;
 }

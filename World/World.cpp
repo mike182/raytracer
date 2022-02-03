@@ -194,8 +194,8 @@ RGBColor World::max_to_one(const RGBColor& c) const  {
     float max_value = max(c.r, max(c.g, c.b));
 
     if (max_value > 1.0)
-        return (c / max_value);
-    return (c);
+        return c / max_value;
+    return c;
 }
 
 RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
@@ -206,7 +206,7 @@ RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
         c.g = 0.0;
         c.b = 0.0;
     }
-    return (c);
+    return c;
 }
 
 void World::delete_objects() {

@@ -23,17 +23,17 @@ Lambertian::~Lambertian(void) {
 
 Lambertian& Lambertian::operator= (const Lambertian& rhs) {
     if (this == &rhs)
-        return (*this);
+        return *this;
     BRDF::operator= (rhs);
     kd = rhs.kd;
     cd = rhs.cd;
-    return (*this);
+    return *this;
 }
 
 RGBColor Lambertian::f([[maybe_unused]] const ShadeRec& sr, [[maybe_unused]] const Vector3D& wo, [[maybe_unused]] const Vector3D& wi) const {
-    return (kd * cd * invPI);
+    return kd * cd * invPI;
 }
 
 RGBColor Lambertian::rho([[maybe_unused]] const ShadeRec& sr, [[maybe_unused]] const Vector3D& wo) const {
-    return (kd * cd);
+    return kd * cd;
 }
