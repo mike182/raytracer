@@ -18,11 +18,13 @@
 #include "RayCast.hpp"
 
 void World::build(void) {
-    int num_samples = 16;
-    // int num_samples = 1;
+    // int num_samples = 16;
+    int num_samples = 1;
 
-    vp.set_hres(600);
-    vp.set_vres(600);
+    // vp.set_hres(600);
+    // vp.set_vres(600);
+    vp.set_hres(200);
+    vp.set_vres(200);
     vp.set_pixel_size(0.5);
     vp.set_samples(num_samples);
 

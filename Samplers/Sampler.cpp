@@ -43,6 +43,7 @@ Sampler::Sampler(const Sampler& s)
 }
 
 Sampler::~Sampler(void) {
+    samples.clear();
 }
 
 Sampler& Sampler::operator= (const Sampler& rhs) {

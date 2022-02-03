@@ -1,5 +1,6 @@
 #include "ShadeRec.hpp"
 #include "Constants.h"
+#include "Material.hpp"
 
 // deleted
 // ShadeRec::ShadeRec(void) {
@@ -37,24 +38,13 @@ ShadeRec::ShadeRec(const ShadeRec& sr)
 {
 }
 
-#include "World.hpp"
-#include "Material.hpp"
-
 ShadeRec::~ShadeRec(void) {
-    // if (material_ptr) {
-        // delete material_ptr;
-        // material_ptr = nullptr;
-    // }
 }
 
 // deleted
 // ShadeRec& ShadeRec::operator=(const ShadeRec& rhs) {
 //     if (this == &rhs)
 //         return *this;
-
-//     // x = rhs.x;
-//     // y = rhs.y;
-//     // z = rhs.z;
 
 //     return *this;
 // }

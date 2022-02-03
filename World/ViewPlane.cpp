@@ -69,10 +69,10 @@ void ViewPlane::set_pixel_size(const float size) {
 
 void ViewPlane::set_samples(const int n) {
     num_samples = n;
-    // if (sampler_ptr) {
-        // delete sampler_ptr;
-        // sampler_ptr = nullptr;
-    // }
+    if (sampler_ptr) {
+        delete sampler_ptr;
+        sampler_ptr = nullptr;
+    }
     if (num_samples > 1)
         // sampler_ptr = new MultiJittered(num_samples);
         sampler_ptr = new Jittered(n);
@@ -82,14 +82,13 @@ void ViewPlane::set_samples(const int n) {
 }
 
 void ViewPlane::set_sampler(Sampler* sp) {
-    // if (sampler_ptr) {
-        // delete sampler_ptr;
-        // sampler_ptr = nullptr;
-    // }
+    if (sampler_ptr) {
+        delete sampler_ptr;
+        sampler_ptr = nullptr;
+    }
     num_samples = sp->get_num_samples();
     sampler_ptr = sp;
     std::cout << "ViewPlane: num_samples set to " << num_samples << std::endl;
-    std::cout << "ViewPlane: sampler_ptr set to " << typeid(*sampler_ptr).name() << std::endl;
 }
 
 void ViewPlane::set_gamma(const float g) {

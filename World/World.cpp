@@ -52,6 +52,7 @@ World::~World(void) {
         delete camera_ptr;
     delete_objects();
     delete_lights();
+    delete image;
 }
 
 void World::display_pixel(const int row, [[maybe_unused]] const int column, const RGBColor& pixel_color) const {

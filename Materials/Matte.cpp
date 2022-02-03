@@ -12,26 +12,21 @@ Matte::Matte(const Matte& m)
 {
     if (m.ambient_brdf)
         ambient_brdf = m.ambient_brdf->clone();
-    // else
-        // ambient_brdf = nullptr;
+    else
+        ambient_brdf = nullptr;
 
     if (m.diffuse_brdf)
         diffuse_brdf = m.diffuse_brdf->clone();
-    // else
-        // diffuse_brdf = nullptr;
+    else
+        diffuse_brdf = nullptr;
 }
 
 Matte::~Matte(void)
 {
-    // if (ambient_brdf) {
-    //     delete ambient_brdf;
-    //     ambient_brdf = nullptr;
-    // }
-
-    // if (diffuse_brdf) {
-    //     delete diffuse_brdf;
-    //     diffuse_brdf = nullptr;
-    // }
+    if (ambient_brdf)
+        delete ambient_brdf;
+    if (diffuse_brdf)
+        delete diffuse_brdf;
 }
 
 Material* Matte::clone(void) const {
@@ -42,16 +37,16 @@ Matte& Matte::operator=(const Matte& rhs) {
     if (this == &rhs)
         return *this;
     Material::operator=(rhs);
-    // if (ambient_brdf) {
-        // delete ambient_brdf;
-        // ambient_brdf = nullptr;
-    // }
+    if (ambient_brdf) {
+        delete ambient_brdf;
+        ambient_brdf = nullptr;
+    }
     if (rhs.ambient_brdf)
         ambient_brdf = rhs.ambient_brdf->clone();
-    // if (diffuse_brdf) {
-        // delete diffuse_brdf;
-        // diffuse_brdf = nullptr;
-    // }
+    if (diffuse_brdf) {
+        delete diffuse_brdf;
+        diffuse_brdf = nullptr;
+    }
     if (rhs.diffuse_brdf)
         diffuse_brdf = rhs.diffuse_brdf->clone();
     return *this;

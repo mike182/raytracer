@@ -16,25 +16,23 @@ GeometricObject::GeometricObject(const GeometricObject& obj)
 {
     if (obj.material_ptr)
         material_ptr = obj.material_ptr->clone();
-    // else
-        // material_ptr = nullptr;
+    else
+        material_ptr = nullptr;
 }
 
 GeometricObject::~GeometricObject(void) {
-    // if (material_ptr) {
-    //     delete material_ptr;
-    //     material_ptr = nullptr;
-    // }
+    if (material_ptr)
+        delete material_ptr;
 }
 
 GeometricObject& GeometricObject::operator=(const GeometricObject& rhs) {
     if (this == &rhs)
         return *this;
     color = rhs.color;
-    // if (material_ptr) {
-        // delete material_ptr;
-        // material_ptr = nullptr;
-    // }
+    if (material_ptr) {
+        delete material_ptr;
+        material_ptr = nullptr;
+    }
     if (rhs.material_ptr)
         material_ptr = rhs.material_ptr->clone();
     // shadows = rhs.shadows;

@@ -15,6 +15,7 @@ Image::Image(void)
 }
 
 Image::~Image(void) {
+    raw_image.clear();
 }
 
 void Image::set_resolution(const int h, const int v) {
