@@ -26,21 +26,21 @@ World::World (void)
     : background_color(black),
     tracer_ptr(nullptr),
     ambient_ptr(new Ambient),
-    camera_ptr(new Orthographic)
+    camera_ptr()
 {
-#ifdef TIOCGSIZE
+    image = new Image();
+
+  #ifdef TIOCGSIZE
     struct ttysize ts;
     ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
     winsize = ts.ts_cols;
-#elif defined(TIOCGWINSZ)
+  #elif defined(TIOCGWINSZ)
     struct winsize ws;
     ioctl(0, TIOCGWINSZ, &ws);
     winsize = ws.ws_col;
-#else
+  #else
     winsize = 80;
-#endif // TIOCGSIZE
-
-    image = new Image();
+  #endif // TIOCGSIZE
 }
 
 World::~World(void) {
@@ -53,33 +53,6 @@ World::~World(void) {
     delete_objects();
     delete_lights();
 }
-
-// void World::render_scene(void) const {
-//     RGBColor pixel_color;
-//     Ray ray;
-//     double zw = 100.0;
-//     Point2D sp;
-//     Point2D pp;
-
-//     image->set_resolution(vp.hres, vp.vres); // png
-//     ray.d = Vector3D(0, 0, -1);
-//     for (int r = 0; r < vp.vres; r++) { // up
-//         for (int c = 0; c < vp.hres; c++) { // accros
-//             pixel_color = black;
-//             for (int i = 0; i < vp.num_samples; i++) {
-//                     sp = vp.sampler_ptr->sample_unit_square();
-//                     pp.x = vp.s * (c - 0.5 * vp.hres + sp.x);
-//                     pp.y = vp.s * (r - 0.5 * vp.vres + sp.y);
-//                     ray.o = Point3D(pp.x, pp.y, zw);
-//                     pixel_color += tracer_ptr->trace_ray(ray);
-//                 }
-//             pixel_color /= vp.num_samples;
-//             display_pixel(r, c, pixel_color);
-//         }
-//     }
-//     // pbar_clear();
-//     image->save_image_png(); // png
-// }
 
 void World::display_pixel(const int row, [[maybe_unused]] const int column, const RGBColor& pixel_color) const {
     RGBColor mapped_color;
@@ -124,20 +97,97 @@ ShadeRec World::hit_objects(const Ray& ray) {
     return sr;
 }
 
-// ShadeRec World::hit_bare_bones_objects(const Ray& ray) {
-//     ShadeRec sr(*this);
-//     double t;
-//     double tmin = kHugeValue;
-//     int num_objects = objects.size();
+void sleepcp(int milli) {
+   // Cross-platform sleep function
+   clock_t end_time;
+   end_time = std::clock() + milli * CLOCKS_PER_SEC/1000;
+   while (clock() < end_time) {
+      //blank loop for waiting
+   }
+}
 
-//     for (int i = 0; i < num_objects; i++)
-//         if (objects[i]->hit(ray, t, sr) && (t < tmin)) {
-//             sr.hit_an_object = true;
-//             tmin = t;
-//             sr.color = objects[i]->get_color();
-//         }
-//     return sr;
-// }
+int World::build_info() const {
+
+    // Cameras
+    if (camera_ptr == nullptr)
+        std::cout << "World: camera_ptr is null" << std::endl;
+    std::cout << "World: camera_ptr: " << ((std::string)typeid(*camera_ptr).name()).erase(0,1) << std::endl;
+
+    // BRDFs
+    // std::cout << "World: brdf: ??" << std::endl;
+
+    // GeometricObjects
+    if (objects.size() == 0) { // check list size
+        std::cout << "World: object[] is empty" << std::endl;
+        return EXIT_FAILURE;
+    }
+    else {
+        // check objects[i]
+        int num_objects = objects.size();
+        std::cout << "World: objects: ";
+        for (int i = 0; i < num_objects; i++) {
+            if (objects[i] == nullptr) {
+                std::cout << i+1 << "is null. aborting" << std::endl;
+                return EXIT_FAILURE;
+            }
+            // std::cout << i+1 << " ";
+        }
+        std::cout << "ok" << std::endl;
+        // check Materials
+        std::cout << "World: materials: ";
+        for (int i = 0; i < num_objects; i++) {
+            if (objects[i]->get_material() == nullptr) {
+                std::cout << i+1 << "is null. aborting" << std::endl;
+                return EXIT_FAILURE;
+            }
+            // std::cout << i+1 << " ";
+        }
+        std::cout << "ok" << std::endl;
+    }
+
+    // Lights
+    if (lights.size() == 0) { // check list size
+        std::cout << "World: lights[] is empty" << std::endl;
+        return EXIT_FAILURE;
+    }
+    else {
+        // check lights[i]
+        int num_lights = lights.size();
+        std:: cout << "World: lights: ";
+        for (int i = 0; i < num_lights; i++) {
+            if (lights[i] == nullptr) {
+                std::cout << i+1 << "is null. aborting" << std::endl;
+                return EXIT_FAILURE;
+            }
+            // std::cout << i+1 << " ";
+        }
+        std::cout << "ok" << std::endl;
+    }
+
+    // Samplers
+    if (vp.sampler_ptr == nullptr) {
+        std::cout << "World: sampler_ptr is null" << std::endl;
+        return EXIT_FAILURE;
+    }
+    std::cout << "World: sampler_ptr: " << ((std::string)typeid(*(vp.sampler_ptr)).name()).erase(0,1) << std::endl;
+
+    // Tracers
+    if (tracer_ptr == nullptr) {
+        std::cout << "World: tracer_ptr is null" << std::endl;
+        return EXIT_FAILURE;
+    }
+    std::cout << "World: tracer_ptr: " << ((std::string)typeid(*tracer_ptr).name()).erase(0,1) << std::endl;
+
+
+    // Utilities
+
+    // World
+    // if (vp.hres == 0 || vp.vres == 0)
+    // std::cout << "vp = 0" << std::endl;
+    // else
+    // std::cout << "vp res = " << typeid(vp).name() << std::endl;
+    return 0;
+}
 
 RGBColor World::max_to_one(const RGBColor& c) const  {
     float max_value = max(c.r, max(c.g, c.b));

@@ -1,9 +1,12 @@
 // builds the scene for Figure 3.20(a)
 
 #include "World.hpp"
-#include "MultipleObjects.hpp"
-#include "Plane.hpp"
+#include "Orthographic.hpp" // Cameras
+#include "Plane.hpp" // GeometricObjects
 #include "Sphere.hpp"
+#include "Ambient.hpp" // Lights
+#include "Regular.hpp" // Samplers
+#include "MultipleObjects.hpp" // Tracers
 
 void World::build(void) {
     vp.set_hres(200);

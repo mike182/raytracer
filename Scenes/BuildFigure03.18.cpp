@@ -1,8 +1,8 @@
 // This builds the scene for Figure 3.18 - the single red sphere
 
 #include "World.hpp"
-#include "MultipleObjects.hpp"
-#include "Plane.hpp"
+#include "MultipleObjects.hpp" // Tracers
+#include "Plane.hpp" // GeometricObjects
 #include "Sphere.hpp"
 
 void World::build(void) {
@@ -17,7 +17,6 @@ void World::build(void) {
     Sphere* sphere_ptr = new Sphere;
     sphere_ptr->set_center(0.0);
     sphere_ptr->set_radius(85.0);
-    sphere_ptr->set_color(1, 0, 0);  // red
+    sphere_ptr->set_color(1, 0, 0); // red
     add_object(sphere_ptr);
-
 }

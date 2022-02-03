@@ -35,12 +35,10 @@ public:
     void add_light(Light* light_ptr);
     void set_ambient_light(Light* light_ptr);
 
-    // void render_scene(void) const; // done in Camera
     void display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
-
     ShadeRec hit_objects(const Ray& ray);
-    // ShadeRec hit_bare_bones_objects(const Ray& ray); // old
 
+    int build_info(void) const;
     RGBColor max_to_one(const RGBColor& c) const;
     RGBColor clamp_to_color(const RGBColor& c) const;
 

@@ -2,12 +2,17 @@
 // The scene is rendered with an orthographic camera, lights, and shading
 
 #include "World.hpp"
-#include "Regular.hpp"
-#include "RayCast.hpp"
-#include "Orthographic.hpp"
-#include "Matte.hpp"
-#include "Plane.hpp"
+#include "Orthographic.hpp" // Cameras
+#include "Pinhole.hpp"
+#include "Plane.hpp" // GeometricObjects
 #include "Sphere.hpp"
+#include "Ambient.hpp" // Lights
+#include "Directional.hpp"
+#include "PointLight.hpp"
+#include "Matte.hpp" // Materials
+#include "Regular.hpp" // Samplers
+#include "MultipleObjects.hpp" // Tracers
+#include "RayCast.hpp"
 
 void World::build(void) {
     int num_samples = 1;  // use 1 for 4.4(a) and 16 for 4.4(b)

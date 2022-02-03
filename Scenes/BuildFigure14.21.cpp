@@ -3,8 +3,8 @@
 #include "World.hpp"
 #include "RayCast.hpp"
 #include "Pinhole.hpp"
+#include "PointLight.hpp"
 #include "Matte.hpp"
-
 #include "Plane.hpp"
 #include "Sphere.hpp"
 

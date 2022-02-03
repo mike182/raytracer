@@ -1,9 +1,20 @@
 // this builds the page one image for Chapter 3: Bare Bones Ray Tracing
 
 #include "World.hpp"
-#include "MultipleObjects.hpp"
-#include "Plane.hpp"
+#include "Constants.h" // Utilities
+#include "Lambertian.hpp" // BRDFs
+#include "Orthographic.hpp" // Cameras
+#include "Pinhole.hpp"
 #include "Sphere.hpp"
+#include "Ambient.hpp" // Lights
+#include "Directional.hpp"
+#include "PointLight.hpp"
+#include "Matte.hpp" // Materials
+#include "Regular.hpp" // Samplers
+#include "PureRandom.hpp"
+#include "Jittered.hpp"
+#include "MultipleObjects.hpp" // Tracers
+#include "RayCast.hpp"
 
 void World::build(void) {
     vp.set_hres(400);
@@ -15,7 +26,6 @@ void World::build(void) {
     tracer_ptr = new MultipleObjects(this);
 
     // colors
-
     RGBColor yellow(1, 1, 0);
     RGBColor brown(0.71, 0.40, 0.16);
     RGBColor dark_green(0.0, 0.41, 0.41);
@@ -27,7 +37,6 @@ void World::build(void) {
     RGBColor dark_purple(0.5, 0.0, 1.0);
 
     // spheres
-
     Sphere * sphere_ptr1 = new Sphere(Point3D(5, 3, 0), 30);
     sphere_ptr1->set_color(yellow);
     add_object(sphere_ptr1);
