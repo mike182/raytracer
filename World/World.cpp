@@ -25,8 +25,8 @@
 World::World (void)
     : background_color(black),
     tracer_ptr(nullptr),
-    ambient_ptr(new Ambient),
-    camera_ptr()
+    camera_ptr(nullptr),
+    ambient_ptr(new Ambient)
 {
     image = new Image();
 
@@ -109,47 +109,71 @@ void sleepcp(int milli) {
 
 int World::build_info() const {
 
-    // Cameras
-    if (camera_ptr == nullptr)
-        std::cout << "World: camera_ptr is null" << std::endl;
-    std::cout << "World: camera_ptr: " << ((std::string)typeid(*camera_ptr).name()).erase(0,1) << std::endl;
+    // Utilities
+
+    // World
 
     // BRDFs
-    // std::cout << "World: brdf: ??" << std::endl;
+
+    // Samplers
+    if (vp.sampler_ptr == nullptr) {
+        std::cout << RED << "ViewPlane: sampler_ptr is null" << WHITE << std::endl;
+        return EXIT_FAILURE;
+    }
+    std::cout << "ViewPlane: num_samples set to ";
+    std::cout << vp.sampler_ptr->get_num_samples() << std::endl;
+    std::cout << "ViewPlane: sampler_ptr set to ";
+    std::cout << ((std::string)typeid(*(vp.sampler_ptr)).name()).erase(0,1) << std::endl;
+
+    // Tracers
+    if (tracer_ptr == nullptr) {
+        std::cout << RED << "World: tracer_ptr is null" << WHITE << std::endl;
+        return EXIT_FAILURE;
+    }
+    std::cout << "World: tracer_ptr set to ";
+    std::cout << ((std::string)typeid(*tracer_ptr).name()).erase(0,1) << std::endl;
+
+    // Cameras
+    if (camera_ptr == nullptr) {
+        std::cout << RED << "World: camera_ptr is null" << WHITE << std::endl;
+        return EXIT_FAILURE;
+    }
+    std::cout << "World: camera_ptr: ";
+    std::cout << ((std::string)typeid(*camera_ptr).name()).erase(0,1) << std::endl;
 
     // GeometricObjects
-    if (objects.size() == 0) { // check list size
-        std::cout << "World: object[] is empty" << std::endl;
-        return EXIT_FAILURE;
+    // check objects list size
+    if (objects.size() == 0) {
+        std::cout << "World: " << YEL << "warning: " << WHITE;
+        std::cout << "objects[] is empty" << std::endl;
+        // return EXIT_FAILURE; // do not exit if no objects ?
     }
     else {
         // check objects[i]
         int num_objects = objects.size();
         std::cout << "World: objects: ";
-        for (int i = 0; i < num_objects; i++) {
+        for (int i = 0; i < num_objects; i++)
             if (objects[i] == nullptr) {
-                std::cout << i+1 << "is null. aborting" << std::endl;
+                std::cout << RED << "objects[" << i+1 << "] is null " << WHITE << "abort" << std::endl;
                 return EXIT_FAILURE;
             }
-            // std::cout << i+1 << " ";
-        }
         std::cout << "ok" << std::endl;
         // check Materials
         std::cout << "World: materials: ";
-        for (int i = 0; i < num_objects; i++) {
+        for (int i = 0; i < num_objects; i++)
             if (objects[i]->get_material() == nullptr) {
-                std::cout << i+1 << "is null. aborting" << std::endl;
+                std::cout << RED << "mat from objects[" << i+1 << "] is null " << WHITE << "abort" << std::endl;
                 return EXIT_FAILURE;
             }
-            // std::cout << i+1 << " ";
-        }
         std::cout << "ok" << std::endl;
     }
 
     // Lights
-    if (lights.size() == 0) { // check list size
-        std::cout << "World: lights[] is empty" << std::endl;
-        return EXIT_FAILURE;
+    // check lights list size
+    if (lights.size() == 0) {
+        std::cout << "World: " << YEL << "warning: " << WHITE;
+        std::cout << "lights[] is empty" << std::endl;
+        // return EXIT_FAILURE; // do not exit if no lights ?
     }
     else {
         // check lights[i]
@@ -157,7 +181,7 @@ int World::build_info() const {
         std:: cout << "World: lights: ";
         for (int i = 0; i < num_lights; i++) {
             if (lights[i] == nullptr) {
-                std::cout << i+1 << "is null. aborting" << std::endl;
+                std::cout << RED << "lights[" << i+1 << "] is null " << WHITE << "abort" << std::endl;
                 return EXIT_FAILURE;
             }
             // std::cout << i+1 << " ";
@@ -165,28 +189,6 @@ int World::build_info() const {
         std::cout << "ok" << std::endl;
     }
 
-    // Samplers
-    if (vp.sampler_ptr == nullptr) {
-        std::cout << "World: sampler_ptr is null" << std::endl;
-        return EXIT_FAILURE;
-    }
-    std::cout << "World: sampler_ptr: " << ((std::string)typeid(*(vp.sampler_ptr)).name()).erase(0,1) << std::endl;
-
-    // Tracers
-    if (tracer_ptr == nullptr) {
-        std::cout << "World: tracer_ptr is null" << std::endl;
-        return EXIT_FAILURE;
-    }
-    std::cout << "World: tracer_ptr: " << ((std::string)typeid(*tracer_ptr).name()).erase(0,1) << std::endl;
-
-
-    // Utilities
-
-    // World
-    // if (vp.hres == 0 || vp.vres == 0)
-    // std::cout << "vp = 0" << std::endl;
-    // else
-    // std::cout << "vp res = " << typeid(vp).name() << std::endl;
     return 0;
 }
 
@@ -247,7 +249,7 @@ void World::pbar_update(int progress, int vres) const {
 }
 
 void World::pbar_clear() const {
-    for (int i = 0; i < 25 + 19; i++)
+    for (int i = 0; i < winsize + 19; i++)
         std::cout << " ";
     std::cout << "\r";
     std::cout.flush();

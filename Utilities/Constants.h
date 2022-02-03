@@ -22,4 +22,8 @@ const RGBColor green(0.0, 1.0, 0.0);
 const RGBColor blue(0.0, 0.0, 1.0);
 const RGBColor fuchsia(1.0, 0.0, 1.0);
 
+#define RED     "\033[1m\033[31m"   /* Red */
+#define YEL     "\033[1m\033[33m"   /* Yellow */
+#define WHITE   "\033[0m\033[37m"   /* White */
+
 #endif // __CONSTANTS_H__

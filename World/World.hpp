@@ -53,8 +53,8 @@ public:
     ViewPlane vp;
     RGBColor background_color;
     Tracer* tracer_ptr;
-    Light* ambient_ptr;
     Camera* camera_ptr;
+    Light* ambient_ptr;
     std::vector<GeometricObject*> objects;
     std::vector<Light*> lights;
 

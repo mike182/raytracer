@@ -59,7 +59,6 @@ void ViewPlane::set_resolution(int x, int y) {
     vres = y;
     std::cout << "ViewPlane: h_res set to " << x << std::endl;
     std::cout << "ViewPlane: v_res set to " << y << std::endl;
-    std::cout << "ViewPlane: resolution set to " << x << "*" << y << std::endl;
 }
 
 void ViewPlane::set_pixel_size(const float size) {
@@ -78,7 +77,6 @@ void ViewPlane::set_samples(const int n) {
         sampler_ptr = new Jittered(n);
     else
         sampler_ptr = new Regular(1);
-    std::cout << "ViewPlane: num_samples set to " << num_samples << std::endl;
 }
 
 void ViewPlane::set_sampler(Sampler* sp) {
@@ -88,7 +86,6 @@ void ViewPlane::set_sampler(Sampler* sp) {
     }
     num_samples = sp->get_num_samples();
     sampler_ptr = sp;
-    std::cout << "ViewPlane: num_samples set to " << num_samples << std::endl;
 }
 
 void ViewPlane::set_gamma(const float g) {
