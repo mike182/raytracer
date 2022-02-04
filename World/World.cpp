@@ -117,7 +117,7 @@ int World::build_info() const {
 
     // Samplers
     if (vp.sampler_ptr == nullptr) {
-        std::cout << RED << "ViewPlane: sampler_ptr is null" << WHITE << std::endl;
+        std::cout << RED << "ViewPlane: sampler_ptr is null" << std::endl;
         return EXIT_FAILURE;
     }
     std::cout << "ViewPlane: num_samples set to ";
@@ -127,7 +127,7 @@ int World::build_info() const {
 
     // Tracers
     if (tracer_ptr == nullptr) {
-        std::cout << RED << "World: tracer_ptr is null" << WHITE << std::endl;
+        std::cout << RED << "World: tracer_ptr is null" << std::endl;
         return EXIT_FAILURE;
     }
     std::cout << "World: tracer_ptr set to ";
@@ -135,7 +135,7 @@ int World::build_info() const {
 
     // Cameras
     if (camera_ptr == nullptr) {
-        std::cout << RED << "World: camera_ptr is null" << WHITE << std::endl;
+        std::cout << RED << "World: camera_ptr is null" << std::endl;
         return EXIT_FAILURE;
     }
     std::cout << "World: camera_ptr: ";
@@ -154,7 +154,7 @@ int World::build_info() const {
         std::cout << "World: objects: ";
         for (int i = 0; i < num_objects; i++)
             if (objects[i] == nullptr) {
-                std::cout << RED << "objects[" << i+1 << "] is null " << WHITE << "abort" << std::endl;
+                std::cout << RED << "objects[" << i+1 << "] is null " << std::endl;
                 return EXIT_FAILURE;
             }
         std::cout << "ok" << std::endl;
@@ -162,13 +162,21 @@ int World::build_info() const {
         std::cout << "World: materials: ";
         for (int i = 0; i < num_objects; i++)
             if (objects[i]->get_material() == nullptr) {
-                std::cout << RED << "mat from objects[" << i+1 << "] is null " << WHITE << "abort" << std::endl;
+                std::cout << RED << "mat from objects[" << i+1 << "] is null " << std::endl;
                 return EXIT_FAILURE;
             }
         std::cout << "ok" << std::endl;
     }
 
     // Lights
+    // ambient light
+    if (ambient_ptr == nullptr) {
+        std::cout << RED << "World: ambient_ptr is null" << std::endl;
+        return EXIT_FAILURE;
+    }
+    std::cout << "World: ambient light: color: ";
+    std::cout << ((Ambient*)ambient_ptr)->color.r << std::endl;
+    std::cout << "World: ambient light: ok" << std::endl;
     // check lights list size
     if (lights.size() == 0) {
         std::cout << "World: " << YEL << "warning: " << WHITE;
@@ -181,7 +189,7 @@ int World::build_info() const {
         std:: cout << "World: lights: ";
         for (int i = 0; i < num_lights; i++) {
             if (lights[i] == nullptr) {
-                std::cout << RED << "lights[" << i+1 << "] is null " << WHITE << "abort" << std::endl;
+                std::cout << RED << "lights[" << i+1 << "] is null " << std::endl;
                 return EXIT_FAILURE;
             }
             // std::cout << i+1 << " ";
