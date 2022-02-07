@@ -36,6 +36,7 @@ set (SOURCES
   Samplers/Sampler.cpp
   Samplers/Regular.cpp
   Samplers/PureRandom.cpp
+  Samplers/NRooks.cpp
   Samplers/Jittered.cpp
   # Tracers
   Tracers/Tracer.cpp
