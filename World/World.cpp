@@ -26,10 +26,9 @@ World::World (void)
     : background_color(black),
     tracer_ptr(nullptr),
     camera_ptr(nullptr),
-    ambient_ptr(new Ambient)
+    ambient_ptr(new Ambient),
+    image_ptr(new Image)
 {
-    image = new Image();
-
   #ifdef TIOCGSIZE
     struct ttysize ts;
     ioctl(STDIN_FILENO, TIOCGSIZE, &ts);
@@ -50,9 +49,10 @@ World::~World(void) {
         delete ambient_ptr;
     if (camera_ptr)
         delete camera_ptr;
+    if (image_ptr)
+        delete image_ptr;
     delete_objects();
     delete_lights();
-    delete image;
 }
 
 void World::display_pixel(const int row, [[maybe_unused]] const int column, const RGBColor& pixel_color) const {
@@ -68,8 +68,8 @@ void World::display_pixel(const int row, [[maybe_unused]] const int column, cons
     // done in Image Class
     // int x = column;
     // int y = vp.vres - row - 1;
-    // image->set_pixel(mapped_color, x, y); // image file
-    image->set_pixel(mapped_color); // image file
+    // image_ptr->set_pixel(mapped_color, x, y); // image file
+    image_ptr->set_pixel(mapped_color); // image file
     pbar_update(row, vp.vres);
 }
 
@@ -108,7 +108,6 @@ void sleepcp(int milli) {
 }
 
 int World::build_info() const {
-
     // Utilities
 
     // World

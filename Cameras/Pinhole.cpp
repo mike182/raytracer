@@ -50,7 +50,7 @@ void Pinhole::render_scene(const World& w) {
 
     vp.s /= zoom;
     ray.o = eye;
-    w.image->set_resolution(vp.hres, vp.vres); // image file
+    w.image_ptr->set_resolution(vp.hres, vp.vres); // image file
     for (int r = 0; r < vp.vres; r++) // up
         for (int c = 0; c < vp.hres; c++) { // across
             L = black;
@@ -65,5 +65,5 @@ void Pinhole::render_scene(const World& w) {
             L *= exposure_time;
             w.display_pixel(r, c, L);
         }
-    w.image->save_image(FILE_PNG); // image file
+    w.image_ptr->save_image(FILE_PNG); // image file
 }

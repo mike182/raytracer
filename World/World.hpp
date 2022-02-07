@@ -58,7 +58,7 @@ public:
     std::vector<GeometricObject*> objects;
     std::vector<Light*> lights;
 
-    Image* image; // save to file
+    Image* image_ptr; // save to file
     int winsize;
 };
 
