@@ -1,6 +1,7 @@
 Raytracing from the ground up
 =============================
 
+```bash
 01 : Design and Programming : Complete
 02 : Essential Mathematics : Complete
 03 : Bare-Bones Ray Tracing : Complete
@@ -32,5 +33,6 @@ Raytracing from the ground up
 29 : Texture Mapping : 0%
 30 : Procedural Textures : 0%
 31 : Noise-Based Textures : 0%
+```
 
 [Ray Tracing from the Ground Up](http://www.raytracegroundup.com/)
