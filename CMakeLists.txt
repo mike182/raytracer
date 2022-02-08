@@ -38,6 +38,7 @@ set (SOURCES
   Samplers/PureRandom.cpp
   Samplers/NRooks.cpp
   Samplers/Jittered.cpp
+  Samplers/MultiJittered.cpp
   Samplers/Hammersley.cpp
   # Tracers
   Tracers/Tracer.cpp

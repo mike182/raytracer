@@ -1,6 +1,7 @@
 #include "ViewPlane.hpp"
 #include "Regular.hpp"
 #include "Jittered.hpp"
+#include "MultiJittered.hpp"
 #include "Hammersley.hpp"
 #include <iostream>
 
@@ -74,8 +75,7 @@ void ViewPlane::set_samples(const int n) {
         sampler_ptr = nullptr;
     }
     if (num_samples > 1)
-        // sampler_ptr = new MultiJittered(num_samples);
-        sampler_ptr = new Jittered(n);
+        sampler_ptr = new MultiJittered(num_samples);
     else
         sampler_ptr = new Regular(1);
 }
