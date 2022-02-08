@@ -49,6 +49,7 @@ set (SOURCES
   GeometricObjects/GeometricObject.cpp
   GeometricObjects/Plane.cpp
   GeometricObjects/Sphere.cpp
+  GeometricObjects/Rectangle.cpp
   # Utilities
   # Utilities/Constants.h
   Utilities/RGBColor.cpp

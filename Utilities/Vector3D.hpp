@@ -27,8 +27,8 @@ public:
     double operator*(const Vector3D& v) const;
     Vector3D operator^(const Vector3D& v) const;
 
-    double length();
-    double len_squared();
+    double length() const;
+    double len_squared() const;
     void normalize();
     Vector3D& hat();
 
@@ -76,7 +76,7 @@ inline Vector3D Vector3D::operator^(const Vector3D& v) const {
                     x * v.y - y * v.x);
 }
 
-inline double Vector3D::len_squared() {
+inline double Vector3D::len_squared() const {
     return x * x + y * y + z * z;
 }
 
