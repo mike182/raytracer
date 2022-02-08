@@ -1,6 +1,7 @@
 #include "ViewPlane.hpp"
 #include "Regular.hpp"
 #include "Jittered.hpp"
+#include "Hammersley.hpp"
 #include <iostream>
 
 ViewPlane::ViewPlane(void)
