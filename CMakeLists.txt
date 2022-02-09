@@ -33,6 +33,7 @@ set (SOURCES
   # Materials
   Materials/Material.cpp
   Materials/Matte.cpp
+  Materials/Phong.cpp
   # Samplers
   Samplers/Sampler.cpp
   Samplers/Regular.cpp
