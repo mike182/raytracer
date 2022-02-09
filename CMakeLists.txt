@@ -20,6 +20,7 @@ set (SOURCES
   #BRDFs
   BRDFs/BRDF.cpp
   BRDFs/Lambertian.cpp
+  BRDFs/GlossySpecular.cpp
   # Cameras
   Cameras/Camera.cpp
   Cameras/Orthographic.cpp
