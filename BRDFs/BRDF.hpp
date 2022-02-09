@@ -5,6 +5,7 @@
 #include "RGBColor.hpp"
 #include "Vector3D.hpp"
 #include "ShadeRec.hpp"
+#include "Sampler.hpp"
 #include <cmath>
 
 class BRDF {
@@ -14,14 +15,15 @@ public:
     virtual BRDF* clone(void) const = 0;
     virtual ~BRDF(void);
 
-protected:
     BRDF& operator= (const BRDF& rhs);
 
-public:
+    void set_sampler(Sampler* s_ptr);
     virtual RGBColor f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const;
     virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi) const;
     virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const;
     virtual RGBColor rho(const ShadeRec& sr, const Vector3D& wo) const;
+protected:
+    Sampler* sampler_ptr;
 };
 
 #endif // __BRDF_HPP__
