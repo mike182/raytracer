@@ -24,14 +24,24 @@ public:
     void shuffle_x_coordinates(void);
     void shuffle_y_coordinates(void);
     void setup_shuffled_indices(void);
+    void map_samples_to_unit_disk(void);
+    void map_samples_to_hemisphere(const float p);
+    void map_samples_to_sphere(void);
 
     Point2D sample_unit_square(void);
+    Point2D sample_unit_disk(void);
+    Point3D sample_hemisphere(void);
+    Point3D sample_sphere(void);
+    Point2D sample_one_set(void); // LatticeNoise
 
 protected:
     int num_samples;
     int num_sets;
     std::vector<Point2D> samples;
     std::vector<int> shuffled_indices;
+    std::vector<Point2D> disk_samples;
+    std::vector<Point3D> hemisphere_samples;
+    std::vector<Point3D> sphere_samples;
     unsigned long count;
     int jump;
 };

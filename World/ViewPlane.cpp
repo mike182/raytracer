@@ -1,5 +1,7 @@
 #include "ViewPlane.hpp"
 #include "Regular.hpp"
+#include "PureRandom.hpp"
+#include "NRooks.hpp"
 #include "Jittered.hpp"
 #include "MultiJittered.hpp"
 #include "Hammersley.hpp"

@@ -38,9 +38,9 @@ set (SOURCES
   Samplers/Regular.cpp
   Samplers/PureRandom.cpp
   Samplers/NRooks.cpp
+  Samplers/Hammersley.cpp
   Samplers/Jittered.cpp
   Samplers/MultiJittered.cpp
-  Samplers/Hammersley.cpp
   # Tracers
   Tracers/Tracer.cpp
   # Tracers/SingleSphere.cpp # old
