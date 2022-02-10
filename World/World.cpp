@@ -99,13 +99,39 @@ ShadeRec World::hit_objects(const Ray& ray) {
     return sr;
 }
 
-void sleepcp(int milli) {
-   // Cross-platform sleep function
-   clock_t end_time;
-   end_time = std::clock() + milli * CLOCKS_PER_SEC/1000;
-   while (clock() < end_time) {
-      //blank loop for waiting
-   }
+RGBColor World::max_to_one(const RGBColor& c) const  {
+    float max_value = max(c.r, max(c.g, c.b));
+
+    if (max_value > 1.0)
+        return c / max_value;
+    return c;
+}
+
+RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
+    RGBColor c(raw_color);
+
+    if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0) {
+        c.r = 1.0; c.g = 0.0; c.b = 0.0;
+    }
+    return c;
+}
+
+void World::delete_objects() {
+    int num_objects = objects.size();
+    for (int i = 0; i < num_objects; i++) {
+        delete objects[i];
+        objects[i] = nullptr;
+    }
+    objects.clear();
+}
+
+void World::delete_lights() {
+    int num_lights = lights.size();
+    for (int i = 0; i < num_lights; i++) {
+        delete lights[i];
+        lights[i] = nullptr;
+    }
+    lights.clear();
 }
 
 int World::build_info() const {
@@ -123,7 +149,7 @@ int World::build_info() const {
     std::cout << "ViewPlane: num_samples set to ";
     std::cout << vp.sampler_ptr->get_num_samples() << std::endl;
     std::cout << "ViewPlane: sampler_ptr set to ";
-    std::cout << ((std::string)typeid(*(vp.sampler_ptr)).name()).erase(0,1) << std::endl;
+    std::cout << typeid(*(vp.sampler_ptr)).name() << std::endl;
 
     // Tracers
     if (tracer_ptr == nullptr) {
@@ -131,7 +157,7 @@ int World::build_info() const {
         return EXIT_FAILURE;
     }
     std::cout << "World: tracer_ptr set to ";
-    std::cout << ((std::string)typeid(*tracer_ptr).name()).erase(0,1) << std::endl;
+    std::cout << typeid(*tracer_ptr).name() << std::endl;
 
     // Cameras
     if (camera_ptr == nullptr) {
@@ -139,7 +165,7 @@ int World::build_info() const {
         return EXIT_FAILURE;
     }
     std::cout << "World: camera_ptr: ";
-    std::cout << ((std::string)typeid(*camera_ptr).name()).erase(0,1) << std::endl;
+    std::cout << typeid(*camera_ptr).name() << std::endl;
 
     // GeometricObjects
     // check objects list size
@@ -161,6 +187,7 @@ int World::build_info() const {
         // check Materials
         std::cout << "World: materials: ";
         for (int i = 0; i < num_objects; i++)
+            // if (typeid(*tracer_ptr) == typeid(RayCast))
             if (objects[i]->get_material() == nullptr) {
                 std::cout << RED << "mat from objects[" << i+1 << "] is null " << std::endl;
                 return EXIT_FAILURE;
@@ -174,8 +201,10 @@ int World::build_info() const {
         std::cout << RED << "World: ambient_ptr is null" << std::endl;
         return EXIT_FAILURE;
     }
-    std::cout << "World: ambient light: color: ";
-    std::cout << ((Ambient*)ambient_ptr)->color.r << std::endl;
+    std::cout << "World: ambient light: color: (";
+    std::cout << ((Ambient*)ambient_ptr)->color.r << ", ";
+    std::cout << ((Ambient*)ambient_ptr)->color.g << ", ";
+    std::cout << ((Ambient*)ambient_ptr)->color.b << ")" << std::endl;
     std::cout << "World: ambient light: ok" << std::endl;
     // check lights list size
     if (lights.size() == 0) {
@@ -198,43 +227,6 @@ int World::build_info() const {
     }
 
     return 0;
-}
-
-RGBColor World::max_to_one(const RGBColor& c) const  {
-    float max_value = max(c.r, max(c.g, c.b));
-
-    if (max_value > 1.0)
-        return c / max_value;
-    return c;
-}
-
-RGBColor World::clamp_to_color(const RGBColor& raw_color) const {
-    RGBColor c(raw_color);
-
-    if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0) {
-        c.r = 1.0;
-        c.g = 0.0;
-        c.b = 0.0;
-    }
-    return c;
-}
-
-void World::delete_objects() {
-    int num_objects = objects.size();
-    for (int i = 0; i < num_objects; i++) {
-        delete objects[i];
-        objects[i] = nullptr;
-    }
-    objects.clear();
-}
-
-void World::delete_lights() {
-    int num_lights = lights.size();
-    for (int i = 0; i < num_lights; i++) {
-        delete lights[i];
-        lights[i] = nullptr;
-    }
-    lights.clear();
 }
 
 // Progress: [ 42%] [#####################...........]

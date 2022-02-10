@@ -38,10 +38,10 @@ public:
     void display_pixel(const int row, const int column, const RGBColor& pixel_color) const;
     ShadeRec hit_objects(const Ray& ray);
 
-    int build_info(void) const;
     RGBColor max_to_one(const RGBColor& c) const;
     RGBColor clamp_to_color(const RGBColor& c) const;
 
+    int build_info(void) const;
     void pbar_update(int row, int vres) const;
     void pbar_clear() const;
 
