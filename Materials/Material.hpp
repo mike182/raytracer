@@ -16,6 +16,9 @@ public:
 
 protected:
     Material& operator=(const Material& rhs);
+
+protected:
+    bool in_shadow;
 };
 
 #endif // __MATERIAL_HPP__

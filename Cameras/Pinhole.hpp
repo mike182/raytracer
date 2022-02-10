@@ -17,6 +17,7 @@ public:
     virtual void render_scene(const World& w);
 
     void set_view_distance(const float vd);
+    void set_vpd(const float vd);
     void set_zoom(const float zoom_factor);
     Vector3D ray_direction(const Point2D& p) const;
 
@@ -26,6 +27,10 @@ public:
 };
 
 inline void Pinhole::set_view_distance(const float vd) {
+    d = vd;
+}
+
+inline void Pinhole::set_vpd(const float vd) {
     d = vd;
 }
 

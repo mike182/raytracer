@@ -14,6 +14,7 @@ public:
     Plane& operator=(const Plane& rhs);
 
     virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
+    virtual bool shadow_hit(const Ray& ray, float& tmin) const;
 
 private:
     Point3D a;

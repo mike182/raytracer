@@ -13,10 +13,11 @@ public:
 
     Sphere& operator=(const Sphere& rhs);
 
+    virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
+    virtual bool shadow_hit(const Ray& ray, float& tmin) const;
     void set_center(const Point3D& c);
     void set_center(const double x, const double y, const double z);
     void set_radius(const double r);
-    virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 
 public:
     Point3D center;

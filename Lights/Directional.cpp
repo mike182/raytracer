@@ -1,4 +1,5 @@
 #include "Directional.hpp"
+#include "World.hpp"
 
 Directional::Directional(void)
     : Light(),
@@ -40,4 +41,16 @@ Vector3D Directional::get_direction([[maybe_unused]] ShadeRec& sr) {
 
 RGBColor Directional::L([[maybe_unused]] ShadeRec& s) const {
     return ls * color;
+}
+
+bool Directional::in_shadow(const Ray& ray, const ShadeRec& sr) const {
+    float t;
+    int num_objects = sr.w.objects.size();
+    // float d = location.distance(ray.o);
+
+    for (int j = 0; j < num_objects; j++)
+        // if (sr.w.objects[j]->shadow_hit(ray, t) && t < d)
+        if (sr.w.objects[j]->shadow_hit(ray, t) && t > 0)
+            return true;
+    return false;
 }

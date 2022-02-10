@@ -26,6 +26,7 @@ public:
     virtual void set_material(Material* m_ptr);
     Material* get_material(void) const;
     virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
+    virtual bool shadow_hit(const Ray& ray, float& tmin) const;
 
     // chap 3 only
     void set_color(RGBColor& c);
@@ -45,6 +46,7 @@ public:
 protected:
     mutable Material* material_ptr;
     RGBColor color;
+    bool shadows;
 };
 
 inline void GeometricObject::set_color(RGBColor& c) {

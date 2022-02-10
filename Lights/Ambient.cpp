@@ -37,3 +37,7 @@ Vector3D Ambient::get_direction([[maybe_unused]] ShadeRec& sr) {
 RGBColor Ambient::L([[maybe_unused]] ShadeRec& sr) const {
     return ls * color;
 }
+
+bool Ambient::in_shadow([[maybe_unused]]const Ray& ray, [[maybe_unused]]const ShadeRec& sr) const {
+    return false;
+}

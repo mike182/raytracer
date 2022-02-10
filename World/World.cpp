@@ -2,6 +2,7 @@
 // Tracers
 // #include "SingleSphere.hpp"
 #include "MultipleObjects.hpp"
+#include "RayCast.hpp"
 #include "Ray.hpp"
 // Cameras
 #include "Orthographic.hpp"

@@ -1,7 +1,7 @@
 #include "Plane.hpp"
 
-// const double Plane::kEpsilon = 0.00001;
-const double Plane::kEpsilon = 0.001;
+const double Plane::kEpsilon = 0.00001;
+// const double Plane::kEpsilon = 0.001;
 
 Plane::Plane(void)
     : GeometricObject(),
@@ -35,7 +35,6 @@ Plane* Plane::clone(void) const {
 Plane& Plane::operator=(const Plane& rhs) {
     if (this == &rhs)
         return *this;
-
     GeometricObject::operator=(rhs);
     a = rhs.a;
     n = rhs.n;
@@ -49,6 +48,20 @@ bool Plane::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
         tmin = t;
         sr.normal = n;
         sr.local_hit_point = ray.o + t * ray.d;
+        return true;
+    }
+    else
+        return false;
+}
+
+bool Plane::shadow_hit(const Ray& ray, float& tmin) const {
+    if (!shadows)
+        return false;
+
+    float t = (a - ray.o) * n / (ray.d * n);
+
+    if (t > kEpsilon) {
+        tmin = t;
         return true;
     }
     else

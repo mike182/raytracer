@@ -19,6 +19,7 @@ public:
     // BBox get_bounding_box(void);
 
     virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
+    virtual bool shadow_hit(const Ray& ray, float& tmin) const;
 
     // // the following functions are used when the rectangle is a light source
     // Point3D sample(void) override;

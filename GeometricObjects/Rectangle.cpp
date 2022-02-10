@@ -129,6 +129,34 @@ bool Rectangle::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
     return true;
 }
 
+bool Rectangle::shadow_hit(const Ray& ray, float& tmin) const {
+    if (!shadows)
+        return false;
+
+    double t = (p - ray.o) * normal / (ray.d * normal);
+
+    if (t <= kEpsilon)
+        return false;
+
+    Point3D p = ray.o + t * ray.d;
+    Vector3D d = p - p;
+
+    double ddota = d * a;
+
+    if (ddota < 0.0 || ddota > a_len_squared)
+        return false;
+
+    double ddotb = d * b;
+
+    if (ddotb < 0.0 || ddotb > b_len_squared)
+        return false;
+
+    tmin = t;
+    // sr.normal = normal;
+    // sr.local_hit_point = p;
+    return true;
+}
+
 // Point3D Rectangle::sample(void) {
     // Point2D sample_point = sampler_ptr->sample_unit_square();
     // return p + sample_point.x * a + sample_point.y * b;

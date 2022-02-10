@@ -1,18 +1,19 @@
 #include "PointLight.hpp"
+#include "World.hpp"
 
 PointLight::PointLight(void)
     : Light(),
     ls(1.0),
     color(1.0),
-    location(0, 1, 0)
+    location(0, 0, 100)
 {
 }
 
-PointLight::PointLight(const PointLight& dl)
-    : Light(dl),
-    ls(dl.ls),
-    color(dl.color),
-    location(dl.location)
+PointLight::PointLight(const PointLight& pl)
+    : Light(pl),
+    ls(pl.ls),
+    color(pl.color),
+    location(pl.location)
 {
 }
 
@@ -23,7 +24,7 @@ Light* PointLight::clone(void) const {
     return new PointLight(*this);
 }
 
-PointLight& PointLight::operator= (const PointLight& rhs) {
+PointLight& PointLight::operator=(const PointLight& rhs) {
     if (this == &rhs)
         return *this;
 
@@ -40,4 +41,15 @@ Vector3D PointLight::get_direction([[maybe_unused]] ShadeRec& sr) {
 
 RGBColor PointLight::L([[maybe_unused]] ShadeRec& s) const {
     return ls * color;
+}
+
+bool PointLight::in_shadow(const Ray& ray, const ShadeRec& sr) const {
+    float t;
+    int num_objects = sr.w.objects.size();
+    float d = location.distance(ray.o);
+
+    for (int j = 0; j < num_objects; j++)
+        if (sr.w.objects[j]->shadow_hit(ray, t) && t < d)
+            return true;
+    return false;
 }
