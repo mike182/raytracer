@@ -1,11 +1,10 @@
 # custom
 rt
-old/
-*.png
 TODO.md
-Scenes/Chapters
-compile_commands.json
+*.png
 .cache/
+old/
+Scenes/
 
 # vim
 .*.swo
@@ -15,6 +14,7 @@ compile_commands.json
 
 # build folder
 build/
+compile_commands.json
 
 # Prerequisites
 *.d
