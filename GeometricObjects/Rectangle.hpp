@@ -27,18 +27,19 @@ public:
     // float pdf(const ShadeRec& sr) override;
 
 private:
-    Point3D p; // corner vertex
+    Point3D p0; // corner vertex
     Vector3D a; // side
     Vector3D b; // side
+    Normal normal;
     double a_len_squared;
     double b_len_squared;
-    Normal normal;
 
     // for rectangular lights
     float area;
     float inv_area;
     Sampler* sampler_ptr;
 
+private:
     static const double kEpsilon;
 };
 
