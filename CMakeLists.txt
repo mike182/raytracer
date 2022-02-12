@@ -49,9 +49,9 @@ set (SOURCES
   Tracers/RayCast.cpp
   # Objects
   GeometricObjects/GeometricObject.cpp
-  GeometricObjects/Plane.cpp
-  GeometricObjects/Sphere.cpp
-  GeometricObjects/Rectangle.cpp
+  GeometricObjects/Primitives/Plane.cpp
+  GeometricObjects/Primitives/Sphere.cpp
+  GeometricObjects/Primitives/Rectangle.cpp
   # Utilities
   # Utilities/Constants.h
   Utilities/RGBColor.cpp
@@ -62,6 +62,7 @@ set (SOURCES
   Utilities/Vector3D.cpp
   Utilities/Normal.cpp
   Utilities/Maths.cpp
+  Utilities/Matrix.cpp
   Utilities/Image.cpp
   )
 
@@ -92,6 +93,7 @@ include_directories (
   BRDFs/
   Cameras/
   GeometricObjects/
+  GeometricObjects/Primitives/
   Lights/
   Materials/
   Samplers/
