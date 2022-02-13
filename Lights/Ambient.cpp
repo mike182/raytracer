@@ -34,7 +34,7 @@ Vector3D Ambient::get_direction([[maybe_unused]] ShadeRec& sr) {
     return Vector3D(0.0);
 }
 
-RGBColor Ambient::L([[maybe_unused]] ShadeRec& sr) const {
+RGBColor Ambient::L([[maybe_unused]] ShadeRec& sr) {
     return ls * color;
 }
 

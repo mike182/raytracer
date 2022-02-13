@@ -29,9 +29,9 @@ Directional& Directional::operator= (const Directional& rhs) {
         return *this;
 
     Light::operator= (rhs);
-    ls		= rhs.ls;
-    color 	= rhs.color;
-    dir 	= rhs.dir;
+    ls = rhs.ls;
+    color = rhs.color;
+    dir = rhs.dir;
     return *this;
 }
 
@@ -39,7 +39,7 @@ Vector3D Directional::get_direction([[maybe_unused]] ShadeRec& sr) {
     return dir;
 }
 
-RGBColor Directional::L([[maybe_unused]] ShadeRec& s) const {
+RGBColor Directional::L([[maybe_unused]] ShadeRec& s) {
     return ls * color;
 }
 

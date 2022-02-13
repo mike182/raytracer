@@ -1,5 +1,4 @@
 #include "Light.hpp"
-#include "World.hpp"
 
 Light::Light(void)
     : shadows(false)
@@ -20,7 +19,7 @@ Light & Light::operator=(const Light & rhs) {
     return *this;
 }
 
-RGBColor Light::L([[maybe_unused]] ShadeRec& sr) const {
+RGBColor Light::L([[maybe_unused]] ShadeRec& sr) {
     return black;
 }
 

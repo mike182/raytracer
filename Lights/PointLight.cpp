@@ -29,9 +29,9 @@ PointLight& PointLight::operator=(const PointLight& rhs) {
         return *this;
 
     Light::operator= (rhs);
-    ls		= rhs.ls;
-    color 	= rhs.color;
-    location 	= rhs.location;
+    ls = rhs.ls;
+    color = rhs.color;
+    location = rhs.location;
     return *this;
 }
 
@@ -39,7 +39,7 @@ Vector3D PointLight::get_direction([[maybe_unused]] ShadeRec& sr) {
     return (location - sr.hit_point).hat();
 }
 
-RGBColor PointLight::L([[maybe_unused]] ShadeRec& s) const {
+RGBColor PointLight::L([[maybe_unused]] ShadeRec& s) {
     return ls * color;
 }
 

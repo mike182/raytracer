@@ -23,7 +23,7 @@ public:
     void set_direction(Vector3D d);
     void set_direction(float dx, float dy, float dz);
     virtual Vector3D get_direction(ShadeRec& sr);
-    virtual RGBColor L(ShadeRec& sr) const;
+    virtual RGBColor L(ShadeRec& sr);
     virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
 
 private:

@@ -19,7 +19,7 @@ public:
     Light & operator=(const Light & rhs);
 
     virtual Vector3D get_direction(ShadeRec& sr) = 0;
-    virtual RGBColor L(ShadeRec& sr) const;
+    virtual RGBColor L(ShadeRec& sr);
     void set_shadows(const bool sh);
     bool cast_shadows() const;
     virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;

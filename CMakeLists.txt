@@ -30,6 +30,7 @@ set (SOURCES
   Lights/Ambient.cpp
   Lights/Directional.cpp
   Lights/PointLight.cpp
+  Lights/AmbientOccluder.cpp
   # Materials
   Materials/Material.cpp
   Materials/Matte.cpp
