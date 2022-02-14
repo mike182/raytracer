@@ -1,9 +1,7 @@
 #include "World.hpp"
 // Tracers
-// #include "SingleSphere.hpp"
 #include "MultipleObjects.hpp"
 #include "RayCast.hpp"
-#include "Ray.hpp"
 // Cameras
 #include "Orthographic.hpp"
 #include "Pinhole.hpp"
@@ -17,7 +15,9 @@
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
 #include "Normal.hpp"
+#include "RGBColor.hpp"
 #include "ShadeRec.hpp"
+#include "Ray.hpp"
 // c/cpp header
 #include <cmath>
 #include <iostream>
@@ -201,11 +201,13 @@ int World::build_info() const {
         std::cout << RED << "World: ambient_ptr is null" << std::endl;
         return EXIT_FAILURE;
     }
-    std::cout << "World: ambient light: color: (";
-    std::cout << ((Ambient*)ambient_ptr)->color.r << ", ";
-    std::cout << ((Ambient*)ambient_ptr)->color.g << ", ";
-    std::cout << ((Ambient*)ambient_ptr)->color.b << ")" << std::endl;
-    std::cout << "World: ambient light: ok" << std::endl;
+    std::cout << "World: ambient light: ";
+    RGBColor c = ((Ambient*)ambient_ptr)->get_color();
+    if (c.r == 1 && c.g == 1 && c.b == 1)
+        std::cout << "white ";
+    else
+        std::cout << "(" << c.r << ", " << c.g << ", " << c.b  << ") ";
+    std::cout << "ok" << std::endl;
     // check lights list size
     if (lights.size() == 0) {
         std::cout << "World: " << YEL << "warning: " << WHITE;

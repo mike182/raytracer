@@ -5,7 +5,7 @@
 AmbientOccluder::AmbientOccluder(void)
     : ls(1),
     color(1),
-    min_amount(0),
+    min_amount(0.25),
     sampler_ptr(nullptr),
     u(1, 0, 0),
     v(0, 1, 0),
@@ -50,6 +50,14 @@ AmbientOccluder& AmbientOccluder::operator=(const AmbientOccluder& rhs) {
     return *this;
 }
 
+void AmbientOccluder::scale_radiance(float r) {
+    ls = r;
+}
+
+void AmbientOccluder::set_min_amount(float min) {
+    min_amount = min;
+}
+
 void AmbientOccluder::set_sampler(Sampler* s_ptr) {
     if (sampler_ptr) {
         delete sampler_ptr;
@@ -73,7 +81,6 @@ RGBColor AmbientOccluder::L(ShadeRec& sr) {
     Ray shadow_ray;
     shadow_ray.o = sr.hit_point;
     shadow_ray.d = get_direction(sr);
-
     if (in_shadow(shadow_ray, sr)) {
         return (min_amount * ls * color);
     }

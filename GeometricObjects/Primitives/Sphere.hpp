@@ -22,6 +22,8 @@ public:
 public:
     Point3D center;
     double radius;
+
+private:
     static const double kEpsilon;
 };
 

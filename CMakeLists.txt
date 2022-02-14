@@ -74,15 +74,16 @@ set (SOURCES
   )
 
 set (SOURCES_SCENES
-    # Scenes/BuildTest.cpp
+    # Custom
+    Scenes/BuildTest.cpp
+    # Scenes/000.cpp # single sphere
+    # Scenes/001.cpp
+    # Scenes/002.cpp
 
     # Chapter 03
     # Scenes/BuildCh03PageOneImage.cpp // OLD
     # Scenes/BuildFigure03.18.cpp # single sphere // OLD
     # Scenes/BuildFigure03.20a.cpp # sphere & plane // OLD
-    # Scenes/000.cpp # single sphere
-    # Scenes/001.cpp
-    # Scenes/002.cpp
     # Scenes/archimedean_spirale.cpp
 
     # Chapter 04

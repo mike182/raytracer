@@ -21,12 +21,15 @@ Matte::Matte(const Matte& m)
         diffuse_brdf = nullptr;
 }
 
-Matte::~Matte(void)
-{
-    if (ambient_brdf)
+Matte::~Matte(void) {
+    if (ambient_brdf) {
         delete ambient_brdf;
-    if (diffuse_brdf)
+        ambient_brdf = nullptr;
+    }
+    if (diffuse_brdf) {
         delete diffuse_brdf;
+        diffuse_brdf = nullptr;
+    }
 }
 
 Material* Matte::clone(void) const {

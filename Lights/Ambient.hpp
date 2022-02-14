@@ -16,6 +16,7 @@ public:
     void set_color(const float c);
     void set_color(const RGBColor& c);
     void set_color(const float r, const float g, const float b);
+    RGBColor get_color() const;
     virtual Vector3D get_direction(ShadeRec& s);
     virtual RGBColor L(ShadeRec& s);
     virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
@@ -39,6 +40,10 @@ inline void Ambient::set_color(const RGBColor& c) {
 
 inline void Ambient::set_color(const float r, const float g, const float b) {
     color.r = r; color.g = g; color.b = b;
+}
+
+inline RGBColor Ambient::get_color() const {
+    return color;
 }
 
 #endif // __AMBIENT_HPP__

@@ -18,6 +18,8 @@ public:
 
     AmbientOccluder& operator=(const AmbientOccluder& rhs);
 
+    void scale_radiance(float r);
+    void set_min_amount(float min);
     void set_sampler(Sampler* s_ptr);
     virtual Vector3D get_direction(ShadeRec& sr);
     virtual RGBColor L(ShadeRec& sr);

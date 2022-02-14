@@ -1,6 +1,7 @@
 Raytracing from the ground up
 =============================
 
+[Ray Tracing from the Ground Up](http://www.raytracegroundup.com/)
 ```bash
 01 - Design and Programming : Complete
 02 - Essential Mathematics : Complete
@@ -35,4 +36,11 @@ Raytracing from the ground up
 31 - Noise-Based Textures : 0%
 ```
 
-[Ray Tracing from the Ground Up](http://www.raytracegroundup.com/)
+Next
+----
+HDR, bvh, efficient global illumination algorithm,
+efficient rendering of caustics, sub-surface scattering,
+bump mapping, [rendering of participating media](https://patapom.com/topics/Revision2013/Revision%202013%20-%20Real-time%20Volumetric%20Rendering%20Course%20Notes.pdf)
+
+[RayTracing in One Weekend Series](https://raytracing.github.io/)
+

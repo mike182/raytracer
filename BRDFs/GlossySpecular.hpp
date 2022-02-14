@@ -41,11 +41,15 @@ inline void GlossySpecular::set_cs(const RGBColor& c) {
 }
 
 inline void GlossySpecular::set_cs(const float r, const float g, const float b) {
-    cs.r = r; cs.g = g; cs.b = b;
+    cs.r = r;
+    cs.g = g;
+    cs.b = b;
 }
 
 inline void GlossySpecular::set_cs(const float c) {
-    cs.r = c; cs.g = c; cs.b = c;
+    cs.r = c;
+    cs.g = c;
+    cs.b = c;
 }
 
 #endif // __GLOSSYSPECULAR_HPP__

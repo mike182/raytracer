@@ -1,7 +1,7 @@
 #ifndef __CONSTANTS_H__
 #define __CONSTANTS_H__
 
-#include <stdlib.h> // RAND_MAX
+#include <cstdlib> // RAND_MAX
 #include "RGBColor.hpp"
 
 const double PI         = 3.1415926535897932384;

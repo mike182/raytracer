@@ -14,7 +14,7 @@ Rectangle::Rectangle(void)
     b_len_squared(4.0),
     area(4.0),
     inv_area(0.25),
-    sampler_ptr(NULL)
+    sampler_ptr(nullptr)
 {
 }
 
@@ -51,7 +51,7 @@ Rectangle::Rectangle(const Point3D& p, const Vector3D& a, const Vector3D& b, con
 Rectangle::~Rectangle (void) {
     if (sampler_ptr) {
         delete sampler_ptr;
-        sampler_ptr = NULL;
+        sampler_ptr = nullptr;
     }
 }
 
@@ -69,7 +69,7 @@ Rectangle::Rectangle (const Rectangle& r)
     if(r.sampler_ptr)
         sampler_ptr = r.sampler_ptr->clone();
     else
-        sampler_ptr = NULL;
+        sampler_ptr = nullptr;
 }
 
 Rectangle* Rectangle::clone(void) const {
@@ -90,11 +90,10 @@ Rectangle& Rectangle::operator=(const Rectangle& rhs) {
     normal = rhs.normal;
     if (sampler_ptr) {
         delete sampler_ptr;
-        sampler_ptr = NULL;
+        sampler_ptr = nullptr;
     }
-    if (rhs.sampler_ptr) {
+    if (rhs.sampler_ptr)
         sampler_ptr= rhs.sampler_ptr->clone();
-    }
     return *this;
 }
 

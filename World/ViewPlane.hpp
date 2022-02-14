@@ -17,6 +17,7 @@ public:
     void set_pixel_size(const float size);
     void set_samples(const int n);
     void set_sampler(Sampler* sp);
+    void set_max_depth(const int d);
 
     void set_gamma(const float g);
     void set_gamut_display(const bool show);
@@ -31,6 +32,8 @@ public:
     float gamma;
     float inv_gamma;
     bool show_out_of_gamut;
+
+    int max_depth;
 };
 
 #endif // __VIEWPLANE_HPP__

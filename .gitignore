@@ -4,7 +4,7 @@ TODO.md
 *.png
 .cache/
 old/
-Scenes/
+Scenes/old
 
 # vim
 .*.swo

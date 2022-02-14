@@ -1,7 +1,7 @@
 #include "Sphere.hpp"
 
-const double Sphere::kEpsilon = 0.00001;
-// const double Sphere::kEpsilon = 0.001;
+// const double Sphere::kEpsilon = 0.00001;
+const double Sphere::kEpsilon = 0.001;
 
 Sphere::Sphere(void)
     : GeometricObject(),

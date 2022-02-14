@@ -19,6 +19,8 @@ public:
 private:
     Point3D a;
     Normal n;
+
+private:
     static const double kEpsilon; // shadow & secondary ray
 };
 

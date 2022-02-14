@@ -28,11 +28,6 @@ public:
     virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const = 0;
     virtual bool shadow_hit(const Ray& ray, float& tmin) const;
 
-    // chap 3 only
-    void set_color(RGBColor& c);
-    void set_color(const float r, const float g, const float b);
-    RGBColor get_color();
-
     // virtual void set_bounding_box(void);
     // virtual BBox get_bounding_box(void);
     virtual void add_object(GeometricObject* object_ptr);
@@ -45,22 +40,7 @@ public:
 
 protected:
     mutable Material* material_ptr;
-    RGBColor color;
     bool shadows;
 };
-
-inline void GeometricObject::set_color(RGBColor& c) {
-    color = c;
-}
-
-inline void GeometricObject::set_color(const float r, const float g, const float b) {
-    color.r = r;
-    color.g = g;
-    color.b = b;
-}
-
-inline RGBColor GeometricObject::get_color() {
-    return color;
-}
 
 #endif // __GEOMETRICOBJECT_HPP__
