@@ -1,8 +1,8 @@
 #ifndef __POINT3D_HPP__
-
 #define __POINT3D_HPP__
 
 #include "Vector3D.hpp"
+#include "Matrix.hpp"
 
 class Point3D {
 public:
@@ -26,6 +26,12 @@ public:
     double x, y, z;
 };
 
+// lhs
+Point3D operator*(double a, const Point3D& p);
+
+// matrix
+Point3D operator*(const Matrix& mat, const Point3D& p);
+
 inline Point3D Point3D::operator-() const {
     return Point3D(-x, -y, -z);
 }
@@ -47,9 +53,13 @@ inline Point3D Point3D::operator*(const double a) const {
 }
 
 inline double Point3D::d_squared(const Point3D& p) const {
-    return ((x - p.x) * (x - p.x)
-            + (y - p.y) * (y - p.y)
-            + (z - p.z) * (z - p.z));
+    return (x - p.x) * (x - p.x)
+        + (y - p.y) * (y - p.y)
+        + (z - p.z) * (z - p.z);
+}
+
+inline Point3D operator* (double a, const Point3D& p) {
+    return Point3D(a * p.x, a * p.y, a * p.z);
 }
 
 #endif // __POINT3D_HPP__

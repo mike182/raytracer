@@ -1,6 +1,8 @@
 #ifndef __VECTOR3D_HPP__
 #define __VECTOR3D_HPP__
 
+#include "Matrix.hpp"
+
 class Normal;
 class Point3D;
 
@@ -38,6 +40,9 @@ public:
 
 // lhs prototype
 Vector3D operator*(const double a, const Vector3D& v);
+
+// matrix
+Vector3D operator*(const Matrix& mat, const Vector3D& v);
 
 inline Vector3D Vector3D::operator-() const {
     return Vector3D(-x, -y, -z);

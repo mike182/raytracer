@@ -48,19 +48,6 @@ Matrix Matrix::operator/(const double d) {
     return *this;
 }
 
-
-Normal Matrix::operator*(const Normal& n) {
-    return Normal(m[0][0] * n.x + m[1][0] * n.y + m[2][0] * n.z,
-		  m[0][1] * n.x + m[1][1] * n.y + m[2][1] * n.z,
-		  m[0][2] * n.x + m[1][2] * n.y + m[2][2] * n.z);
-}
-
-Point3D Matrix::operator*(const Point3D& p) {
-    return Point3D(m[0][0] * p.x + m[0][1] * p.y + m[0][2] * p.z + m[0][3],
-                   m[1][0] * p.x + m[1][1] * p.y + m[1][2] * p.z + m[1][3],
-                   m[2][0] * p.x + m[2][1] * p.y + m[2][2] * p.z + m[2][3]);
-}
-
 void Matrix::set_identity(void) {
     for (int x = 0; x < 4; x++)
         for (int y = 0; y < 4; y++) {

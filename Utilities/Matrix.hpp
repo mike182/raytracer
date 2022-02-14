@@ -1,8 +1,6 @@
 #ifndef __MATRIX_HPP__
 #define __MATRIX_HPP__
 
-#include "Normal.hpp"
-
 class Matrix {
 public:
     Matrix(void);
@@ -12,9 +10,6 @@ public:
     Matrix& operator=(const Matrix& rhs);
     Matrix operator*(const Matrix& m) const;
     Matrix operator/(const double d);
-
-    Point3D operator*(const Point3D& p);
-    Normal operator*(const Normal& n);
 
     void set_identity(void);
 

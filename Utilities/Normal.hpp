@@ -3,6 +3,7 @@
 
 #include "Vector3D.hpp"
 #include "Point3D.hpp"
+#include "Matrix.hpp"
 
 class Normal {
 public:
@@ -34,6 +35,9 @@ Normal operator*(const double a, const Normal& n);
 Vector3D operator+(const Vector3D& v, const Normal& n);
 Vector3D operator-(const Vector3D& v, const Normal& n);
 double operator*(const Vector3D& v, const Normal& n);
+
+// matrix
+Normal operator*(const Matrix& mat, const Normal& n);
 
 inline Normal Normal::operator-() const {
     return Normal(-x, -y, -z);

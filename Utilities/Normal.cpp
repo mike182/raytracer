@@ -62,3 +62,9 @@ void Normal::normalize() {
     y /= length;
     z /= length;
 }
+
+Normal operator*(const Matrix& mat, const Normal& n) {
+    return Normal(mat.m[0][0] * n.x + mat.m[1][0] * n.y + mat.m[2][0] * n.z,
+                  mat.m[0][1] * n.x + mat.m[1][1] * n.y + mat.m[2][1] * n.z,
+                  mat.m[0][2] * n.x + mat.m[1][2] * n.y + mat.m[2][2] * n.z);
+}
