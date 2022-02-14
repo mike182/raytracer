@@ -20,6 +20,7 @@ set (SOURCES
   #BRDFs
   BRDFs/BRDF.cpp
   BRDFs/Lambertian.cpp
+  BRDFs/SV_Lambertian.cpp
   BRDFs/GlossySpecular.cpp
   # Cameras
   Cameras/Camera.cpp
@@ -34,6 +35,7 @@ set (SOURCES
   # Materials
   Materials/Material.cpp
   Materials/Matte.cpp
+  Materials/SV_Matte.cpp
   Materials/Phong.cpp
   # Samplers
   Samplers/Sampler.cpp
@@ -43,6 +45,10 @@ set (SOURCES
   Samplers/Hammersley.cpp
   Samplers/Jittered.cpp
   Samplers/MultiJittered.cpp
+  # Textures
+  Textures/Texture.cpp
+  Textures/ConstantColor.cpp
+  Textures/Checker3D.cpp
   # Tracers
   Tracers/Tracer.cpp
   # Tracers/SingleSphere.cpp # old
@@ -54,7 +60,7 @@ set (SOURCES
   GeometricObjects/Primitives/Sphere.cpp
   GeometricObjects/Primitives/Rectangle.cpp
   # Utilities
-  # Utilities/Constants.h
+  Utilities/Constants.h
   Utilities/RGBColor.cpp
   Utilities/ShadeRec.cpp
   Utilities/Ray.cpp
@@ -68,25 +74,20 @@ set (SOURCES
   )
 
 set (SOURCES_SCENES
-    # Scenes/Custom/03.18.cpp # red sphere
-    # Scenes/Custom/03.c00.cpp # two spheres & plane
-    # Scenes/Custom/03.c01.cpp # multiple spheres
-    # Scenes/Custom/03.c02.cpp # archimedean spirale sphere
-    # Scenes/BuildTmp.cpp
-    # Scenes/BuildCh03PageOneImage.cpp # multiple spheres
-    # Scenes/BuildFigure03.18.cpp
-    # Scenes/BuildFigure03.20a.cpp
-    # Scenes/BuildFigure04.04.cpp
-    # Scenes/BuildFigure04.08.cpp #
-    # Scenes/BuildFigure05.13.cpp #
-    # Scenes/BuildFigure14.15.cpp
-    # Scenes/BuildFigure14.21.cpp # two spheres with directional light and matte material
-    # Scenes/BuildFigure14.22.cpp # multiple spheres
-    # Scenes/BuildFigure14.22.1.cpp # multiple spheres with Phong ???
-    # Scenes/BuildFigure14.22.2.cpp # multiple spheres with Phong ???
-    # Scenes/BuildFigure14.24.cpp # four spheres
-    # Scenes/BuildFigure16.10a.cpp # two spheres & plan with Shadows
-    Scenes/BuildCh16PageOneImage.cpp # multiple spheres with Phong
+    # Scenes/BuildTest.cpp
+
+    # Chapter 03
+    # Scenes/BuildCh03PageOneImage.cpp // OLD
+    # Scenes/BuildFigure03.18.cpp # single sphere // OLD
+    # Scenes/BuildFigure03.20a.cpp # sphere & plane // OLD
+    # Scenes/000.cpp # single sphere
+    # Scenes/001.cpp
+    # Scenes/002.cpp
+    # Scenes/archimedean_spirale.cpp
+
+    # Chapter 04
+    # Scenes/BuildFigure04.04.cpp # AA low res
+    # Scenes/BuildFigure04.08.cpp # Checker3D plane
     )
 
 include_directories (
@@ -98,6 +99,7 @@ include_directories (
   Lights/
   Materials/
   Samplers/
+  Textures/
   Tracers/
   Utilities/
   World/
