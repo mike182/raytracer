@@ -56,6 +56,7 @@ set (SOURCES
   Tracers/RayCast.cpp
   # Objects
   GeometricObjects/GeometricObject.cpp
+  GeometricObjects/Instance.cpp
   GeometricObjects/Primitives/Plane.cpp
   GeometricObjects/Primitives/Sphere.cpp
   GeometricObjects/Primitives/Rectangle.cpp
