@@ -60,6 +60,8 @@ set (SOURCES
   GeometricObjects/Primitives/Plane.cpp
   GeometricObjects/Primitives/Sphere.cpp
   GeometricObjects/Primitives/Rectangle.cpp
+  GeometricObjects/Primitives/OpenCylinder.cpp
+  GeometricObjects/Primitives/OpenCone.cpp
   GeometricObjects/Primitives/Torus.cpp
   GeometricObjects/Triangles/Triangle.cpp
   # Utilities
