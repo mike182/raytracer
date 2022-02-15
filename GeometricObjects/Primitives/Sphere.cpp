@@ -96,8 +96,6 @@ bool Sphere::shadow_hit(const Ray& ray, float& tmin) const {
 
         if (t > kEpsilon) {
             tmin = t;
-            // sr.normal = (temp + t * ray.d) / radius;
-            // sr.local_hit_point = ray.o + t * ray.d;
             return true;
         }
 
@@ -105,8 +103,6 @@ bool Sphere::shadow_hit(const Ray& ray, float& tmin) const {
 
         if (t > kEpsilon) {
             tmin = t;
-            // sr.normal = (temp + t * ray.d) / radius;
-            // sr.local_hit_point = ray.o + t * ray.d;
             return true;
         }
     }

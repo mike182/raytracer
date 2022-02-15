@@ -153,8 +153,6 @@ bool Rectangle::shadow_hit(const Ray& ray, float& tmin) const {
         return false;
 
     tmin = t;
-    // sr.normal = normal;
-    // sr.local_hit_point = p0;
     return true;
 }
 

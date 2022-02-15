@@ -59,6 +59,7 @@ set (SOURCES
   GeometricObjects/Primitives/Plane.cpp
   GeometricObjects/Primitives/Sphere.cpp
   GeometricObjects/Primitives/Rectangle.cpp
+  GeometricObjects/Triangles/Triangle.cpp
   # Utilities
   Utilities/Constants.h
   Utilities/RGBColor.cpp
@@ -97,6 +98,7 @@ include_directories (
   Cameras/
   GeometricObjects/
   GeometricObjects/Primitives/
+  GeometricObjects/Triangles/
   Lights/
   Materials/
   Samplers/
