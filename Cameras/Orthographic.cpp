@@ -40,8 +40,7 @@ void Orthographic::render_scene(const World& w) {
     Point2D pp;
 
     ray.d = Vector3D(0, 0, -1);
-    w.image_ptr->set_resolution(vp.hres, vp.vres); // image file
-    for (int r = 0; r < vp.vres; r++) // up
+    for (int r = 0; r < vp.vres; r++) { // up
         for (int c = 0; c < vp.hres; c++) { // across
             pixel_color = black;
             for (int i = 0; i < vp.num_samples; i++) {
@@ -55,5 +54,7 @@ void Orthographic::render_scene(const World& w) {
             pixel_color *= exposure_time;
             w.display_pixel(r, c, pixel_color);
         }
-    w.image_ptr->save_image(FILE_PNG); // image file
+        w.gfx_ptr->render_line();
+    }
+    w.gfx_ptr->end();
 }

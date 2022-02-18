@@ -28,7 +28,7 @@ World::World (void)
     tracer_ptr(nullptr),
     camera_ptr(nullptr),
     ambient_ptr(new Ambient),
-    image_ptr(new Image)
+    gfx_ptr(nullptr)
 {
   #ifdef TIOCGSIZE
     struct ttysize ts;
@@ -50,8 +50,8 @@ World::~World(void) {
         delete ambient_ptr;
     if (camera_ptr)
         delete camera_ptr;
-    if (image_ptr)
-        delete image_ptr;
+    if (gfx_ptr)
+        delete gfx_ptr;
     delete_objects();
     delete_lights();
 }
@@ -67,10 +67,17 @@ void World::display_pixel(const int row, [[maybe_unused]] const int column, cons
         mapped_color = mapped_color.powc(vp.inv_gamma);
     // have to start from max y coordinate to convert to screen coordinates
     // done in Image Class
-    // int x = column;
-    // int y = vp.vres - row - 1;
+    int x = column;
+    int y = vp.vres - row - 1;
     // image_ptr->set_pixel(mapped_color, x, y); // image file
-    image_ptr->set_pixel(mapped_color); // image file
+
+   // paintArea->setPixel(x, y, (int)(mapped_color.r * 255),
+                             // (int)(mapped_color.g * 255),
+                             // (int)(mapped_color.b * 255));
+    gfx_ptr->display(x, y,
+                     (int)(mapped_color.r * 255),
+                     (int)(mapped_color.g * 255),
+                     (int)(mapped_color.b * 255));
     pbar_update(row, vp.vres);
 }
 

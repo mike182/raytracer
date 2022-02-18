@@ -4,10 +4,13 @@ project(raytracer)
 
 set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_FLAGS "-std=c++17 -W -Wall -Werror -Wextra -pedantic")
-set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# find_package(SDL2 REQUIRED)
+# include_directories(${SDL2_INCLUDE_DIRS})
 
 find_package(PNG REQUIRED)
 # find_package(JPEG REQUIRED)
@@ -26,6 +29,10 @@ set (SOURCES
   Cameras/Camera.cpp
   Cameras/Orthographic.cpp
   Cameras/Pinhole.cpp
+  # Graphics
+  Graphics/Graphics.cpp
+  # Graphics/GuiSDL.cpp
+  Graphics/ImgPNG.cpp
   # Lights
   Lights/Light.cpp
   Lights/Ambient.cpp
@@ -100,6 +107,7 @@ include_directories (
   .
   BRDFs/
   Cameras/
+  Graphics/
   GeometricObjects/
   GeometricObjects/Primitives/
   GeometricObjects/Triangles/
@@ -123,5 +131,5 @@ add_custom_target(
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES} ${SOURCES_SCENES})
 
-target_link_libraries(${EXECUTABLE_NAME} ${PNG_LIBRARY} ${JPEG_LIBRARY})
+target_link_libraries(${EXECUTABLE_NAME} ${SDL2_LIBRARIES} ${PNG_LIBRARY} ${JPEG_LIBRARY})
 

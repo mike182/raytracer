@@ -2,21 +2,15 @@
 #define __WORLD_HPP__
 
 #include "Constants.h"
+#include "Graphics.hpp"
 #include "ViewPlane.hpp"
 #include "RGBColor.hpp"
-#include "Tracer.hpp"
 #include "GeometricObject.hpp"
-// #include "Sphere.hpp"
-#include "Ray.hpp"
-// #include "SingleSphere.hpp"
-#include "Image.hpp"
-#include "Camera.hpp"
-// Lights
-#include "Ambient.hpp"
 #include "Light.hpp"
 #include "Ambient.hpp"
-#include "Directional.hpp"
-#include "PointLight.hpp"
+#include "Camera.hpp"
+#include "Tracer.hpp"
+#include "Ray.hpp"
 #include <sys/ioctl.h>
 #include <cstdio>
 #include <cstdint>
@@ -58,7 +52,7 @@ public:
     std::vector<GeometricObject*> objects;
     std::vector<Light*> lights;
 
-    Image* image_ptr; // save to file
+    Graphics* gfx_ptr;
     int winsize;
 };
 

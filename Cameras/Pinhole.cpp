@@ -47,11 +47,27 @@ void Pinhole::render_scene(const World& w) {
     int depth = 0;
     Point2D sp;
     Point2D pp;
+    // SDL_Event event;
 
     vp.s /= zoom;
     ray.o = eye;
-    w.image_ptr->set_resolution(vp.hres, vp.vres); // image file
-    for (int r = 0; r < vp.vres; r++) // up
+    // // render color only
+    // for (int r = 0; r < vp.vres; r++) { // up
+    //     for (int c = 0; c < vp.hres; c++) { // across
+    //         L = black;
+    //         pp.x = (c - 0.5 * vp.hres + ( + 0.5));
+    //         pp.y = (r - 0.5 * vp.vres + ( 0.5));
+    //         ray.d = ray_direction(pp);
+    //         L = w.tracer_ptr->trace_ray(ray, depth);
+    //         w.display_pixel(r, c, L);
+    //         // if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
+    //             // exit(EXIT_FAILURE);
+    //     }
+    //     w.gfx_ptr->render_line();
+    // }
+
+    // render full
+    for (int r = 0; r < vp.vres; r++) { // up
         for (int c = 0; c < vp.hres; c++) { // across
             L = black;
             for (int i = 0; i < vp.num_samples; i++) {
@@ -64,6 +80,10 @@ void Pinhole::render_scene(const World& w) {
             L /= vp.num_samples;
             L *= exposure_time;
             w.display_pixel(r, c, L);
+            // if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
+                // exit(EXIT_FAILURE);
         }
-    w.image_ptr->save_image(FILE_PNG); // image file
+        w.gfx_ptr->render_line();
+    }
+    w.gfx_ptr->end();
 }
