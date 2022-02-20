@@ -7,6 +7,7 @@
 #include "GuiSDL.hpp"
 #else
 #include "ImgPNG.hpp"
+// #include "ImgJPEG.hpp"
 #endif
 
 
@@ -24,9 +25,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
     w.gfx_ptr = new GuiSDL(w.vp.hres, w.vp.vres);
 #else
     w.gfx_ptr = new ImgPNG(w.vp.hres, w.vp.vres);
+    // w.gfx_ptr = new ImgJPEG(w.vp.hres, w.vp.vres);
 #endif
 
-    // w.gfx_ptr->init();
+    w.gfx_ptr->init();
     w.camera_ptr->render_scene(w);
     w.gfx_ptr->end();
     return EXIT_SUCCESS;

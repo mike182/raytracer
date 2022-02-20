@@ -33,6 +33,7 @@ set (SOURCES
   Graphics/Graphics.cpp
   # Graphics/GuiSDL.cpp
   Graphics/ImgPNG.cpp
+  # Graphics/ImgJPEG.cpp
   # Lights
   Lights/Light.cpp
   Lights/Ambient.cpp
@@ -68,8 +69,9 @@ set (SOURCES
   GeometricObjects/Primitives/Sphere.cpp
   GeometricObjects/Primitives/Rectangle.cpp
   GeometricObjects/Primitives/OpenCylinder.cpp
-  GeometricObjects/Primitives/OpenCone.cpp
   GeometricObjects/Primitives/Torus.cpp
+  GeometricObjects/Primitives/OpenCone.cpp
+  # GeometricObjects/Primitives/Goursat.cpp
   GeometricObjects/Triangles/Triangle.cpp
   # Utilities
   Utilities/Constants.h

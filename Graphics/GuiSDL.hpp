@@ -16,6 +16,7 @@ public:
     virtual void init();
     virtual void display(const int x, const int y, const float r, const float g, const float b);
     virtual void render_line();
+    virtual void get_event();
     virtual void end();
 
 public:

@@ -25,16 +25,17 @@
 #include "MultipleObjects.hpp" // Tracers
 #include "RayCast.hpp"
 
-// This builds the scene for Figure 26.7
+// 26.7
 
 void World::build(void) {
-    int num_samples = 1; // for Figure 26.7(a)
+    // int num_samples = 1; // for Figure 26.7(a)
     // int num_samples = 100; // for Figure 26.7(b)
     // int num_samples = 1024; // for Figure 26.7(c)
     // int num_samples = 10000; // for Figure 26.7(d)
 
-    vp.set_hres(30);
-    vp.set_vres(30);
+    int num_samples = 16;
+    vp.set_hres(300);
+    vp.set_vres(300);
     vp.set_samples(num_samples);
     // vp.set_max_depth(10);
 
@@ -49,7 +50,6 @@ void World::build(void) {
     pinhole_ptr->set_view_distance(400);
     pinhole_ptr->compute_uvw();
     set_camera(pinhole_ptr);
-
 
     Point3D p0;
     Vector3D a, b;
@@ -76,11 +76,48 @@ void World::build(void) {
     // light_ptr->set_material(emissive_ptr);
     // add_object(light_ptr);
 
+    // p0 = Point3D(0.0, height, 0.0);
+    // a = Vector3D(0.0, 0.0, depth);
+    // b = Vector3D(width, 0.0, 0.0);
+
+
+    // items
+    // -----
+    float radius = 6;
+    Point3D center(27.64, radius, 27.96);
+    int spheres = 0;
+
+    int boxes = 1;
+
+    float ka_red = 0.6;
+    float ka_green = 0.6;
+    float ka_white = 0.6;
+
+    ka_red = ka_green = ka_white = 0.2;
+
+    int sampl = 128;
+    // tmp light
+    // ---------
+    // PointLight* light_ptr = new PointLight();
+    // // light_ptr->set_location(21.3, height - 0.001, 22.7); // for rectangle light
+    // light_ptr->set_location(27.64, height - 1.1, 27.96); // centered
+    // light_ptr->set_shadows(true);
+    // add_light(light_ptr);
+
+    // tmp ambient occluder
+    // --------------------
+    vp.set_samples(sampl);
+    MultiJittered* sampler_ptr = new MultiJittered(sampl);
+    AmbientOccluder* occluder_ptr = new AmbientOccluder();
+    occluder_ptr->scale_radiance(1.3);
+    occluder_ptr->set_min_amount(0);
+    occluder_ptr->set_sampler(sampler_ptr);
+    set_ambient_light(occluder_ptr);
 
     // left wall
 
     Matte* matte_ptr1 = new Matte;
-    matte_ptr1->set_ka(0.0);
+    matte_ptr1->set_ka(ka_red);
     matte_ptr1->set_kd(0.6);
     matte_ptr1->set_cd(0.57, 0.025, 0.025);	 // red
     // matte_ptr1->set_sampler(new MultiJittered(num_samples));
@@ -97,7 +134,7 @@ void World::build(void) {
     // right wall
 
     Matte* matte_ptr2 = new Matte;
-    matte_ptr2->set_ka(0.0);
+    matte_ptr2->set_ka(ka_green);
     matte_ptr2->set_kd(0.6);
     matte_ptr2->set_cd(0.37, 0.59, 0.2);	 // green   from Photoshop
     // matte_ptr2->set_sampler(new MultiJittered(num_samples));
@@ -114,7 +151,7 @@ void World::build(void) {
     // back wall
 
     Matte* matte_ptr3 = new Matte;
-    matte_ptr3->set_ka(0.0);
+    matte_ptr3->set_ka(ka_white);
     matte_ptr3->set_kd(0.6);
     matte_ptr3->set_cd(1.0);	 // white
     // matte_ptr3->set_sampler(new MultiJittered(num_samples));
@@ -149,6 +186,16 @@ void World::build(void) {
     ceiling_ptr->set_material(matte_ptr3);
     add_object(ceiling_ptr);
 
+
+    // spheres
+    if (spheres) {
+        Sphere* sphere_ptr = new Sphere(center, radius);
+        sphere_ptr->set_material(matte_ptr3);
+        add_object(sphere_ptr);
+    }
+
+    // boxes
+    if (boxes) {
 
     // the two boxes defined as 5 rectangles each
 
@@ -252,4 +299,5 @@ void World::build(void) {
     Rectangle* tall_side_ptr4 = new Rectangle(p0, a, b);
     tall_side_ptr4->set_material(matte_ptr3);
     add_object(tall_side_ptr4);
+    }
 }

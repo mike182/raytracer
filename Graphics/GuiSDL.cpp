@@ -59,6 +59,11 @@ void GuiSDL::render_line() {
     SDL_RenderPresent(renderer_ptr);
 }
 
+void GuiSDL::get_event() {
+    if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
+        exit(EXIT_FAILURE);
+}
+
 void GuiSDL::end() {
     while (true) {
         if (SDL_PollEvent(&event) && event.type == SDL_QUIT)

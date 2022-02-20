@@ -47,7 +47,6 @@ void Pinhole::render_scene(const World& w) {
     int depth = 0;
     Point2D sp;
     Point2D pp;
-    // SDL_Event event;
 
     vp.s /= zoom;
     ray.o = eye;
@@ -60,9 +59,7 @@ void Pinhole::render_scene(const World& w) {
     //         ray.d = ray_direction(pp);
     //         L = w.tracer_ptr->trace_ray(ray, depth);
     //         w.display_pixel(r, c, L);
-    //         // if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-    //             // exit(EXIT_FAILURE);
-    //     }
+    //gfx_ptr->get_event();
     //     w.gfx_ptr->render_line();
     // }
 
