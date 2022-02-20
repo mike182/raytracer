@@ -7,6 +7,7 @@ class Disk : public GeometricObject {
 public:
     Disk(void);
     Disk(const Point3D& center, const double radius, const Normal& normal);
+    Disk(const Point3D& center, const Normal& normal, const double radius);
     Disk(const Disk& plane);
     virtual Disk* clone(void) const;
     virtual ~Disk(void);

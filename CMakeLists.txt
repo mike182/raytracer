@@ -71,8 +71,12 @@ set (SOURCES
   GeometricObjects/Primitives/OpenCylinder.cpp
   GeometricObjects/Primitives/Torus.cpp
   GeometricObjects/Primitives/OpenCone.cpp
+  GeometricObjects/Primitives/Disk.cpp
   # GeometricObjects/Primitives/Goursat.cpp
   GeometricObjects/Triangles/Triangle.cpp
+  GeometricObjects/PartObjects/ConvexPartSphere.cpp
+  GeometricObjects/CompoundObjects/Compound.cpp
+  GeometricObjects/CompoundObjects/SolidCylinder.cpp
   # Utilities
   Utilities/Constants.h
   Utilities/RGBColor.cpp
@@ -84,12 +88,13 @@ set (SOURCES
   Utilities/Normal.cpp
   Utilities/Maths.cpp
   Utilities/Matrix.cpp
-  Utilities/Image.cpp
+  # Utilities/Image.cpp
   )
 
 set (SOURCES_SCENES
     # Custom
-    Scenes/BuildTest.cpp
+    # Scenes/BuildTest.cpp
+    Scenes/GeometricObjects.cpp
     # Scenes/000.cpp # single sphere
     # Scenes/001.cpp
     # Scenes/002.cpp
@@ -113,6 +118,8 @@ include_directories (
   GeometricObjects/
   GeometricObjects/Primitives/
   GeometricObjects/Triangles/
+  GeometricObjects/PartObjects/
+  GeometricObjects/CompoundObjects/
   Lights/
   Materials/
   Samplers/

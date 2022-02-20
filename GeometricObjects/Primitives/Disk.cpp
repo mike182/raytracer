@@ -11,6 +11,15 @@ Disk::Disk(void)
 {
 }
 
+Disk::Disk(const Point3D& c, const Normal& n, const double r)
+    : GeometricObject(),
+    center(c),
+    radius(r),
+    normal(n)
+{
+    normal.normalize();
+}
+
 Disk::Disk(const Point3D& c, const double r, const Normal& n)
     : GeometricObject(),
     center(c),

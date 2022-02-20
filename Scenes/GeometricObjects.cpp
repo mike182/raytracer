@@ -13,6 +13,7 @@
 #include "Rectangle.hpp"
 #include "Triangle.hpp"
 #include "OpenCone.hpp"
+#include "SolidCylinder.hpp"
 #include "Ambient.hpp" // Lights
 #include "Directional.hpp"
 #include "PointLight.hpp"
@@ -122,16 +123,33 @@ void World::build(void) {
 
     // cylinder
 
-    OpenCylinder* cylinder_ptr = new OpenCylinder(0, 6, 1.75);
-    // cylinder_ptr->set_material(phong_ptr2);
-    cylinder_ptr->set_material(matte_ptr3);
+    // OpenCylinder* cylinder_ptr = new OpenCylinder(0, 6, 1.75);
+    // // cylinder_ptr->set_material(phong_ptr2);
+    // cylinder_ptr->set_material(matte_ptr3);
+    // add_object(cylinder_ptr);
+
+
+    Matte* matte_ptr45 = new Matte;
+    matte_ptr45->set_cd(0.2, 1, 0.4); // yellow
+    matte_ptr45->set_ka(0.3);
+    matte_ptr45->set_kd(0.6);
+    // solid cylinder
+    // the following values for bottom, top, and radius can also be the default values
+    // by setting them in the SolidCylinder default constructor
+    float bottom = 0.0;
+    float top = 6.0;
+    float radius = 1.75;
+    SolidCylinder* cylinder_ptr = new SolidCylinder(bottom, top, radius);
+    cylinder_ptr->set_material(matte_ptr45);
     add_object(cylinder_ptr);
+
+
 
     // cone
 
-    Instance* cone_ptr = new Instance(new OpenCone(4, 3));
-    // cone_ptr->set_material(phong_ptr2);
-    cone_ptr->set_material(matte_ptr4);
+    Instance* cone_ptr = new Instance(new OpenCone(5, 2));
+    cone_ptr->set_material(phong_ptr2);
+    // cone_ptr->set_material(matte_ptr4);
     cone_ptr->translate(7, 0, 5);
     add_object(cone_ptr);
 

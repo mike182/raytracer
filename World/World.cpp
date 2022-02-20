@@ -1,12 +1,13 @@
 #include "World.hpp"
 // Tracers
-#include "MultipleObjects.hpp"
 #include "RayCast.hpp"
 // Cameras
 #include "Orthographic.hpp"
 #include "Pinhole.hpp"
 // Lights
 #include "Light.hpp"
+// Objects
+#include "Compound.hpp"
 // Materials
 #include "Matte.hpp"
 // Utilities
@@ -193,12 +194,16 @@ int World::build_info() const {
         std::cout << "ok" << std::endl;
         // check Materials
         std::cout << "World: materials: ";
-        for (int i = 0; i < num_objects; i++)
+        for (int i = 0; i < num_objects; i++) {
             // if (typeid(*tracer_ptr) == typeid(RayCast))
-            if (objects[i]->get_material() == nullptr) {
-                std::cout << RED << "mat from objects[" << i+1 << "] is null " << std::endl;
-                return EXIT_FAILURE;
-            }
+            if (typeid(objects) == typeid(Compound))
+                continue; // skip check for Compoung Objects for now
+            if (typeid(objects) == typeid(GeometricObject))
+                if (objects[i]->get_material() == nullptr) {
+                    std::cout << RED << "mat from (GeometricObject) objects[" << i+1 << "] is null " << std::endl;
+                    return EXIT_FAILURE;
+                }
+        }
         std::cout << "ok" << std::endl;
     }
 
