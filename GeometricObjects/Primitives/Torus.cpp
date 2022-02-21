@@ -7,24 +7,24 @@ const double Torus::kEpsilon = 0.001;
 Torus::Torus (void)
     : GeometricObject(),
     a(2.0),
-    b(0.5) // 1 default
-    // bbox(-a - b, a + b, -b, b, -a - b, a + b)
+    b(0.5),// 1 default
+    bbox(-a - b, a + b, -b, b, -a - b, a + b)
 {
 }
 
 Torus::Torus (const double _a, const double _b)
     : GeometricObject(),
     a(_a),
-    b(_b)
-    // bbox(-a - b, a + b, -b, b, -a - b, a + b)
+    b(_b),
+    bbox(-a - b, a + b, -b, b, -a - b, a + b)
 {
 }
 
 Torus::Torus (const Torus& torus)
     : GeometricObject(torus),
     a(torus.a),
-    b(torus.b)
-    // bbox(torus.bbox)
+    b(torus.b),
+    bbox(torus.bbox)
 {
 }
 
@@ -41,13 +41,13 @@ Torus& Torus::operator=(Torus& rhs) {
     GeometricObject::operator=(rhs);
     a = rhs.a;
     b = rhs.b;
-    // bbox = rhs.bbox;
+    bbox = rhs.bbox;
     return *this;
 }
 
 bool Torus::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
-    // if (!bbox.hit(ray))
-        // return (false);
+    if (!bbox.hit(ray))
+        return (false);
 
     double x1 = ray.o.x; double y1 = ray.o.y; double z1 = ray.o.z;
     double d1 = ray.d.x; double d2 = ray.d.y; double d3 = ray.d.z;
@@ -97,8 +97,8 @@ bool Torus::shadow_hit(const Ray& ray, float& tmin) const {
     if (!shadows)
         return false;
 
-    // if (!bbox.hit(ray))
-    //     return (false);
+    if (!bbox.hit(ray))
+        return (false);
 
     double x1 = ray.o.x; double y1 = ray.o.y; double z1 = ray.o.z;
     double d1 = ray.d.x; double d2 = ray.d.y; double d3 = ray.d.z;

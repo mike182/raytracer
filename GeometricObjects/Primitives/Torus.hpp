@@ -2,6 +2,7 @@
 #define __TORUS_HPP__
 
 #include "GeometricObject.hpp"
+#include "BBox.hpp"
 
 class Torus: public GeometricObject {
 public:
@@ -20,7 +21,7 @@ public:
 private:
     double a; // swept radius
     double b; // tube radius
-    // BBox bbox; // the bounding box
+    BBox bbox; // the bounding box
 
 private:
     static const double kEpsilon;
