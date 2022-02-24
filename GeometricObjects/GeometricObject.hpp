@@ -2,7 +2,7 @@
 #define __GEOMETRICOBJECT_HPP__
 
 #include "Constants.h"
-// #include "BBox.h"
+#include "BBox.hpp"
 #include "RGBColor.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
@@ -29,14 +29,15 @@ public:
     virtual bool shadow_hit(const Ray& ray, float& tmin) const;
 
     // virtual void set_bounding_box(void);
-    // virtual BBox get_bounding_box(void);
+    virtual BBox get_bounding_box(void);
     virtual void add_object(GeometricObject* object_ptr);
 
     virtual Point3D sample(void);
     virtual float pdf(ShadeRec& sr);
 
     virtual Normal get_normal(void) const;
-    virtual Normal get_normal(const Point3D& p);
+    virtual Normal get_normal(const Point3D& p) const;
+    virtual Normal get_normal(const int face_hit) const;
 
 protected:
     mutable Material* material_ptr;

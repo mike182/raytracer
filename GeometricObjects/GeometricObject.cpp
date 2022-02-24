@@ -5,8 +5,8 @@
 GeometricObject::GeometricObject(void)
     : material_ptr(nullptr),
     shadows(true)
- {
- }
+{
+}
 
 GeometricObject::GeometricObject(const GeometricObject& obj)
     : material_ptr(nullptr),
@@ -49,9 +49,9 @@ bool GeometricObject::shadow_hit([[maybe_unused]]const Ray& ray, [[maybe_unused]
 // void GeometricObject::set_bounding_box (void) {
 // }
 
-// BBox GeometricObject::get_bounding_box (void) {
-    // return BBox();
-// }
+BBox GeometricObject::get_bounding_box (void) {
+    return BBox();
+}
 
 void GeometricObject::add_object([[maybe_unused]] GeometricObject* object_ptr) {
 }
@@ -68,6 +68,10 @@ Normal GeometricObject::get_normal(void) const {
     return Normal();
 }
 
-Normal GeometricObject::get_normal([[maybe_unused]] const Point3D& p) {
+Normal GeometricObject::get_normal([[maybe_unused]] const Point3D& p) const {
+    return Normal();
+}
+
+Normal GeometricObject::get_normal([[maybe_unused]] const int face_hit) const {
     return Normal();
 }

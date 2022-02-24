@@ -166,7 +166,7 @@ PlyFile *ply_write(
   for (i = 0; i < nelems; i++) {
     elem = (PlyElement *) myalloc (sizeof (PlyElement));
     plyfile->elems[i] = elem;
-    elem->name = (char* )strdup (elem_names[i]);         /* added (char* ) cast 3/2/2005 */
+    elem->name = strdup (elem_names[i]);
     elem->num = 0;
     elem->nprops = 0;
   }
@@ -538,7 +538,7 @@ void ply_put_element(PlyFile *plyfile, void *elem_ptr)
   char **other_ptr;
 
   elem = plyfile->which_elem;
-  elem_data = (char* )elem_ptr;   // explicit cast to char* added 4/2/2005
+  elem_data = elem_ptr;
   other_ptr = (char **) (((char *) elem_ptr) + elem->other_offset);
 
   /* write out either to an ascii or binary file */
@@ -553,7 +553,7 @@ void ply_put_element(PlyFile *plyfile, void *elem_ptr)
       if (elem->store_prop[j] == OTHER_PROP)
         elem_data = *other_ptr;
       else
-        elem_data = (char* )elem_ptr; // explicit cast to char* added 4/2/2005
+        elem_data = elem_ptr;
       if (prop->is_list) {
         item = elem_data + prop->count_offset;
         get_stored_item ((void *) item, prop->count_internal,
@@ -593,7 +593,7 @@ void ply_put_element(PlyFile *plyfile, void *elem_ptr)
       if (elem->store_prop[j] == OTHER_PROP)
         elem_data = *other_ptr;
       else
-        elem_data = (char* )elem_ptr;   // explicit cast to char* added 4/2/2005
+        elem_data = elem_ptr;
       if (prop->is_list) {
         item = elem_data + prop->count_offset;
         item_size = ply_type_size[prop->count_internal];
@@ -645,7 +645,7 @@ void ply_put_comment(PlyFile *plyfile, char *comment)
                          sizeof (char *) * (plyfile->num_comments + 1));
 
   /* add comment to list */
-  plyfile->comments[plyfile->num_comments] = (char* )strdup (comment);   /* added (char* ) cast 3/2/2005 */
+  plyfile->comments[plyfile->num_comments] = strdup (comment);
   plyfile->num_comments++;
 }
 
@@ -669,7 +669,7 @@ void ply_put_obj_info(PlyFile *plyfile, char *obj_info)
                          sizeof (char *) * (plyfile->num_obj_info + 1));
 
   /* add info to list */
-  plyfile->obj_info[plyfile->num_obj_info] = (char* )strdup (obj_info);  /* added (char* ) cast 3/2/2005 */
+  plyfile->obj_info[plyfile->num_obj_info] = strdup (obj_info);
   plyfile->num_obj_info++;
 }
 
@@ -711,6 +711,7 @@ PlyFile *ply_read(FILE *fp, int *nelems, char ***elem_names)
   /* check for NULL file pointer */
   if (fp == NULL)
   {
+      printf("File is null\n");
       // std::cout << "File is null" << std::endl;
       // while(!Button());
       // ExitToShell();
@@ -785,8 +786,7 @@ PlyFile *ply_read(FILE *fp, int *nelems, char ***elem_names)
 
   elist = (char **) myalloc (sizeof (char *) * plyfile->nelems);
   for (i = 0; i < plyfile->nelems; i++)
-//    elist[i] = (char* )strdup (plyfile->elems[i]->name);   /* added (char* ) cast 3/2/2005 */
-    elist[i] = strdup (plyfile->elems[i]->name);   /* added (char* ) cast 3/2/2005 */
+    elist[i] = strdup (plyfile->elems[i]->name);
 
   *elem_names = elist;
   *nelems = plyfile->nelems;
@@ -1161,7 +1161,7 @@ PlyOtherProp *ply_get_other_properties(
 
   /* create structure for describing other_props */
   other = (PlyOtherProp *) myalloc (sizeof (PlyOtherProp));
-  other->name = (char* )strdup (elem_name);    /* added (char* ) cast 3/2/2005 */
+  other->name = strdup (elem_name);
 #if 0
   if (elem->other_offset == NO_OTHER_PROPS) {
     other->size = 0;
@@ -1261,7 +1261,7 @@ PlyOtherElems *ply_get_other_element (
   other->elem_count = elem_count;
 
   /* save name of element */
-  other->elem_name = (char* ) strdup (elem_name);  /* added (char* ) cast 3/2/2005 */
+  other->elem_name = strdup (elem_name);
 
   /* create a list to hold all the current elements */
   other->other_data = (OtherData **)
@@ -2356,7 +2356,7 @@ void add_element (PlyFile *plyfile, char **words, int nwords)
 
   /* create the new element */
   elem = (PlyElement *) myalloc (sizeof (PlyElement));
-  elem->name = (char* ) strdup (words[1]);  /* added (char* ) cast 3/2/2005 */
+  elem->name = strdup (words[1]);
   elem->num = atoi (words[2]);
   elem->nprops = 0;
 
@@ -2419,12 +2419,12 @@ void add_property (PlyFile *plyfile, char **words, int nwords)
   if (equal_strings (words[1], "list")) {       /* is a list */
     prop->count_external = get_prop_type (words[2]);
     prop->external_type = get_prop_type (words[3]);
-    prop->name = (char* ) strdup (words[4]);  /* added (char* ) cast 3/2/2005 */
+    prop->name = strdup (words[4]);
     prop->is_list = 1;
   }
   else {                                        /* not a list */
     prop->external_type = get_prop_type (words[1]);
-    prop->name = (char* ) strdup (words[2]);  /* added (char* ) cast 3/2/2005 */
+    prop->name = strdup (words[2]);
     prop->is_list = 0;
   }
 
@@ -2491,7 +2491,8 @@ Copy a property.
 
 void copy_property(PlyProperty *dest, PlyProperty *src)
 {
-  dest->name = (char* ) strdup (src->name);
+  // dest->name = (char* ) strdup (src->name);
+  dest->name = strdup (src->name);
   dest->external_type = src->external_type;
   dest->internal_type = src->internal_type;
   dest->offset = src->offset;

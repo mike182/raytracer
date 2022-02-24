@@ -16,8 +16,8 @@ public:
 
     void set_object(GeometricObject* obj_ptr);
     void transform_texture(const bool transform);
-    // virtual void compute_bounding_box(void);
-    // virtual BBox get_bounding_box(void);
+    virtual void compute_bounding_box(void);
+    virtual BBox get_bounding_box(void);
     virtual Material* get_material(void) const;
     virtual void set_material(Material* materialPtr);
     virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
@@ -36,7 +36,7 @@ private:
     GeometricObject* object_ptr; // object to be transformed
     Matrix inv_matrix; // inverse transformation matrix
     static Matrix forward_matrix; // transformation matrix
-    // BBox bbox; // transformed object's bounding box
+    BBox bbox; // transformed object's bounding box
     bool transform_the_texture; // do we transform the texture?
 };
 
