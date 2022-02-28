@@ -72,9 +72,10 @@ bool OpenCone::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
             if (yhit >= 0.0 && yhit <= y) {
                 tmin = t;
                 // sr.normal = Normal(ox + t * dx, oy + t * dy, oz + t * dz);
+                // sr.normal = Normal(ox + t * dx, -(oy + t * dy), oz + t * dz);
                 sr.normal = Normal(ox + t * dx, 0, oz + t * dz);
                 // sr.normal = Normal(y / r * (ox + t * dx), oy + t * dy - y, y / r *(oz + t * dz));
-                // sr.normal.normalize();
+                sr.normal.normalize();
                 // test for hitting from inside
                 // if (-ray.d * sr.normal < 0.0)
                     // sr.normal = -sr.normal;
@@ -91,9 +92,12 @@ bool OpenCone::hit(const Ray& ray, double& tmin, ShadeRec& sr) const {
             if (yhit >= 0.0 && yhit <= y) {
                 tmin = t;
                 // sr.normal = Normal(ox + t * dx, oy + t * dy, oz + t * dz);
+                // sr.normal = Normal(ox + t * dx, -(oy + t * dy), oz + t * dz);
                 sr.normal = Normal(ox + t * dx, 0, oz + t * dz);
                 // sr.normal = Normal(y / r * (ox + t * dx), oy + t * dy - y, y / r *(oz + t * dz));
-                // sr.normal.normalize();
+                //
+                // sr.normal = Normal(y / r * (ox + t * dx), -(oy + t * dy - y), y / r * (oz + t * dz));
+                sr.normal.normalize();
                 // test for hitting inside surface
                 // if (-ray.d * sr.normal < 0.0)
                     // sr.normal = -sr.normal;

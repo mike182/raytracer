@@ -34,8 +34,16 @@ GeometricObjects:
     - Torus
     - Rectangle
     - OpenCone
++ CompoundObjects:
+    - Grid
+    - Box
+    - SolidCylinder
 + Triangles:
     - Triangle
+    - SmoothTriangle
+    - Mesh
+    - FlatMeshTriangle
+    - SmoothMeshTriangle
 + Translations
 + Rotations
 + Shadows

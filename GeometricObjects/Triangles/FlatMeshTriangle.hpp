@@ -10,8 +10,8 @@ class FlatMeshTriangle: public MeshTriangle {
 public:
     FlatMeshTriangle(void);
     FlatMeshTriangle(Mesh* _meshPtr, const int i0, const int i1, const int i2);
-    virtual FlatMeshTriangle* clone(void) const;
     FlatMeshTriangle(const FlatMeshTriangle& fmt);
+    virtual FlatMeshTriangle* clone(void) const;
     virtual ~FlatMeshTriangle(void);
 
     FlatMeshTriangle& operator=(const FlatMeshTriangle& rhs);

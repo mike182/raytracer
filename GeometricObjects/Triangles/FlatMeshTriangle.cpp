@@ -6,13 +6,13 @@ FlatMeshTriangle::FlatMeshTriangle(void)
 {
 }
 
-FlatMeshTriangle::FlatMeshTriangle (Mesh* _mesh_ptr, const int i0, const int i1, const int i2)
-    : MeshTriangle(_mesh_ptr, i0, i1, i2)
+FlatMeshTriangle::FlatMeshTriangle(Mesh* m_ptr, const int i0, const int i1, const int i2)
+    : MeshTriangle(m_ptr, i0, i1, i2)
 {
 }
 
 FlatMeshTriangle::FlatMeshTriangle(const FlatMeshTriangle& fmt)
-    :MeshTriangle(fmt)
+    : MeshTriangle(fmt)
 {
 }
 
@@ -26,7 +26,7 @@ FlatMeshTriangle::~FlatMeshTriangle(void) {
 FlatMeshTriangle& FlatMeshTriangle::operator=(const FlatMeshTriangle& rhs) {
     if (this == &rhs)
         return *this;
-    MeshTriangle::operator= (rhs);
+    MeshTriangle::operator=(rhs);
     return *this;
 }
 

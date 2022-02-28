@@ -11,13 +11,13 @@ SmoothMeshTriangle::SmoothMeshTriangle(Mesh* m_ptr, const int i0, const int i1, 
 {
 }
 
-SmoothMeshTriangle* SmoothMeshTriangle::clone(void) const {
-    return new SmoothMeshTriangle (*this);
+SmoothMeshTriangle::SmoothMeshTriangle(const SmoothMeshTriangle& fmt)
+    : MeshTriangle(fmt)
+{
 }
 
-SmoothMeshTriangle::SmoothMeshTriangle(const SmoothMeshTriangle& fmt)
-    :MeshTriangle(fmt)
-{
+SmoothMeshTriangle* SmoothMeshTriangle::clone(void) const {
+    return new SmoothMeshTriangle (*this);
 }
 
 SmoothMeshTriangle::~SmoothMeshTriangle(void) {

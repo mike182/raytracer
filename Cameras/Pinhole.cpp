@@ -77,8 +77,6 @@ void Pinhole::render_scene(const World& w) {
             L /= vp.num_samples;
             L *= exposure_time;
             w.display_pixel(r, c, L);
-            // if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-                // exit(EXIT_FAILURE);
         }
         w.gfx_ptr->render_line();
     }
