@@ -24,6 +24,10 @@ public:
     bool cast_shadows() const;
     virtual bool in_shadow(const Ray& ray, const ShadeRec& sr) const;
 
+    // Emissive Light
+    virtual float G(const ShadeRec & sr) const;
+    virtual float pdf(const ShadeRec & sr) const;
+
 protected:
     bool shadows;
 };
@@ -34,6 +38,16 @@ inline void Light::set_shadows(const bool sh) {
 
 inline bool Light::cast_shadows() const {
     return shadows;
+}
+
+// Emissive Light
+inline float Light::G([[maybe_unused]]const ShadeRec & sr) const {
+    return 1.0;
+}
+
+// Emissive Light
+inline float Light::pdf([[maybe_unused]]const ShadeRec & sr) const {
+    return 1.0;
 }
 
 #endif // __LIGHT_HPP__

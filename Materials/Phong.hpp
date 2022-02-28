@@ -15,6 +15,7 @@ public:
     Phong& operator=(const Phong& rhs);
 
     virtual RGBColor shade(ShadeRec& sr);
+    virtual RGBColor area_light_shade(ShadeRec& sr);
 
     void set_ka(const float k);
     void set_kd(const float k);
