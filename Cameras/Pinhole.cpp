@@ -80,5 +80,5 @@ void Pinhole::render_scene(const World& w) {
         }
         w.gfx_ptr->render_line();
     }
-    w.gfx_ptr->end();
+    // w.gfx_ptr->end();
 }

@@ -16,6 +16,7 @@ public:
     virtual void init();
     virtual void display(int x, int y, float r, float g, float b);
     virtual void render_line();
+    virtual void get_event();
     virtual void end();
 
     void set_resolution(int w, int h);

@@ -75,6 +75,7 @@ void World::display_pixel(const int row, [[maybe_unused]] const int column, cons
    // paintArea->setPixel(x, y, (int)(mapped_color.r * 255),
                              // (int)(mapped_color.g * 255),
                              // (int)(mapped_color.b * 255));
+    gfx_ptr->get_event();
     gfx_ptr->display(x, y,
                      (int)(mapped_color.r * 255),
                      (int)(mapped_color.g * 255),
