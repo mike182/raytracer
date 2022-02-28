@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.19)
 
 project(raytracer)
 
@@ -9,11 +9,17 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g3")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# find_package(SDL2 REQUIRED)
-# include_directories(${SDL2_INCLUDE_DIRS})
+find_package(SDL2 REQUIRED)
+# find_package(SDL2)
+include_directories(${SDL2_INCLUDE_DIRS})
 
 find_package(PNG REQUIRED)
-# find_package(JPEG REQUIRED)
+# find_package(PNG)
+find_package(JPEG REQUIRED)
+# find_package(JPEG)
+
+find_package(OpenMP REQUIRED)
+# find_package(OpenMP)
 
 set (SOURCES
   main.cpp
@@ -23,17 +29,17 @@ set (SOURCES
   #BRDFs
   BRDFs/BRDF.cpp
   BRDFs/Lambertian.cpp
-  BRDFs/SV_Lambertian.cpp
   BRDFs/GlossySpecular.cpp
+  BRDFs/SV_Lambertian.cpp
   # Cameras
   Cameras/Camera.cpp
   Cameras/Orthographic.cpp
   Cameras/Pinhole.cpp
   # Graphics
   Graphics/Graphics.cpp
-  # Graphics/GuiSDL.cpp
+  Graphics/GuiSDL.cpp
   Graphics/ImgPNG.cpp
-  # Graphics/ImgJPEG.cpp
+  # Graphics/ImgJPEG.cpp # WIP
   # Lights
   Lights/Light.cpp
   Lights/Ambient.cpp
@@ -43,8 +49,8 @@ set (SOURCES
   # Materials
   Materials/Material.cpp
   Materials/Matte.cpp
-  Materials/SV_Matte.cpp
   Materials/Phong.cpp
+  Materials/SV_Matte.cpp
   # Samplers
   Samplers/Sampler.cpp
   Samplers/Regular.cpp
@@ -59,8 +65,6 @@ set (SOURCES
   Textures/Checker3D.cpp
   # Tracers
   Tracers/Tracer.cpp
-  # Tracers/SingleSphere.cpp # old
-  Tracers/MultipleObjects.cpp
   Tracers/RayCast.cpp
   # Objects
   GeometricObjects/GeometricObject.cpp
@@ -72,13 +76,19 @@ set (SOURCES
   GeometricObjects/Primitives/Torus.cpp
   GeometricObjects/Primitives/OpenCone.cpp
   GeometricObjects/Primitives/Disk.cpp
-  # GeometricObjects/Primitives/Goursat.cpp
+  GeometricObjects/Primitives/Box.cpp
+  # GeometricObjects/Primitives/Goursat.cpp # WIP
   GeometricObjects/Triangles/Triangle.cpp
+  GeometricObjects/Triangles/SmoothTriangle.cpp
+  GeometricObjects/Triangles/MeshTriangle.cpp
+  GeometricObjects/Triangles/FlatMeshTriangle.cpp
+  GeometricObjects/Triangles/SmoothMeshTriangle.cpp
   GeometricObjects/PartObjects/ConvexPartSphere.cpp
   GeometricObjects/CompoundObjects/Compound.cpp
+  GeometricObjects/CompoundObjects/Grid.cpp
   GeometricObjects/CompoundObjects/SolidCylinder.cpp
   # Utilities
-  Utilities/Constants.h
+  Utilities/BBox.cpp
   Utilities/RGBColor.cpp
   Utilities/ShadeRec.cpp
   Utilities/Ray.cpp
@@ -88,13 +98,14 @@ set (SOURCES
   Utilities/Normal.cpp
   Utilities/Maths.cpp
   Utilities/Matrix.cpp
-  # Utilities/Image.cpp
+  Utilities/Mesh.cpp
+  Utilities/ply.c
   )
 
 set (SOURCES_SCENES
     # Custom
     # Scenes/BuildTest.cpp
-    Scenes/GeometricObjects.cpp
+    # Scenes/GeometricObjects.cpp
     # Scenes/000.cpp # single sphere
     # Scenes/001.cpp
     # Scenes/002.cpp
@@ -108,6 +119,9 @@ set (SOURCES_SCENES
     # Chapter 04
     # Scenes/BuildFigure04.04.cpp # AA low res
     # Scenes/BuildFigure04.08.cpp # Checker3D plane
+
+    Scenes/BuildFigure23.07.cpp # Two Flat Triangles
+
     )
 
 include_directories (
@@ -140,5 +154,13 @@ add_custom_target(
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES} ${SOURCES_SCENES})
 
-target_link_libraries(${EXECUTABLE_NAME} ${SDL2_LIBRARIES} ${PNG_LIBRARY} ${JPEG_LIBRARY})
+# SDL2
+# target_link_libraries(MyProject SDL2::Main SDL2::Net SDL2::Mixer SDL2::Image SDL2::TTF SDL2::GFX)
+
+# target_link_libraries(${EXECUTABLE_NAME} PUBLIC OpenMP::OpenMP_CXX ${SDL2_LIBRARIES} ${PNG_LIBRARY} ${JPEG_LIBRARY})
+target_link_libraries(${EXECUTABLE_NAME}
+    PUBLIC OpenMP::OpenMP_CXX
+    PUBLIC SDL2::SDL2
+    PUBLIC PNG::PNG
+    PUBLIC JPEG::JPEG)
 
