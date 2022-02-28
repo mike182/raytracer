@@ -17,11 +17,11 @@ public:
     Grid& operator= (const Grid& rhs);
 
     virtual BBox get_bounding_box(void);
+    virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
     void read_flat_triangles(char* file_name);
     void read_smooth_triangles(char* file_name);
     void tessellate_flat_sphere(const int horizontal_steps, const int vertical_steps);
-    // void tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps);
-    virtual bool hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
+    void tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps);
     void setup_cells(void);
     void reverse_mesh_normals(void);
     void store_material(Material* material, const int index);

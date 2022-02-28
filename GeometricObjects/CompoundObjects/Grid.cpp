@@ -5,11 +5,11 @@
 #include "Point3D.hpp"
 #include "MeshTriangle.hpp"
 #include "FlatMeshTriangle.hpp"
-// #include "SmoothMeshTriangle.hpp"
+#include "SmoothMeshTriangle.hpp"
 // #include "FlatUVMeshTriangle.hpp"
 // #include "SmoothUVMeshTriangle.hpp"
 #include "Triangle.hpp"
-// #include "SmoothTriangle.hpp"
+#include "SmoothTriangle.hpp"
 #include "ply.h"
 #include <iostream>
 #include <vector>
@@ -387,7 +387,7 @@ void Grid::read_ply_file(char* file_name, const int triangle_type) {
 
             // grab all the face elements
 
-            // int count = 0; // the number of faces read
+            int count = 0; // the number of faces read
 
             for (j = 0; j < num_elems; j++) {
                 // grab an element from the file
@@ -404,19 +404,19 @@ void Grid::read_ply_file(char* file_name, const int triangle_type) {
                     objects.push_back(triangle_ptr);
                 }
 
-                // if (triangle_type == smooth) {
-                //     SmoothMeshTriangle* triangle_ptr = new SmoothMeshTriangle(mesh_ptr, face_ptr->verts[0], face_ptr->verts[1], face_ptr->verts[2]);
-                //     triangle_ptr->compute_normal(reverse_normal); // the "flat triangle" normal is used to compute the average normal at each mesh vertex
-                //     objects.push_back(triangle_ptr); // it's quicker to do it once here, than have to do it on average 6 times in compute_mesh_normals
+                if (triangle_type == smooth) {
+                    SmoothMeshTriangle* triangle_ptr = new SmoothMeshTriangle(mesh_ptr, face_ptr->verts[0], face_ptr->verts[1], face_ptr->verts[2]);
+                    triangle_ptr->compute_normal(reverse_normal); // the "flat triangle" normal is used to compute the average normal at each mesh vertex
+                    objects.push_back(triangle_ptr); // it's quicker to do it once here, than have to do it on average 6 times in compute_mesh_normals
 
-                //     // the following code stores a list of all faces that share a vertex
-                //     // it's used for computing the average normal at each vertex in order(num_vertices) time
+                    // the following code stores a list of all faces that share a vertex
+                    // it's used for computing the average normal at each vertex in order(num_vertices) time
 
-                //     mesh_ptr->vertex_faces[face_ptr->verts[0]].push_back(count);
-                //     mesh_ptr->vertex_faces[face_ptr->verts[1]].push_back(count);
-                //     mesh_ptr->vertex_faces[face_ptr->verts[2]].push_back(count);
-                //     count++;
-                // }
+                    mesh_ptr->vertex_faces[face_ptr->verts[0]].push_back(count);
+                    mesh_ptr->vertex_faces[face_ptr->verts[1]].push_back(count);
+                    mesh_ptr->vertex_faces[face_ptr->verts[2]].push_back(count);
+                    count++;
+                }
             }
 
             if (triangle_type == flat)
@@ -579,110 +579,110 @@ void Grid::tessellate_flat_sphere(const int horizontal_steps, const int vertical
 }
 
 // tesselate a unit sphere into smooth triangles that are stored directly in the grid
-// void Grid::tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps) {
-//     double pi = 3.1415926535897932384;
+void Grid::tessellate_smooth_sphere(const int horizontal_steps, const int vertical_steps) {
+    double pi = 3.1415926535897932384;
 
-//     // define the top triangles
+    // define the top triangles
 
-//     int k = 1;
+    int k = 1;
 
-//     for (int j = 0; j <= horizontal_steps - 1; j++) {
-//         // define vertices
+    for (int j = 0; j <= horizontal_steps - 1; j++) {
+        // define vertices
 
-//         Point3D v0(0, 1, 0); // top
+        Point3D v0(0, 1, 0); // top
 
-//         Point3D v1(sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // bottom left
-//                    cos(pi * k / vertical_steps),
-//                    cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
+        Point3D v1(sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // bottom left
+                   cos(pi * k / vertical_steps),
+                   cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
 
-//         Point3D v2(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), // bottom  right
-//                    cos(pi * k / vertical_steps),
-//                    cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps));
+        Point3D v2(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), // bottom  right
+                   cos(pi * k / vertical_steps),
+                   cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps));
 
-//         SmoothTriangle* triangle_ptr = new SmoothTriangle(v0, v1, v2);
-//         triangle_ptr->n0 = v0;
-//         triangle_ptr->n1 = v1;
-//         triangle_ptr->n2 = v2;
-//         objects.push_back(triangle_ptr);
-//     }
-
-
-//     // define the bottom triangles
-
-//     k = vertical_steps - 1;
-
-//     for (int j = 0; j <= horizontal_steps - 1; j++) {
-//         // define vertices
-
-//         Point3D v0(sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // top left
-//                    cos(pi * k / vertical_steps),
-//                    cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
-
-//         Point3D v1(0, -1, 0); // bottom
-
-//         Point3D v2(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), // top right
-//                    cos(pi * k / vertical_steps),
-//                    cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps));
-
-//         SmoothTriangle* triangle_ptr = new SmoothTriangle(v0, v1, v2);
-//         triangle_ptr->n0 = v0;
-//         triangle_ptr->n1 = v1;
-//         triangle_ptr->n2 = v2;
-//         objects.push_back(triangle_ptr);
-//     }
+        SmoothTriangle* triangle_ptr = new SmoothTriangle(v0, v1, v2);
+        triangle_ptr->n0 = v0;
+        triangle_ptr->n1 = v1;
+        triangle_ptr->n2 = v2;
+        objects.push_back(triangle_ptr);
+    }
 
 
-//     //  define the other triangles
+    // define the bottom triangles
 
-//     for (int k = 1; k <= vertical_steps - 2; k++) {
-//         for (int j = 0; j <= horizontal_steps - 1; j++) {
-//             // define the first triangle
+    k = vertical_steps - 1;
 
-//             // vertices
+    for (int j = 0; j <= horizontal_steps - 1; j++) {
+        // define vertices
 
-//             Point3D v0(sin(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), // bottom left, use k + 1, j
-//                        cos(pi * (k + 1) / vertical_steps),
-//                        cos(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps));
+        Point3D v0(sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // top left
+                   cos(pi * k / vertical_steps),
+                   cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
 
-//             Point3D v1(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), // bottom  right, use k + 1, j + 1
-//                        cos(pi * (k + 1) / vertical_steps),
-//                        cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps));
+        Point3D v1(0, -1, 0); // bottom
 
-//             Point3D v2(sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // top left, use k, j
-//                        cos(pi * k / vertical_steps),
-//                        cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
+        Point3D v2(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), // top right
+                   cos(pi * k / vertical_steps),
+                   cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps));
 
-//             SmoothTriangle* triangle_ptr1 = new SmoothTriangle(v0, v1, v2);
-//             triangle_ptr1->n0 = v0;
-//             triangle_ptr1->n1 = v1;
-//             triangle_ptr1->n2 = v2;
-//             objects.push_back(triangle_ptr1);
+        SmoothTriangle* triangle_ptr = new SmoothTriangle(v0, v1, v2);
+        triangle_ptr->n0 = v0;
+        triangle_ptr->n1 = v1;
+        triangle_ptr->n2 = v2;
+        objects.push_back(triangle_ptr);
+    }
 
 
-//             // define the second triangle
+    //  define the other triangles
 
-//             // vertices
+    for (int k = 1; k <= vertical_steps - 2; k++) {
+        for (int j = 0; j <= horizontal_steps - 1; j++) {
+            // define the first triangle
 
-//             v0 = Point3D(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), // top right, use k, j + 1
-//                          cos(pi * k / vertical_steps),
-//                          cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps) );
+            // vertices
 
-//             v1 = Point3D (sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // top left, use k, j
-//                           cos(pi * k / vertical_steps),
-//                           cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
+            Point3D v0(sin(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), // bottom left, use k + 1, j
+                       cos(pi * (k + 1) / vertical_steps),
+                       cos(2.0 * pi * j / horizontal_steps) * sin(pi * (k + 1) / vertical_steps));
 
-//             v2 = Point3D (sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), // bottom  right, use k + 1, j + 1
-//                           cos(pi * (k + 1) / vertical_steps),
-//                           cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps));
+            Point3D v1(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), // bottom  right, use k + 1, j + 1
+                       cos(pi * (k + 1) / vertical_steps),
+                       cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps));
 
-//             SmoothTriangle* triangle_ptr2 = new SmoothTriangle(v0, v1, v2);
-//             triangle_ptr2->n0 = v0;
-//             triangle_ptr2->n1 = v1;
-//             triangle_ptr2->n2 = v2;
-//             objects.push_back(triangle_ptr2);
-//         }
-//     }
-// }
+            Point3D v2(sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // top left, use k, j
+                       cos(pi * k / vertical_steps),
+                       cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
+
+            SmoothTriangle* triangle_ptr1 = new SmoothTriangle(v0, v1, v2);
+            triangle_ptr1->n0 = v0;
+            triangle_ptr1->n1 = v1;
+            triangle_ptr1->n2 = v2;
+            objects.push_back(triangle_ptr1);
+
+
+            // define the second triangle
+
+            // vertices
+
+            v0 = Point3D(sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps), // top right, use k, j + 1
+                         cos(pi * k / vertical_steps),
+                         cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * k / vertical_steps) );
+
+            v1 = Point3D (sin(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps), // top left, use k, j
+                          cos(pi * k / vertical_steps),
+                          cos(2.0 * pi * j / horizontal_steps) * sin(pi * k / vertical_steps));
+
+            v2 = Point3D (sin(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps), // bottom  right, use k + 1, j + 1
+                          cos(pi * (k + 1) / vertical_steps),
+                          cos(2.0 * pi * (j + 1) / horizontal_steps) * sin(pi * (k + 1) / vertical_steps));
+
+            SmoothTriangle* triangle_ptr2 = new SmoothTriangle(v0, v1, v2);
+            triangle_ptr2->n0 = v0;
+            triangle_ptr2->n1 = v1;
+            triangle_ptr2->n2 = v2;
+            objects.push_back(triangle_ptr2);
+        }
+    }
+}
 
 // The following grid traversal code is based on the pseudo-code in Shirley (2000)
 // The first part is the same as the code in BBox::hit
