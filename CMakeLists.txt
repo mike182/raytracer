@@ -46,10 +46,12 @@ set (SOURCES
   Lights/Directional.cpp
   Lights/PointLight.cpp
   Lights/AmbientOccluder.cpp
+  Lights/AreaLight.cpp
   # Materials
   Materials/Material.cpp
   Materials/Matte.cpp
   Materials/Phong.cpp
+  Materials/Emissive.cpp
   Materials/SV_Matte.cpp
   # Samplers
   Samplers/Sampler.cpp
