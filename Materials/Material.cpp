@@ -24,3 +24,8 @@ Material& Material::operator=(const Material& rhs) {
 RGBColor Material::shade([[maybe_unused]] ShadeRec& sr) {
     return black;
 }
+
+
+RGBColor Material::get_Le([[maybe_unused]] ShadeRec& sr) const {
+    return RGBColor(1, 1, 1);
+}
