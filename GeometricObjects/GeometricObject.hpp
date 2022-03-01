@@ -19,6 +19,7 @@ public:
     GeometricObject(const GeometricObject& obj);
     virtual GeometricObject* clone(void) const = 0;
     virtual ~GeometricObject(void);
+
 protected:
     GeometricObject& operator=(const GeometricObject& rhs);
 
@@ -32,14 +33,21 @@ public:
     virtual BBox get_bounding_box(void);
     virtual void add_object(GeometricObject* object_ptr);
 
+    // The following two functions are only required for objects that are
+    // light sources, eg disks, rectangles, and spheres
     virtual Point3D sample(void);
-    virtual float pdf(ShadeRec& sr);
+    virtual float pdf(const ShadeRec& sr);
 
+    // The following two functions allow us to simplify the code for
+    // smooth shaded triangle meshes
     virtual Normal get_normal(void) const;
     virtual Normal get_normal(const Point3D& p) const;
+
     virtual Normal get_normal(const int face_hit) const;
 
 protected:
+    // mutable allows the const functions Compound::hit,
+    // Instance::hit, and RegularGrid::hit to assign to material_ptr
     mutable Material* material_ptr;
     bool shadows;
 };

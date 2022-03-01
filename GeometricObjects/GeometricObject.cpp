@@ -60,7 +60,7 @@ Point3D GeometricObject::sample(void) {
     return Point3D(0.0);
 }
 
-float GeometricObject::pdf([[maybe_unused]] ShadeRec& sr) {
+float GeometricObject::pdf([[maybe_unused]] const ShadeRec& sr) {
     return 0.0;
 }
 
