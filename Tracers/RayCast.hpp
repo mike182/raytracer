@@ -12,8 +12,8 @@ public:
 
     // RayCast& operator=(const RayCast& rhs) = delete;
 
-    virtual RGBColor trace_ray(const Ray& ray) const override;
-    virtual RGBColor trace_ray(const Ray& ray, const int depth) const override;
+    virtual RGBColor trace_ray(const Ray& ray) const;
+    virtual RGBColor trace_ray(const Ray& ray, const int depth) const;
 };
 
 #endif // __RAYCAST_HPP__

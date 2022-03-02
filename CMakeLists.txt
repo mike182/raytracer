@@ -68,6 +68,7 @@ set (SOURCES
   # Tracers
   Tracers/Tracer.cpp
   Tracers/RayCast.cpp
+  Tracers/AreaLighting.cpp
   # Objects
   GeometricObjects/GeometricObject.cpp
   GeometricObjects/Instance.cpp
@@ -122,7 +123,9 @@ set (SOURCES_SCENES
     # Scenes/BuildFigure04.04.cpp # AA low res
     # Scenes/BuildFigure04.08.cpp # Checker3D plane
 
-    Scenes/BuildFigure23.07.cpp # Two Flat Triangles
+    Scenes/BuildFigure18.04.cpp # Rectangle AreaLight & Boxes
+
+    # Spenes/BuildFigure23.07.cpp # Two Flat Triangles
 
     )
 

@@ -26,10 +26,10 @@ Light* AreaLight::clone(void) const {
 }
 
 AreaLight::~AreaLight(void) {
-    if (object_ptr) {
-        delete object_ptr;
-        object_ptr = nullptr;
-    }
+    // if (object_ptr) {
+    //     delete object_ptr;
+    //     object_ptr = nullptr;
+    // }
 
     if (material_ptr) {
         delete material_ptr;
