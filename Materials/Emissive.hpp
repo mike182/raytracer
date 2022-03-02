@@ -13,8 +13,8 @@ public:
 
     Emissive& operator=(const Emissive& rhs);
 
-    virtual RGBColor area_light_shade(ShadeRec& sr);
     virtual RGBColor shade(ShadeRec& sr);
+    virtual RGBColor area_light_shade(ShadeRec& sr);
     virtual RGBColor get_Le(ShadeRec& sr) const;
     void set_ce(const float r, const float g, const float b);
     void set_ce(const float c);

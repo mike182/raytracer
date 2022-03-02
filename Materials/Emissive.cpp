@@ -17,6 +17,9 @@ Material* Emissive::clone(void) const {
     return new Emissive(*this);
 }
 
+Emissive::~Emissive(void) {
+}
+
 Emissive& Emissive::operator=(const Emissive& rhs) {
     if (this == &rhs)
         return *this;
@@ -24,9 +27,6 @@ Emissive& Emissive::operator=(const Emissive& rhs) {
     ls = rhs.ls;
     ce = rhs.ce;
     return *this;
-}
-
-Emissive::~Emissive(void) {
 }
 
 RGBColor Emissive::get_Le([[maybe_unused]]ShadeRec& sr) const {
