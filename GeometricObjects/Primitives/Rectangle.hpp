@@ -23,8 +23,10 @@ public:
 
     // the following functions are used when the rectangle is a light source
     Point3D sample(void);
-    virtual Normal get_normal(const Point3D& p) const;
     virtual float pdf(const ShadeRec& sr);
+    virtual Normal get_normal(const Point3D& p) const;
+    void set_sampler(Sampler* sampler);
+    void set_shadows(bool s);
 
 private:
     Point3D p0; // corner vertex

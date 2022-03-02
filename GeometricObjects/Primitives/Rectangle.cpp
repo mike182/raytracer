@@ -155,7 +155,6 @@ bool Rectangle::shadow_hit(const Ray& ray, float& tmin) const {
     tmin = t;
     return true;
 }
-
 Point3D Rectangle::sample(void) {
     Point2D sample_point = sampler_ptr->sample_unit_square();
     return p0 + sample_point.x * a + sample_point.y * b;
@@ -167,4 +166,12 @@ Normal Rectangle::get_normal([[maybe_unused]]const Point3D& p) const {
 
 float Rectangle::pdf([[maybe_unused]]const ShadeRec& sr) {
     return inv_area;
+}
+
+void Rectangle::set_sampler(Sampler* sampler) {
+    sampler_ptr = sampler;
+}
+
+void Rectangle::set_shadows(bool s) {
+    shadows = s;
 }
