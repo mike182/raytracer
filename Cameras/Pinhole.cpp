@@ -2,6 +2,7 @@
 #include "Point2D.hpp"
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
+#include <omp.h>
 
 Pinhole::Pinhole(void)
     : Camera(),
@@ -50,7 +51,7 @@ void Pinhole::render_scene(const World& w) {
 
     vp.s /= zoom;
     ray.o = eye;
-    // // render color only
+    // render color only
     // for (int r = 0; r < vp.vres; r++) { // up
     //     for (int c = 0; c < vp.hres; c++) { // across
     //         L = black;
@@ -59,12 +60,19 @@ void Pinhole::render_scene(const World& w) {
     //         ray.d = ray_direction(pp);
     //         L = w.tracer_ptr->trace_ray(ray, depth);
     //         w.display_pixel(r, c, L);
-    //gfx_ptr->get_event();
     //     w.gfx_ptr->render_line();
     // }
 
+    // omp_set_num_threads(8);
     // render full
     for (int r = 0; r < vp.vres; r++) { // up
+// int c;
+//   #pragma omp parallel for \
+//             shared(w,depth) \
+//             private(c,ray,L,pp,sp,vp) \
+//             schedule(static,1)
+//         for (c = 0; c < vp.hres; c++) { // across
+// ray.o = eye;
         for (int c = 0; c < vp.hres; c++) { // across
             L = black;
             for (int i = 0; i < vp.num_samples; i++) {
@@ -80,5 +88,4 @@ void Pinhole::render_scene(const World& w) {
         }
         w.gfx_ptr->render_line();
     }
-    // w.gfx_ptr->end();
 }

@@ -21,7 +21,8 @@ void ImgPNG::init() {
 }
 
 void ImgPNG::display([[maybe_unused]] int x, [[maybe_unused]] int y, float r, float g, float b) {
-    buffer.push_back(RGBColor(r, g, b));
+    // buffer.push_back(RGBColor(r, g, b));
+    buffer[y*width+x] = RGBColor(r, g, b);
 }
 
 void ImgPNG::render_line() {
@@ -45,6 +46,8 @@ void ImgPNG::end() {
     auto UTC = duration_cast<seconds>((system_clock::now()).time_since_epoch()).count();
     // std::string filename = "/mnt/d/w/rt_image/" + std::to_string(UTC);
 
+    std::cout << std::endl; // jump after progress bar
+
     // copy in current folder
     std::string filename = "./result";
     // image->write(filename + ".png");
@@ -56,6 +59,5 @@ void ImgPNG::end() {
     filename = "../Images/" + std::to_string(UTC);
     // image->write(filename + ".png");
     image.write(filename + ".png");
-    std::cout << std::endl; // jump after progress bar
     std::cout << "Image: " << filename << ".png" << std::endl;
 }

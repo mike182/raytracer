@@ -68,14 +68,15 @@ void World::display_pixel(const int row, [[maybe_unused]] const int column, cons
         mapped_color = mapped_color.powc(vp.inv_gamma);
     // have to start from max y coordinate to convert to screen coordinates
     // done in Image Class
-    int x = column;
-    int y = vp.vres - row - 1;
+    // int x = column;
+    // int y = vp.vres - row - 1;
     // image_ptr->set_pixel(mapped_color, x, y); // image file
-
-   // paintArea->setPixel(x, y, (int)(mapped_color.r * 255),
-                             // (int)(mapped_color.g * 255),
-                             // (int)(mapped_color.b * 255));
+    // paintArea->setPixel(...)
+#ifdef HAS_SDL
     gfx_ptr->get_event();
+#endif
+    int x = column;
+    int y = row;
     gfx_ptr->display(x, y,
                      (int)(mapped_color.r * 255),
                      (int)(mapped_color.g * 255),
