@@ -167,11 +167,3 @@ Normal Rectangle::get_normal([[maybe_unused]]const Point3D& p) const {
 float Rectangle::pdf([[maybe_unused]]const ShadeRec& sr) {
     return inv_area;
 }
-
-void Rectangle::set_sampler(Sampler* sampler) {
-    sampler_ptr = sampler;
-}
-
-void Rectangle::set_shadows(bool s) {
-    shadows = s;
-}

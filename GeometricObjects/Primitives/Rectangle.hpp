@@ -45,4 +45,12 @@ private:
     static const double kEpsilon;
 };
 
+inline void Rectangle::set_sampler(Sampler* sampler) {
+    sampler_ptr = sampler;
+}
+
+inline void Rectangle::set_shadows(bool s) {
+    shadows = s;
+}
+
 #endif // __RECTANGLE_HPP__
